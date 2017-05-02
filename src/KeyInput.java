@@ -44,14 +44,30 @@ public class KeyInput extends KeyAdapter {
 				// key events for player 2
 
 				if (key == KeyEvent.VK_UP && tempObject.canObjectMoveUp()) {
-					if(!(isWallUp(tempObject)))
-						tempObject.setY(tempObject.getY() - 32);
-					
+					if(!(isWallUp(tempObject))){
+						if(isPlayerAboveToBox(tempObject)){
+							GameObject b = getBoxAboveToPlayer(tempObject);
+							if(canBoxMoveUp(b)){
+								tempObject.setY(tempObject.getY() - 32);
+								b.setY(b.getY() - 32);
+							}
+						} else {
+							tempObject.setY(tempObject.getY() - 32);
+						}
+					}
 				}
 				if (key == KeyEvent.VK_DOWN && tempObject.canObjectMoveDown()) {
-					if(!(isWallDown(tempObject)))
-						tempObject.setY(tempObject.getY() + 32);
-					
+					if(!(isWallDown(tempObject))){
+						if(isPlayerBelowToBox(tempObject)){
+							GameObject b = getBoxUnderPlayer(tempObject);
+							if(canBoxMoveDown(b)){
+								tempObject.setY(tempObject.getY() + 32);
+								b.setY(b.getY() + 32);
+							}
+						} else {
+							tempObject.setY(tempObject.getY() + 32);
+						}
+					}
 				}
 				if (key == KeyEvent.VK_RIGHT && tempObject.canObjectMoveRight()) {
 					if(!(isWallRight(tempObject))){
@@ -82,7 +98,7 @@ public class KeyInput extends KeyAdapter {
 			}
 			
 			if(tempObject.getID() == ID.Box){
-				
+				/*
 				if (key == KeyEvent.VK_UP && handler.getPlayer2().getY() == tempObject.getY() && handler.getPlayer2().getX() == tempObject.getX() && tempObject.canObjectMoveUp()) {
 					tempObject.setY(tempObject.getY() - 32);
 				}
@@ -95,7 +111,7 @@ public class KeyInput extends KeyAdapter {
 				//if (key == KeyEvent.VK_LEFT && handler.getPlayer2().getX()  == tempObject.getX()  && handler.getPlayer2().getY()  == tempObject.getY() && tempObject.canObjectMoveLeft()) {
 					//if(canBoxMoveLeft(tempObject))
 					//tempObject.setX(tempObject.getX() - 32);
-				//}
+				//}*/
 			}
 		}
 
@@ -224,6 +240,42 @@ public class KeyInput extends KeyAdapter {
 		return true;
 	}
 	
+	public boolean canBoxMoveUp(GameObject box){
+		for(GameObject g : walls){
+			if(box.getX() == g.getX()){
+				if(box.getY() - 32 == g.getY()){
+					return false;
+				}
+			}
+		}
+		for(GameObject b : boxes){
+			if(box.getX() == b.getX()){
+				if(box.getY() - 32 == b.getY()){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	public boolean canBoxMoveDown(GameObject box){
+		for(GameObject g : walls){
+			if(box.getX() == g.getX()){
+				if(box.getY() + 32 == g.getY()){
+					return false;
+				}
+			}
+		}
+		for(GameObject b : boxes){
+			if(box.getX() == b.getX()){
+				if(box.getY() + 32 == b.getY()){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
 	public boolean isPlayerLeftToBox(GameObject player){
 		for(GameObject b : boxes){
 			if(player.getY() == b.getY()){
@@ -246,6 +298,28 @@ public class KeyInput extends KeyAdapter {
 		return false;
 	}
 	
+	public boolean isPlayerAboveToBox(GameObject player){
+		for(GameObject b : boxes){
+			if(player.getX() == b.getX()){
+				if(player.getY()  == b.getY() + 32){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean isPlayerBelowToBox(GameObject player){
+		for(GameObject b : boxes){
+			if(player.getX() == b.getX()){
+				if(player.getY()  == b.getY() - 32){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public GameObject getBoxRightToPlayer(GameObject player){
 		for(GameObject b : boxes){
 			if(player.getY() == b.getY()){
@@ -261,6 +335,28 @@ public class KeyInput extends KeyAdapter {
 		for(GameObject b : boxes){
 			if(player.getY() == b.getY()){
 				if(player.getX()  == b.getX() + 32){
+					return b;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public GameObject getBoxAboveToPlayer(GameObject player){
+		for(GameObject b : boxes){
+			if(player.getX() == b.getX()){
+				if(player.getY()  == b.getY() + 32){
+					return b;
+				}
+			}
+		}
+		return null;
+	}
+	
+	public GameObject getBoxUnderPlayer(GameObject player){
+		for(GameObject b : boxes){
+			if(player.getX() == b.getX()){
+				if(player.getY()  == b.getY() - 32){
 					return b;
 				}
 			}
