@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class GoalSquare extends GameObject {
 
 	private Handler handler;
-	private boolean BoxOnGoal;
+	public boolean BoxOnGoal;
 
 	public GoalSquare(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
@@ -21,7 +21,6 @@ public class GoalSquare extends GameObject {
 			if (g.getX() == x && g.getY() == y) {
 				if (!BoxOnGoal) {
 					BoxOnGoal = true;
-					System.out.println("You win!");
 				}
 			} else {
 				BoxOnGoal = false;
@@ -36,4 +35,8 @@ public class GoalSquare extends GameObject {
 
 	}
 
+	
+	public boolean getBoxOnGoal(){
+		return BoxOnGoal;
+	}
 }

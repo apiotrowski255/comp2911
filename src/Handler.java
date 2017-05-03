@@ -55,13 +55,14 @@ public class Handler {
 		return boxes;
 	}
 	
-	public GameObject getGoalSquare(){
+	public ArrayList<GameObject> getGoalSquares(){
+		ArrayList<GameObject> GoalSquares = new ArrayList<GameObject>();
 		for(int i = 0; i < object.size(); i++){
 			if(object.get(i).getID() == ID.GoalSquare){
-				return object.get(i);
+				GoalSquares.add(object.get(i));
 			}
 		}
-		return null;
+		return GoalSquares;
 	}
 	
 	

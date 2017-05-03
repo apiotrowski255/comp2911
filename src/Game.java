@@ -3,6 +3,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Game extends Canvas implements Runnable {
@@ -19,41 +20,20 @@ public class Game extends Canvas implements Runnable {
 
 	private Random r;
 	private Handler handler;
+	
+	public enum STATE {
+		Menu,
+		Help,
+		Game,
+		End
+	};
 
 	public Game() {
 		this.handler = new Handler();
 		
 		r = new Random();
 
-		// handler.addObject(new Player(0, 0, ID.Player));
-		handler.addObject(new GoalSquare(32 * 1, 32 * 5, ID.GoalSquare, handler));
-		handler.addObject(new GoalSquare(32 * 1, 32 * 6, ID.GoalSquare, handler));
-		handler.addObject(new GoalSquare(32 * 2, 32 * 6, ID.GoalSquare, handler));
-		handler.addObject(new GoalSquare(32 * 4, 32 * 6, ID.GoalSquare, handler));
-		
-		handler.addObject(new Player(32 * 1, 32 * 2, ID.Player2));
-		
-		handler.addObject(new Box(32 * 2, 32 * 2, ID.Box));
-		handler.addObject(new Box(32 * 2, 32 * 3, ID.Box));
-		handler.addObject(new Box(32 * 2, 32 * 5, ID.Box));
-		handler.addObject(new Box(32 * 3, 32 * 4, ID.Box));
-		
-		for(int i = 0; i < 6; i++){
-			handler.addObject(new Wall(32 * i, 32 * 0, ID.Wall));
-			handler.addObject(new Wall(32 * i, 32 * 7, ID.Wall));
-		}
-		for(int i = 1; i < 7; i++){
-			handler.addObject(new Wall(32 * 0, 32 * i, ID.Wall));
-			handler.addObject(new Wall(32 * 5, 32 * i, ID.Wall));
-		}
-		for(int i = 1; i < 4 ; i++){
-			handler.addObject(new Wall(32 * 4, 32 * i, ID.Wall));
-		}
-		
-		handler.addObject(new Wall(32 * 1, 32 * 1, ID.Wall));
-		handler.addObject(new Wall(32 * 1, 32 * 3, ID.Wall));
-		handler.addObject(new Wall(32 * 1, 32 * 4, ID.Wall));
-		handler.addObject(new Wall(32 * 3, 32 * 6, ID.Wall));
+		loadLevel1(handler);
 		
 		
 		this.addKeyListener(new KeyInput(handler));
@@ -109,6 +89,21 @@ public class Game extends Canvas implements Runnable {
 
 	private void tick() {
 		handler.tick();
+		
+		ArrayList<GameObject> GoalSquares = handler.getGoalSquares();
+		ArrayList<GameObject> Boxes = handler.getBoxes();
+
+		int i = 0;
+		for(GameObject g :  GoalSquares){
+			for(GameObject g1 : Boxes){
+				if(g1.getX() == g.getX() && g1.getY() == g.getY()){
+					i++;
+				}
+			}
+		}
+		if(i == GoalSquares.size()){
+			System.out.println("You Win!");
+		}
 	}
 
 	private void render() {
@@ -140,5 +135,37 @@ public class Game extends Canvas implements Runnable {
 
 	public static void main(String args[]) {
 		new Game();
+	}
+	
+	public static void loadLevel1(Handler handler){
+		handler.addObject(new GoalSquare(32 * 1, 32 * 5, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32 * 1, 32 * 6, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32 * 2, 32 * 6, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32 * 4, 32 * 6, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32 * 3, 32 * 6, ID.GoalSquare, handler));
+		
+		handler.addObject(new Player(32 * 1, 32 * 2, ID.Player2));
+		
+		handler.addObject(new Box(32 * 2, 32 * 2, ID.Box));
+		handler.addObject(new Box(32 * 2, 32 * 3, ID.Box));
+		handler.addObject(new Box(32 * 2, 32 * 5, ID.Box));
+		handler.addObject(new Box(32 * 3, 32 * 4, ID.Box));
+		
+		for(int i = 0; i < 6; i++){
+			handler.addObject(new Wall(32 * i, 32 * 0, ID.Wall));
+			handler.addObject(new Wall(32 * i, 32 * 7, ID.Wall));
+		}
+		for(int i = 1; i < 7; i++){
+			handler.addObject(new Wall(32 * 0, 32 * i, ID.Wall));
+			handler.addObject(new Wall(32 * 5, 32 * i, ID.Wall));
+		}
+		for(int i = 1; i < 4 ; i++){
+			handler.addObject(new Wall(32 * 4, 32 * i, ID.Wall));
+		}
+		
+		handler.addObject(new Wall(32 * 1, 32 * 1, ID.Wall));
+		handler.addObject(new Wall(32 * 1, 32 * 3, ID.Wall));
+		handler.addObject(new Wall(32 * 1, 32 * 4, ID.Wall));
+		handler.addObject(new Box(32 * 3, 32 * 6, ID.Box));
 	}
 }
