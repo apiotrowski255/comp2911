@@ -27,6 +27,8 @@ public class Game extends Canvas implements Runnable {
 		Game,
 		End
 	};
+	
+	public static STATE gameState = STATE.Menu;
 
 	public Game() {
 		this.handler = new Handler();
@@ -101,8 +103,9 @@ public class Game extends Canvas implements Runnable {
 				}
 			}
 		}
-		if(i == GoalSquares.size()){
+		if(i == GoalSquares.size() && i != 0){
 			System.out.println("You Win!");
+			handler.object.clear();
 		}
 	}
 
