@@ -96,23 +96,6 @@ public class KeyInput extends KeyAdapter {
 					} 
 				}
 			}
-			
-			if(tempObject.getID() == ID.Box){
-				/*
-				if (key == KeyEvent.VK_UP && handler.getPlayer2().getY() == tempObject.getY() && handler.getPlayer2().getX() == tempObject.getX() && tempObject.canObjectMoveUp()) {
-					tempObject.setY(tempObject.getY() - 32);
-				}
-				if (key == KeyEvent.VK_DOWN && handler.getPlayer2().getY() == tempObject.getY() && handler.getPlayer2().getX()  == tempObject.getX() && tempObject.canObjectMoveDown()) {
-					tempObject.setY(tempObject.getY() + 32);
-				}
-				if (key == KeyEvent.VK_RIGHT && handler.getPlayer2().getX()  == tempObject.getX()  && handler.getPlayer2().getY() == tempObject.getY() && tempObject.canObjectMoveRight()) {
-					tempObject.setX(tempObject.getX() + 32);
-				}
-				//if (key == KeyEvent.VK_LEFT && handler.getPlayer2().getX()  == tempObject.getX()  && handler.getPlayer2().getY()  == tempObject.getY() && tempObject.canObjectMoveLeft()) {
-					//if(canBoxMoveLeft(tempObject))
-					//tempObject.setX(tempObject.getX() - 32);
-				//}*/
-			}
 		}
 
 	}
