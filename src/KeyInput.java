@@ -347,6 +347,8 @@ public class KeyInput extends KeyAdapter {
 		return null;
 	}
 	
+	
+	//We may not need this
 	public void UpdateHandler(Handler newHandler){
 		this.handler = newHandler;
 	}
