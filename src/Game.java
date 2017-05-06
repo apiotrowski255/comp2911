@@ -39,8 +39,8 @@ public class Game extends Canvas implements Runnable {
 		r = new Random();
 
 		loadLevel2(handler);
-		this.keyinput = new KeyInput(handler);
-		this.addKeyListener(keyinput);
+		this.setKeyinput(new KeyInput(handler));
+		this.addKeyListener(getKeyinput());
 		
 		
 		new Window(WIDTH, HEIGHT, "Comp2911", this);
@@ -94,9 +94,6 @@ public class Game extends Canvas implements Runnable {
 	private void tick() {
 		handler.tick();
 		spawner.tick();
-		this.removeKeyListener(keyinput);
-		this.keyinput = new KeyInput(handler);
-		this.addKeyListener(keyinput);
 	}
 
 	private void render() {
@@ -183,5 +180,13 @@ public class Game extends Canvas implements Runnable {
 			handler.addObject(new Wall(32 * 8, 32 * i, ID.Wall));
 		}
 		
+	}
+
+	public KeyInput getKeyinput() {
+		return keyinput;
+	}
+
+	public void setKeyinput(KeyInput keyinput) {
+		this.keyinput = keyinput;
 	}
 }

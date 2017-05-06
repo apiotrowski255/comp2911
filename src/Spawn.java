@@ -27,7 +27,12 @@ public class Spawn {
 			while(handler.object.size() != 0){
 				handler.removeObject(handler.object.get(0));
 			}
+			
+			game.removeKeyListener(game.getKeyinput());
 			loadLevel1(handler);
+			
+			game.setKeyinput(new KeyInput(handler));
+			game.addKeyListener(game.getKeyinput());
 		}
 	}
 	
