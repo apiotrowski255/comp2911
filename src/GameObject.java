@@ -1,9 +1,10 @@
 
 
 
+import java.awt.Canvas;
 import java.awt.Graphics;
 
-public abstract class GameObject {
+public abstract class GameObject extends Canvas {
 	
 	protected int x, y;
 	protected ID id;

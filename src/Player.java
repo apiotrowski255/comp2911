@@ -3,6 +3,8 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.Random;
 
 public class Player extends GameObject {
@@ -28,7 +30,10 @@ public class Player extends GameObject {
 		} else if (id == ID.Player2) {
 			g.setColor(Color.blue);
 		}
-		g.fillRect(x, y, 32, 32);
+		
+		Toolkit t = Toolkit.getDefaultToolkit();
+        Image i = t.getImage("player.png");
+        g.drawImage(i, x, y, this);
 	}
 	
 
