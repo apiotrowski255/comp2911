@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 public class GoalSquare extends GameObject {
@@ -30,8 +32,12 @@ public class GoalSquare extends GameObject {
 
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.green);
-		g.fillRect(x, y, 32, 32);
+//		g.setColor(Color.green);
+//		g.fillRect(x, y, 32, 32);
+		
+		Toolkit t = Toolkit.getDefaultToolkit();
+        Image i = t.getImage("goal.png");
+        g.drawImage(i, x, y, this);
 
 	}
 

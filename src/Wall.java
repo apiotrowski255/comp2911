@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class Wall extends GameObject{
 
@@ -17,7 +19,10 @@ public class Wall extends GameObject{
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.darkGray);
-		g.fillRect(x, y, 32, 32);
+//		g.fillRect(x, y, 32, 32);
+		Toolkit t = Toolkit.getDefaultToolkit();
+        Image i = t.getImage("wall.png");
+        g.drawImage(i, x, y, this);
 	}
 
 }

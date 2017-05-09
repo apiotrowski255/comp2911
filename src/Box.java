@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class Box extends GameObject{
 
@@ -15,8 +17,11 @@ public class Box extends GameObject{
 	}
 
 	public void render(Graphics g) {
-		g.setColor(Color.red);
-		g.fillRect(x, y, 32, 32);
+//		g.setColor(Color.red);
+//		g.fillRect(x, y, 32, 32);
+		Toolkit t = Toolkit.getDefaultToolkit();
+        Image i = t.getImage("box.gif");
+        g.drawImage(i, x, y, this);
 	}
 
 }
