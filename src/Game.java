@@ -6,6 +6,7 @@ import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1222540838952399849L;
@@ -19,6 +20,7 @@ public class Game extends Canvas implements Runnable {
 	private Handler handler;
 	private Spawn spawner;
 	private KeyInput keyinput;
+	private Menu menu;
 	
 	public enum STATE {
 		Menu,
@@ -35,9 +37,16 @@ public class Game extends Canvas implements Runnable {
 		//Creates a new Spawner, The Spawner can add and remove gameObjects from the handler
 		this.spawner = new Spawn(handler, this);
 		
+		this.menu = new Menu(this, handler);
+		this.addMouseListener(menu);
+		
 		r = new Random();
-
-		loadLevel2(handler);
+		
+		if(gameState == STATE.Game){
+			loadLevel2(handler);
+		}
+		
+		
 		this.setKeyinput(new KeyInput(handler));
 		this.addKeyListener(getKeyinput());
 		
@@ -90,8 +99,13 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void tick() {
-		handler.tick();
-		spawner.tick();
+		
+		if(gameState == STATE.Game){
+			handler.tick();
+			spawner.tick();
+		} else if (gameState == STATE.Menu){
+			menu.tick();
+		}
 	}
 
 	private void render() {
@@ -107,6 +121,12 @@ public class Game extends Canvas implements Runnable {
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
 		handler.render(g);
+		
+		if(gameState == STATE.Game){
+
+		} else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End){
+			menu.render(g);
+		} 
 
 		g.dispose();
 		bs.show();
@@ -186,5 +206,45 @@ public class Game extends Canvas implements Runnable {
 
 	public void setKeyinput(KeyInput keyinput) {
 		this.keyinput = keyinput;
+	}
+	
+	public boolean IsgameStateMenu(){
+		if(gameState == STATE.Menu){
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean IsgameStateHelp(){
+		if(gameState == STATE.Help){
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean IsgameStateGame(){
+		if(gameState == STATE.Game){
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean IsgameStateEnd(){
+		if(gameState == STATE.End){
+			return true;
+		}
+		return false;
+	}
+	
+	public void setgameState(String state){
+		if(state.equals("Help")){
+			gameState = STATE.Help;
+		} else if(state.equals("Game")){
+			gameState = STATE.Game;
+		} else if (state.equals("Menu")){
+			gameState = STATE.Menu;
+		} else if (state.equals("End")){
+			gameState = STATE.End;
+		}
 	}
 }
