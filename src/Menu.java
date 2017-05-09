@@ -78,7 +78,7 @@ public class Menu extends MouseAdapter{
 
 			g.setFont(fnt);
 			g.setColor(Color.white);
-			g.drawString("Sokoban", 240, 70);
+			g.drawString("Sokoban", 205, 90);
 
 			g.setFont(fnt2);
 			g.drawRect(210, 150, 200, 64);
@@ -99,8 +99,8 @@ public class Menu extends MouseAdapter{
 			g.drawString("Help", 240, 70);
 			
 			g.setFont(fnt3);
-			g.drawString("i need help too", 270, 290);
-			g.drawString("use WASD keys to move player and dodge enemies", 50, 200);
+			g.drawString("i need help too", 240, 290);
+			g.drawString("use WASD/arrow keys to move player", 130, 200);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
