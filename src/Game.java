@@ -8,9 +8,6 @@ import java.util.Random;
 
 public class Game extends Canvas implements Runnable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1222540838952399849L;
 
 	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9; 
@@ -33,7 +30,9 @@ public class Game extends Canvas implements Runnable {
 	public static STATE gameState = STATE.Menu;
 
 	public Game() {
+		//Creates a new Handler. Handler is the class that "handles" all gameObjects
 		this.handler = new Handler();
+		//Creates a new Spawner, The Spawner can add and remove gameObjects from the handler
 		this.spawner = new Spawn(handler, this);
 		
 		r = new Random();
@@ -42,7 +41,7 @@ public class Game extends Canvas implements Runnable {
 		this.setKeyinput(new KeyInput(handler));
 		this.addKeyListener(getKeyinput());
 		
-		
+		//Create Window for the game
 		new Window(WIDTH, HEIGHT, "Comp2911", this);
 	}
 
@@ -84,7 +83,6 @@ public class Game extends Canvas implements Runnable {
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				System.out.println("FPS: " + frames);
-				System.out.println(handler.object.size());
 				frames = 0;
 			}
 		}
