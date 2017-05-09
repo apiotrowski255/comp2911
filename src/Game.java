@@ -44,6 +44,8 @@ public class Game extends Canvas implements Runnable {
 		
 		if(gameState == STATE.Game){
 			loadLevel2(handler);
+		} else {
+			//cool background animations
 		}
 		
 		
