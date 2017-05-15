@@ -16,6 +16,9 @@ public class Wall extends GameObject{
 		
 	}
 
+	/**
+	 * loads image to draw
+	 */
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.darkGray);

@@ -8,6 +8,9 @@ public class Handler {
 
 	ArrayList<GameObject> object = new ArrayList<GameObject>();
 	
+	/**
+	 * runs the tick function on each object in the Array
+	 */
 	public void tick(){
 		for(int i = 0; i < object.size(); i++){
 			GameObject tempObject = object.get(i);
@@ -16,6 +19,10 @@ public class Handler {
 		}
 	}
 	
+	/**
+	 * runs the render function on each object
+	 * @param g which is a Graphics
+	 */
 	public void render(Graphics g){
 		for(int i = 0; i < object.size(); i++){
 			GameObject tempObject = object.get(i);
@@ -24,10 +31,17 @@ public class Handler {
 		}
 	}
 	
+	/**
+	 * adds object to the array
+	 */
 	public void addObject(GameObject object){
 		this.object.add(object);
 	}
 	
+	/**
+	 * remove object from the array
+	 * @param object
+	 */
 	public void removeObject(GameObject object){
 		this.object.remove(object);
 	}
@@ -55,6 +69,10 @@ public class Handler {
 		return boxes;
 	}
 	
+	/**
+	 * returns all goal squares in the array
+	 * @return
+	 */
 	public ArrayList<GameObject> getGoalSquares(){
 		ArrayList<GameObject> GoalSquares = new ArrayList<GameObject>();
 		for(int i = 0; i < object.size(); i++){
@@ -65,7 +83,10 @@ public class Handler {
 		return GoalSquares;
 	}
 	
-	
+	/**
+	 * returns all walls in the array
+	 * @return
+	 */
 	public ArrayList<GameObject> getWalls(){
 		ArrayList<GameObject> walls = new ArrayList<GameObject>();
 		for(int i = 0; i < object.size(); i++){

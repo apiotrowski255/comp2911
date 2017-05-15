@@ -9,8 +9,10 @@ import java.util.Random;
 
 public class Game extends Canvas implements Runnable {
 
+	// automatically generated, not to sure why
 	private static final long serialVersionUID = 1222540838952399849L;
 
+	//size of our game window
 	public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9; 
 															
 	private Thread thread;
@@ -29,17 +31,24 @@ public class Game extends Canvas implements Runnable {
 		End
 	};
 	
+	//create enum (gameState) and set it to Menu
 	public static STATE gameState = STATE.Menu;
 
+	/**
+	 * Game constructor
+	 */
 	public Game() {
 		//Creates a new Handler. Handler is the class that "handles" all gameObjects
 		this.handler = new Handler();
 		//Creates a new Spawner, The Spawner can add and remove gameObjects from the handler
 		this.spawner = new Spawn(handler, this);
 		
+		//create Menu class
 		this.menu = new Menu(this, handler);
+		//needed for the menu class as we need to "listen" when the user clicks 
 		this.addMouseListener(menu);
 		
+		//creates a random number
 		r = new Random();
 		
 		if(gameState == STATE.Game){
@@ -48,20 +57,31 @@ public class Game extends Canvas implements Runnable {
 			//cool background animations
 		}
 		
-		
+		// Set Key Input
 		this.setKeyinput(new KeyInput(handler));
+		// add the Key Input so it actually registers
 		this.addKeyListener(getKeyinput());
 		
 		//Create Window for the game
 		new Window(WIDTH, HEIGHT, "Comp2911", this);
 	}
-
+	
+	/**
+	 * auto generated.
+	 * only runs during start up.
+	 * sets this Thread to this
+	 * turns running into true (we just started our game)
+	 */
 	public synchronized void start() {
 		thread = new Thread(this);
 		thread.start();
 		running = true;
 	}
 
+	/**
+	 * this is the same as clicking the close button
+	 * turns running to false, so it no longer runs
+	 */
 	public synchronized void stop() {
 		try {
 			thread.join();
@@ -71,6 +91,12 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
+	/**
+	 * The Run function
+	 * Calculates the FPS and calls the render function 
+	 * if it is running
+	 * this function runs continuously until running = false
+	 */
 	public void run() {
 		this.requestFocus();
 		long lastTime = System.nanoTime();
@@ -100,6 +126,11 @@ public class Game extends Canvas implements Runnable {
 		stop();
 	}
 
+	/**
+	 * runs every frame,
+	 * you can think of it as a tick for a clock
+	 * basically updates the game
+	 */
 	private void tick() {
 		
 		if(gameState == STATE.Game){
@@ -110,6 +141,11 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
+	/**
+	 * draws images onto the screen
+	 * runs once every frame as well
+	 * heads up: images that are drawn last will overlap images that are drawn first
+	 */
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if (bs == null) {
@@ -134,6 +170,13 @@ public class Game extends Canvas implements Runnable {
 		bs.show();
 	}
 
+	/**
+	 * clamps a variable between a maximum and a minimum
+	 * @param var
+	 * @param max
+	 * @param min
+	 * @return var between max and min
+	 */
 	public static int clamp(int var, int max, int min) {
 		if (var >= max)
 			return max;
@@ -143,13 +186,21 @@ public class Game extends Canvas implements Runnable {
 			return var;
 	}
 
+	/**
+	 * main method, creates new game
+	 * @param args
+	 */
 	public static void main(String args[]) {
 		new Game();
 	}
 	
 	
 	
-	
+	/**
+	 * hard coded, 
+	 * loads level two
+	 * @param handler
+	 */
 	public static void loadLevel2(Handler handler){
 		
 		for(int i = 3; i < 6; i++){
@@ -202,6 +253,7 @@ public class Game extends Canvas implements Runnable {
 		
 	}
 
+	// getters and setters functions
 	public KeyInput getKeyinput() {
 		return keyinput;
 	}

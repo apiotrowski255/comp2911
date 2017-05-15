@@ -19,6 +19,8 @@ public abstract class GameObject extends Canvas {
 	public abstract void tick();
 	public abstract void render(Graphics g);
 	
+	
+	// getters and setters
 	public void setX(int x){
 		this.x = x;
 	}
@@ -50,6 +52,7 @@ public abstract class GameObject extends Canvas {
 		return velY;
 	}
 	
+	//tells us information about the object
 	public boolean canObjectMoveRight(){
 		if(x + 32 > Game.WIDTH - 64){
 			return false;

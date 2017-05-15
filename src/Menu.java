@@ -29,12 +29,12 @@ public class Menu extends MouseAdapter{
 				game.addKeyListener(game.getKeyinput());
 			}
 			
-			//help button
+			//help button, is Mouse on the help button
 			if(mouseOver(mx, my, 210, 250, 200, 64)){
 				game.setgameState("Help");
 			}
 			
-			// quit button
+			// quit button, is Mouse on the quit button
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
 				System.exit(1);
 			}
@@ -49,6 +49,16 @@ public class Menu extends MouseAdapter{
 		}
 	}
 	
+	/**
+	 * helper function, determines whether mouse is in box
+	 * @param mx, mouse x
+	 * @param my, mouse y
+	 * @param x , x position of box
+	 * @param y, y position of box
+	 * @param width of the box
+	 * @param height of the box
+	 * @return
+	 */
 	private boolean mouseOver(int mx, int my, int x, int y, int width, int height) {
 		if (mx > x && mx < x + width) {
 			if (my > y && my < y + height) {
@@ -71,6 +81,10 @@ public class Menu extends MouseAdapter{
 		
 	}
 	
+	/**
+	 * draw the graphics
+	 * @param g
+	 */
 	public void render(Graphics g){
 		if (game.IsgameStateMenu()) {
 			Font fnt = new Font("arial", 1, 50);

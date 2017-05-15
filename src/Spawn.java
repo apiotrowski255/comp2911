@@ -10,6 +10,9 @@ public class Spawn {
 		this.game = game;
 	}
 	
+	/**
+	 * checks if all boxes are on goal squares
+	 */
 	public void tick(){
 		ArrayList<GameObject> GoalSquares = handler.getGoalSquares();
 		ArrayList<GameObject> Boxes = handler.getBoxes();
@@ -36,15 +39,20 @@ public class Spawn {
 		}
 	}
 	
+	/**
+	 * test level
+	 * @param handler
+	 */
 	public void loadtest(Handler handler){
 		handler.addObject(new Player(32 * 1, 32 * 1, ID.Player2));
 		
 		handler.addObject(new Wall(32 * 8, 32 * 8, ID.Wall));
 	}
 
-	
-	
-	
+	/**
+	 * hard coded to load level1
+	 * @param handler
+	 */
 	public void loadLevel1(Handler handler){
 		handler.addObject(new GoalSquare(32 * 1, 32 * 5, ID.GoalSquare, handler));
 		handler.addObject(new GoalSquare(32 * 1, 32 * 6, ID.GoalSquare, handler));

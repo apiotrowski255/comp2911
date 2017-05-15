@@ -16,6 +16,7 @@ public class GoalSquare extends GameObject {
 	}
 
 	@Override
+	//can determine whether a box is on the Goal square
 	public void tick() {
 		ArrayList<GameObject> boxes = handler.getBoxes();
 		BoxOnGoal = false;
@@ -41,7 +42,7 @@ public class GoalSquare extends GameObject {
 
 	}
 
-	
+	//getter
 	public boolean getBoxOnGoal(){
 		return BoxOnGoal;
 	}

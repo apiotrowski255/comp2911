@@ -10,6 +10,10 @@ public class KeyInput extends KeyAdapter {
 	public ArrayList<GameObject> walls = new ArrayList<GameObject>();
 	public ArrayList<GameObject> boxes = new ArrayList<GameObject>();
 
+	/**
+	 * Constructor
+	 * @param handler
+	 */
 	public KeyInput(Handler handler) {
 		this.handler = handler;
 		this.walls= handler.getWalls();
@@ -42,7 +46,10 @@ public class KeyInput extends KeyAdapter {
 			}
 
 			if (tempObject.getID() == ID.Player2) {
-				// key events for player 2
+				/**
+				 * key events for player2
+				 * does all checks before it can move
+				 */
 
 				if (key == KeyEvent.VK_UP && tempObject.canObjectMoveUp()) {
 					if(!(isWallUp(tempObject))){
@@ -349,7 +356,7 @@ public class KeyInput extends KeyAdapter {
 	}
 	
 	
-	//We may not need this
+	//We may not need this, but Updates the handler 
 	public void UpdateHandler(Handler newHandler){
 		this.handler = newHandler;
 	}
