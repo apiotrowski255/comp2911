@@ -25,15 +25,16 @@ public class Game extends Canvas implements Runnable {
 	private Menu menu;
 	
 	public enum STATE {
-		Menu,
+		MainMenu,
 		Help,
 		Game,
 		PlayerMenu,
+		LevelTypeMenu,
 		End
 	};
 	
 	//create enum (gameState) and set it to Menu
-	public static STATE gameState = STATE.Menu;
+	public static STATE gameState = STATE.MainMenu;
 
 	/**
 	 * Game constructor
@@ -154,7 +155,7 @@ public class Game extends Canvas implements Runnable {
 		if(gameState == STATE.Game){
 			handler.tick();
 			spawner.tick();
-		} else if (gameState == STATE.Menu){
+		} else if (gameState == STATE.MainMenu){
 			menu.tick();
 		}
 	}
@@ -176,11 +177,11 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 
-		handler.render(g);
+		
 		
 		if(gameState == STATE.Game){
-
-		} else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.PlayerMenu){
+			handler.render(g);
+		} else if(gameState == STATE.MainMenu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.PlayerMenu || gameState == STATE.LevelTypeMenu){
 			menu.render(g);
 		} 
 
@@ -226,7 +227,7 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	public boolean IsgameStateMenu(){
-		if(gameState == STATE.Menu){
+		if(gameState == STATE.MainMenu){
 			return true;
 		}
 		return false;
@@ -260,17 +261,26 @@ public class Game extends Canvas implements Runnable {
 		return false;
 	}
 	
+	public boolean isgameStateLevelTypeMenu(){
+		if(gameState == STATE.LevelTypeMenu){
+			return true;
+		}
+		return false;
+	}
+	
 	public void setgameState(String state){
 		if(state.equals("Help")){
 			gameState = STATE.Help;
 		} else if(state.equals("Game")){
 			gameState = STATE.Game;
-		} else if (state.equals("Menu")){
-			gameState = STATE.Menu;
+		} else if (state.equals("MainMenu")){
+			gameState = STATE.MainMenu;
 		} else if (state.equals("End")){
 			gameState = STATE.End;
 		} else if (state.equals("PlayerMenu")){
 			gameState = STATE.PlayerMenu;
+		} else if (state.equals("LevelTypeMenu")){
+			gameState = STATE.LevelTypeMenu;
 		}
 	}
 	

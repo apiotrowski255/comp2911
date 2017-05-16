@@ -45,6 +45,28 @@ public class Menu extends MouseAdapter{
 		if(game.IsgameStatePlayerMenu()){
 			//single player button
 			if (mouseOver(mx, my, 210, 150, 200, 64)) {
+				gameStateWord = "LevelTypeMenu";
+			}
+			
+			//2 player button
+			if(mouseOver(mx, my, 210, 250, 200, 64)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
+				
+				game.setKeyinput(new KeyInput(handler));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			// back button, is Mouse on the button button
+			if (mouseOver(mx, my, 210, 350, 200, 64)) {
+				gameStateWord = "MainMenu";
+			}
+			
+		}
+		if(game.isgameStateLevelTypeMenu()){
+			//Level select button
+			if (mouseOver(mx, my, 210, 150, 200, 64)) {
 				gameStateWord = "Game";
 				game.removeKeyListener(game.getKeyinput());
 				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
@@ -65,15 +87,14 @@ public class Menu extends MouseAdapter{
 			
 			// back button, is Mouse on the button button
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
-				gameStateWord = "Menu";
+				gameStateWord = "PlayerMenu";
 			}
-			
 		}
 		
 		//back button for help
 		if(game.IsgameStateHelp()){
 			if(mouseOver(mx, my, 210, 350, 200, 64)){
-				gameStateWord = "Menu";
+				gameStateWord = "MainMenu";
 				return;
 			}
 		}
@@ -139,10 +160,10 @@ public class Menu extends MouseAdapter{
 			g.drawRect(210 - bouncer/2, 150 - bouncer/2, 200 + bouncer, 64 + bouncer);
 			g.drawString("Play", 270, 190);
 
-			g.drawRect(210, 250, 200, 64);
+			g.drawRect(210 - bouncer/2, 250 - bouncer/2, 200 + bouncer, 64 + bouncer);
 			g.drawString("Help", 270, 290);
 
-			g.drawRect(210, 350, 200, 64);
+			g.drawRect(210 - bouncer/2, 350 - bouncer/2, 200 + bouncer, 64 + bouncer);
 			g.drawString("Quit", 270, 390);
 		} else if (game.IsgameStateHelp()) {
 			Font fnt = new Font("arial", 1, 50);
@@ -154,8 +175,14 @@ public class Menu extends MouseAdapter{
 			g.drawString("Help", 240, 70);
 			
 			g.setFont(fnt3);
+			g.drawString("Welcome to the Game Sokoban!", 150, 100);
+			g.drawString("Your objective is to move the boxes to the goal Square", 50, 125);
+			g.drawString("Sounds easy right? but there are some rules", 90, 150);
+			g.drawString("You (and the box) can only move horizontally and vertically", 30, 175);
+			g.drawString("Even if all your might, you can only move one box at a time", 30, 200);
+			
 			g.drawString("i need help too", 240, 290);
-			g.drawString("use WASD/arrow keys to move player", 130, 200);
+			g.drawString("In Single Player mode, use the arrow keys to move", 130, 250);
 			
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
@@ -175,6 +202,26 @@ public class Menu extends MouseAdapter{
 			g.drawRect(210, 250, 200, 64);
 			g.drawString("2 Player", 255, 290);
 
+			g.drawRect(210, 350, 200, 64);
+			g.drawString("Back", 270, 390);
+		} else if (game.isgameStateLevelTypeMenu()){
+			Font fnt = new Font("arial", 1, 50);
+			Font fnt2 = new Font("arial", 1, 30);
+			Font fnt3 = new Font("arial", 1, 25);
+
+			g.setFont(fnt);
+			g.setColor(Color.white);
+			g.drawString("Sokoban", 205, 90);
+
+			g.setFont(fnt2);
+			g.drawRect(210, 150, 200, 64);
+			g.drawString("Select Level", 223, 190);
+
+			g.setFont(fnt3);
+			g.drawRect(210, 250, 200, 64);
+			g.drawString("Random Level", 225, 290);
+
+			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Back", 270, 390);
 		}
