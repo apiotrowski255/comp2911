@@ -9,10 +9,15 @@ public class Menu extends MouseAdapter{
 
 	private Game game;
 	private Handler handler;
+	private String gameStateWord;
+	private int bouncer;
+	private boolean startFromTop;
 	
 	public Menu(Game game, Handler handler){
 		this.game = game;
 		this.handler = handler;
+		this.gameStateWord = null;
+		this.bouncer = 0;
 	}
 	
 	public void mousePressed(MouseEvent e){
@@ -20,18 +25,15 @@ public class Menu extends MouseAdapter{
 		int my = e.getY();
 		
 		if(game.IsgameStateMenu()){
+			//playButton
 			if (mouseOver(mx, my, 210, 150, 200, 64)) {
-				game.setgameState("Game");
-				game.removeKeyListener(game.getKeyinput());
-				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
+				gameStateWord = "PlayerMenu";
 				
-				game.setKeyinput(new KeyInput(handler));
-				game.addKeyListener(game.getKeyinput());
 			}
 			
 			//help button, is Mouse on the help button
 			if(mouseOver(mx, my, 210, 250, 200, 64)){
-				game.setgameState("Help");
+				gameStateWord = "Help";
 			}
 			
 			// quit button, is Mouse on the quit button
@@ -40,10 +42,38 @@ public class Menu extends MouseAdapter{
 			}
 		}
 		
+		if(game.IsgameStatePlayerMenu()){
+			//single player button
+			if (mouseOver(mx, my, 210, 150, 200, 64)) {
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
+				
+				game.setKeyinput(new KeyInput(handler));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			//2 player button
+			if(mouseOver(mx, my, 210, 250, 200, 64)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
+				
+				game.setKeyinput(new KeyInput(handler));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			// back button, is Mouse on the button button
+			if (mouseOver(mx, my, 210, 350, 200, 64)) {
+				gameStateWord = "Menu";
+			}
+			
+		}
+		
 		//back button for help
 		if(game.IsgameStateHelp()){
 			if(mouseOver(mx, my, 210, 350, 200, 64)){
-				game.setgameState("Menu");
+				gameStateWord = "Menu";
 				return;
 			}
 		}
@@ -72,12 +102,23 @@ public class Menu extends MouseAdapter{
 	}
 	
 	public void mouseReleased(MouseEvent e){
-		
+		game.setgameState(gameStateWord);
 	}
 	
 	
 	
 	public void tick(){
+		
+		if(bouncer < 10 && !startFromTop){
+			bouncer++;
+		} else {
+			startFromTop = true;
+			if(bouncer > 0){
+				bouncer--;
+			} else {
+				startFromTop = false;
+			}
+		}
 		
 	}
 	
@@ -95,7 +136,7 @@ public class Menu extends MouseAdapter{
 			g.drawString("Sokoban", 205, 90);
 
 			g.setFont(fnt2);
-			g.drawRect(210, 150, 200, 64);
+			g.drawRect(210 - bouncer/2, 150 - bouncer/2, 200 + bouncer, 64 + bouncer);
 			g.drawString("Play", 270, 190);
 
 			g.drawRect(210, 250, 200, 64);
@@ -119,6 +160,23 @@ public class Menu extends MouseAdapter{
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Back", 270, 390);
-		} 
+		} else if (game.IsgameStatePlayerMenu()){
+			Font fnt = new Font("arial", 1, 50);
+			Font fnt2 = new Font("arial", 1, 30);
+
+			g.setFont(fnt);
+			g.setColor(Color.white);
+			g.drawString("Sokoban", 205, 90);
+
+			g.setFont(fnt2);
+			g.drawRect(210, 150, 200, 64);
+			g.drawString("Single Player", 217, 190);
+
+			g.drawRect(210, 250, 200, 64);
+			g.drawString("2 Player", 255, 290);
+
+			g.drawRect(210, 350, 200, 64);
+			g.drawString("Back", 270, 390);
+		}
 	}
 }

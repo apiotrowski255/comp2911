@@ -28,6 +28,7 @@ public class Game extends Canvas implements Runnable {
 		Menu,
 		Help,
 		Game,
+		PlayerMenu,
 		End
 	};
 	
@@ -131,6 +132,7 @@ public class Game extends Canvas implements Runnable {
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				System.out.println("FPS: " + frames);
+				System.out.println(gameState);
 				if(frames > targetFPS){
 					sleepCounter++;
 				} else if (frames < targetFPS){
@@ -178,7 +180,7 @@ public class Game extends Canvas implements Runnable {
 		
 		if(gameState == STATE.Game){
 
-		} else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End){
+		} else if(gameState == STATE.Menu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.PlayerMenu){
 			menu.render(g);
 		} 
 
@@ -251,6 +253,13 @@ public class Game extends Canvas implements Runnable {
 		return false;
 	}
 	
+	public boolean IsgameStatePlayerMenu(){
+		if(gameState == STATE.PlayerMenu){
+			return true;
+		}
+		return false;
+	}
+	
 	public void setgameState(String state){
 		if(state.equals("Help")){
 			gameState = STATE.Help;
@@ -260,10 +269,20 @@ public class Game extends Canvas implements Runnable {
 			gameState = STATE.Menu;
 		} else if (state.equals("End")){
 			gameState = STATE.End;
+		} else if (state.equals("PlayerMenu")){
+			gameState = STATE.PlayerMenu;
 		}
 	}
 	
 	public Spawn getSpawner(){
 		return this.spawner;
+	}
+
+	public STATE getGameState() {
+		return gameState;
+	}
+
+	public void setGameState(STATE gameState) {
+		Game.gameState = gameState;
 	}
 }
