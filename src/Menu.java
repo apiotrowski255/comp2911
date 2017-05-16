@@ -235,11 +235,25 @@ public class Menu extends MouseAdapter{
 			g.drawString("Sokoban", 205, 90);
 			
 			g.setFont(fnt3);
+			g.drawString("Levels", 350, 130);
+			
 			g.drawString("Easy", 200, 175);
 			g.drawRect(350, 150, 32, 32);
 			g.drawRect(400, 150, 32, 32);
 			g.drawRect(450, 150, 32, 32);
 			g.drawRect(300, 150, 32, 32);
+			
+			g.drawString("Medium", 200, 225);
+			g.drawRect(350, 200, 32, 32);
+			g.drawRect(400, 200, 32, 32);
+			g.drawRect(450, 200, 32, 32);
+			g.drawRect(300, 200, 32, 32);
+			
+			g.drawString("Hard", 200, 275);
+			g.drawRect(350, 250, 32, 32);
+			g.drawRect(400, 250, 32, 32);
+			g.drawRect(450, 250, 32, 32);
+			g.drawRect(300, 250, 32, 32);
 			
 			
 			g.setFont(fnt2);
