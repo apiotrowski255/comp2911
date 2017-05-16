@@ -54,6 +54,7 @@ public class Game extends Canvas implements Runnable {
 		if(gameState == STATE.Game){
 			loadLevel2(handler);
 		} else {
+			
 			//cool background animations
 		}
 		
@@ -106,6 +107,13 @@ public class Game extends Canvas implements Runnable {
 		long timer = System.currentTimeMillis();
 		int frames = 0;
 		while (running) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
