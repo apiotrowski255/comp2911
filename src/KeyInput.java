@@ -9,6 +9,7 @@ public class KeyInput extends KeyAdapter {
 	private Handler handler;
 	public ArrayList<GameObject> walls = new ArrayList<GameObject>();
 	public ArrayList<GameObject> boxes = new ArrayList<GameObject>();
+	public int currentSteps;
 
 	/**
 	 * Constructor
@@ -18,6 +19,19 @@ public class KeyInput extends KeyAdapter {
 		this.handler = handler;
 		this.walls= handler.getWalls();
 		this.boxes = handler.getBoxes();
+		this.currentSteps = 0;
+	}
+	
+	public int getCurrentSteps() {
+		return this.currentSteps;
+	}
+	
+	public void addStep() {
+		this.currentSteps++;
+	}
+	
+	public void resetSteps() {
+		this.currentSteps = 0;
 	}
 
 	public void keyPressed(KeyEvent e) {
@@ -58,10 +72,13 @@ public class KeyInput extends KeyAdapter {
 							if(canBoxMoveUp(b)){
 								tempObject.setY(tempObject.getY() - 32);
 								b.setY(b.getY() - 32);
+								addStep();
 							}
 						} else {
 							tempObject.setY(tempObject.getY() - 32);
+							addStep();
 						}
+						
 					}
 				}
 				if (key == KeyEvent.VK_DOWN && tempObject.canObjectMoveDown()) {
@@ -71,10 +88,13 @@ public class KeyInput extends KeyAdapter {
 							if(canBoxMoveDown(b)){
 								tempObject.setY(tempObject.getY() + 32);
 								b.setY(b.getY() + 32);
+								addStep();
 							}
 						} else {
 							tempObject.setY(tempObject.getY() + 32);
+							addStep();
 						}
+						
 					}
 				}
 				if (key == KeyEvent.VK_RIGHT && tempObject.canObjectMoveRight()) {
@@ -84,10 +104,13 @@ public class KeyInput extends KeyAdapter {
 							if(canBoxMoveRight(b)){
 								tempObject.setX(tempObject.getX() + 32);
 								b.setX(b.getX() + 32);
+								addStep();
 							}
 						} else {
 							tempObject.setX(tempObject.getX() + 32);
+							addStep();
 						}
+						
 					}
 				}
 				if (key == KeyEvent.VK_LEFT && tempObject.canObjectMoveLeft()) {
@@ -97,10 +120,13 @@ public class KeyInput extends KeyAdapter {
 							if(canBoxMoveLeft(b)){
 								tempObject.setX(tempObject.getX() - 32);
 								b.setX(b.getX() - 32);
+								addStep();
 							}
 						} else {
 							tempObject.setX(tempObject.getX() - 32);
+							addStep();
 						}
+						
 					} 
 				}
 			}
