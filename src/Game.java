@@ -30,6 +30,7 @@ public class Game extends Canvas implements Runnable {
 		Game,
 		PlayerMenu,
 		LevelTypeMenu,
+		LevelSelectMenu,
 		End
 	};
 	
@@ -182,7 +183,7 @@ public class Game extends Canvas implements Runnable {
 		
 		if(gameState == STATE.Game){
 			handler.render(g);
-		} else if(gameState == STATE.MainMenu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.PlayerMenu || gameState == STATE.LevelTypeMenu){
+		} else if(gameState == STATE.MainMenu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.PlayerMenu || gameState == STATE.LevelTypeMenu || gameState == STATE.LevelSelectMenu){
 			menu.render(g);
 		} 
 
@@ -269,6 +270,13 @@ public class Game extends Canvas implements Runnable {
 		return false;
 	}
 	
+	public boolean isgameStateLevelSelectMenu(){
+		if(gameState == STATE.LevelSelectMenu){
+			return true;
+		}
+		return false;
+	}
+	
 	public void setgameState(String state){
 		if(state.equals("Help")){
 			gameState = STATE.Help;
@@ -282,6 +290,10 @@ public class Game extends Canvas implements Runnable {
 			gameState = STATE.PlayerMenu;
 		} else if (state.equals("LevelTypeMenu")){
 			gameState = STATE.LevelTypeMenu;
+		} else if (state.equals("LevelSelectMenu")){
+			gameState = STATE.LevelSelectMenu;
+		} else {
+			System.out.println("Error");
 		}
 	}
 	

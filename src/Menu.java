@@ -67,15 +67,10 @@ public class Menu extends MouseAdapter{
 		if(game.isgameStateLevelTypeMenu()){
 			//Level select button
 			if (mouseOver(mx, my, 210, 150, 200, 64)) {
-				gameStateWord = "Game";
-				game.removeKeyListener(game.getKeyinput());
-				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
-				
-				game.setKeyinput(new KeyInput(handler));
-				game.addKeyListener(game.getKeyinput());
+				gameStateWord = "LevelSelectMenu";
 			}
 			
-			//2 player button
+			//Random button
 			if(mouseOver(mx, my, 210, 250, 200, 64)){
 				gameStateWord = "Game";
 				game.removeKeyListener(game.getKeyinput());
@@ -89,6 +84,10 @@ public class Menu extends MouseAdapter{
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
 				gameStateWord = "PlayerMenu";
 			}
+		}
+		
+		if(game.isgameStateLevelSelectMenu()){
+			
 		}
 		
 		//back button for help
@@ -181,11 +180,13 @@ public class Menu extends MouseAdapter{
 			g.drawString("You (and the box) can only move horizontally and vertically", 30, 175);
 			g.drawString("Even if all your might, you can only move one box at a time", 30, 200);
 			
-			g.drawString("i need help too", 240, 290);
-			g.drawString("In Single Player mode, use the arrow keys to move", 130, 250);
+			g.drawString("i need help too", 240, 300);
+			g.drawString("In Single Player mode, use the arrow keys to move", 70, 250);
+			g.drawString("In Two Player mode, use the wasd keys to move player 2", 40, 275);
+			
 			
 			g.setFont(fnt2);
-			g.drawRect(210, 350, 200, 64);
+			g.drawRect(210 - bouncer/2, 350 - bouncer/2, 200 + bouncer, 64 + bouncer);
 			g.drawString("Back", 270, 390);
 		} else if (game.IsgameStatePlayerMenu()){
 			Font fnt = new Font("arial", 1, 50);
@@ -221,6 +222,26 @@ public class Menu extends MouseAdapter{
 			g.drawRect(210, 250, 200, 64);
 			g.drawString("Random Level", 225, 290);
 
+			g.setFont(fnt2);
+			g.drawRect(210, 350, 200, 64);
+			g.drawString("Back", 270, 390);
+		} else if (game.isgameStateLevelSelectMenu()){
+			Font fnt = new Font("arial", 1, 50);
+			Font fnt2 = new Font("arial", 1, 30);
+			Font fnt3 = new Font("arial", 1, 25);
+
+			g.setFont(fnt);
+			g.setColor(Color.white);
+			g.drawString("Sokoban", 205, 90);
+			
+			g.setFont(fnt3);
+			g.drawString("Easy", 200, 175);
+			g.drawRect(350, 150, 32, 32);
+			g.drawRect(400, 150, 32, 32);
+			g.drawRect(450, 150, 32, 32);
+			g.drawRect(300, 150, 32, 32);
+			
+			
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Back", 270, 390);
