@@ -52,7 +52,7 @@ public class Game extends Canvas implements Runnable {
 		r = new Random();
 		
 		if(gameState == STATE.Game){
-			loadLevel2(handler);
+			spawner.levelLoader(spawner.currentLevelNumber, handler);
 		} else {
 			
 			//cool background animations
@@ -106,9 +106,12 @@ public class Game extends Canvas implements Runnable {
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
+		int sleepCounter = 10;
+		int targetFPS = 60;
 		while (running) {
+			
 			try {
-				Thread.sleep(10);
+				Thread.sleep(sleepCounter);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -128,6 +131,11 @@ public class Game extends Canvas implements Runnable {
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				System.out.println("FPS: " + frames);
+				if(frames > targetFPS){
+					sleepCounter++;
+				} else if (frames < targetFPS){
+					sleepCounter--;
+				}
 				frames = 0;
 			}
 		}
@@ -204,62 +212,7 @@ public class Game extends Canvas implements Runnable {
 	
 	
 	
-	/**
-	 * hard coded, 
-	 * loads level two
-	 * @param handler
-	 */
-	public static void loadLevel2(Handler handler){
-		
-		for(int i = 3; i < 6; i++){
-			handler.addObject(new GoalSquare(32 * 7, 32 * i, ID.GoalSquare, handler));
-		}
-		
-		handler.addObject(new Player(32 * 1, 32 * 1, ID.Player2));
-		
-		handler.addObject(new Box(32 * 2, 32 * 2, ID.Box));
-		handler.addObject(new Box(32 * 3, 32 * 2, ID.Box));
-		handler.addObject(new Box(32 * 2, 32 * 3, ID.Box));
-		
-		for(int i = 0; i < 5; i++){
-			handler.addObject(new Wall(0, 32 * i, ID.Wall));
-		}
-		handler.addObject(new Wall(32 * 1, 32 * 0, ID.Wall));
-		for(int i = 4; i < 9; i++){
-			handler.addObject(new Wall(32 * 1, 32 * i, ID.Wall));
-		}
-		handler.addObject(new Wall(32 * 2, 32 * 0, ID.Wall));
-		for(int i = 4; i < 6; i++){
-			handler.addObject(new Wall(32 * 2, 32 * i, ID.Wall));
-		}
-		handler.addObject(new Wall(32 * 2, 32 * 8, ID.Wall));
-		
-		handler.addObject(new Wall(32 * 3, 32 * 0, ID.Wall));
-		handler.addObject(new Wall(32 * 3, 32 * 8, ID.Wall));
-		
-		for(int i = 0; i < 5; i++){
-			handler.addObject(new Wall(32 * 4, 32 * i, ID.Wall));
-		}
-		handler.addObject(new Wall(32 * 4, 32 * 8, ID.Wall));
-		
-		handler.addObject(new Wall(32 * 5, 32 * 4, ID.Wall));
-		for(int i = 6; i < 9; i++){
-			handler.addObject(new Wall(32 * 5, 32 * i, ID.Wall));
-		}
-		
-		for(int i = 2; i < 5; i++){
-			handler.addObject(new Wall(32 * 6, 32 * i, ID.Wall));
-		}
-		handler.addObject(new Wall(32 * 6, 32 * 7, ID.Wall));
-		
-		handler.addObject(new Wall(32 * 7, 32 * 2, ID.Wall));
-		handler.addObject(new Wall(32 * 7, 32 * 7, ID.Wall));
-		
-		for(int i = 2; i < 8; i++){
-			handler.addObject(new Wall(32 * 8, 32 * i, ID.Wall));
-		}
-		
-	}
+
 
 	// getters and setters functions
 	public KeyInput getKeyinput() {
@@ -308,5 +261,9 @@ public class Game extends Canvas implements Runnable {
 		} else if (state.equals("End")){
 			gameState = STATE.End;
 		}
+	}
+	
+	public Spawn getSpawner(){
+		return this.spawner;
 	}
 }

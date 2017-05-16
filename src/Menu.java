@@ -23,7 +23,7 @@ public class Menu extends MouseAdapter{
 			if (mouseOver(mx, my, 210, 150, 200, 64)) {
 				game.setgameState("Game");
 				game.removeKeyListener(game.getKeyinput());
-				game.loadLevel2(handler);
+				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
 				
 				game.setKeyinput(new KeyInput(handler));
 				game.addKeyListener(game.getKeyinput());
