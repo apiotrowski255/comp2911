@@ -87,7 +87,9 @@ public class Menu extends MouseAdapter{
 		}
 		
 		if(game.isgameStateLevelSelectMenu()){
-			
+			if (mouseOver(mx, my, 210, 350, 200, 64)) {
+				gameStateWord = "LevelTypeMenu";
+			}
 		}
 		
 		//back button for help
@@ -210,6 +212,7 @@ public class Menu extends MouseAdapter{
 			Font fnt2 = new Font("arial", 1, 30);
 			Font fnt3 = new Font("arial", 1, 25);
 
+
 			g.setFont(fnt);
 			g.setColor(Color.white);
 			g.drawString("Sokoban", 205, 90);
@@ -229,6 +232,24 @@ public class Menu extends MouseAdapter{
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
 			Font fnt3 = new Font("arial", 1, 25);
+			Font fnt4 = new Font("arial", 1, 25);
+			
+			g.setFont(fnt4);
+			g.setColor(Color.white);
+			g.drawString("1", 310, 175);
+			g.drawString("2", 360, 175);
+			g.drawString("3", 410, 175);
+			g.drawString("4", 460, 175);
+			
+			g.drawString("5", 310, 225);
+			g.drawString("6", 360, 225);
+			g.drawString("7", 410, 225);
+			g.drawString("8", 460, 225);
+			
+			g.drawString("9", 310, 275);
+			g.drawString("10", 353, 275);
+			g.drawString("11", 403, 275);
+			g.drawString("12", 452, 275);
 
 			g.setFont(fnt);
 			g.setColor(Color.white);
