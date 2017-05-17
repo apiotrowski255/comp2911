@@ -10,7 +10,7 @@ public class Spawn {
 	public Spawn(Handler handler, Game game){
 		this.handler = handler;
 		this.game = game;
-		this.currentLevelNumber = 3;	
+		this.currentLevelNumber = 1;	
 	}
 	
 	/**
