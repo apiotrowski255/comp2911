@@ -62,8 +62,10 @@ public class Spawn {
 	public void levelLoader (int levelNumber, Handler handler) {
 		if (levelNumber == 1) {
 			loadLevel1(handler);
-		} else {
+		} else if (levelNumber == 2) {
 			loadLevel2(handler);
+		} else if (levelNumber == 3) {
+			loadLevel3(handler);
 		}
 	}
 
@@ -157,6 +159,28 @@ public class Spawn {
 		for(int i = 2; i < 8; i++){
 			handler.addObject(new Wall(32 * 8, 32 * i, ID.Wall));
 		}
+		
+	}
+	
+	/**
+	 * hard coded, 
+	 * loads level three
+	 * @param handler
+	 */
+	public void loadLevel3(Handler handler){
+		for (int i = 0; i < 12; i++) {
+			handler.addObject(new Wall(32 * i, 32 * 0, ID.Wall));
+		}
+		for (int i = 1; i < 7; i++) {
+			handler.addObject(new Wall(32 * 0, 32 * i, ID.Wall));
+		}
+		for (int i = 1; i < 6; i++) {
+			handler.addObject(new Wall(32 * i, 32 * 6, ID.Wall));
+		}
+		for (int i = 1; i < 4; i++) {
+			handler.addObject(new Wall(32 * 2, 32 * (6+i), ID.Wall));
+		}
+		
 		
 	}
 }
