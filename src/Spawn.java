@@ -10,7 +10,7 @@ public class Spawn {
 	public Spawn(Handler handler, Game game){
 		this.handler = handler;
 		this.game = game;
-		this.currentLevelNumber = 1;	
+		this.currentLevelNumber = 3;	
 	}
 	
 	/**
@@ -168,19 +168,76 @@ public class Spawn {
 	 * @param handler
 	 */
 	public void loadLevel3(Handler handler){
+		
+		// -- Load Player
+		handler.addObject(new Player(32 * 7, 32 * 4, ID.Player2));
+		
+		// -- Load Walls
+		// Outer Walls
 		for (int i = 0; i < 12; i++) {
 			handler.addObject(new Wall(32 * i, 32 * 0, ID.Wall));
 		}
 		for (int i = 1; i < 7; i++) {
 			handler.addObject(new Wall(32 * 0, 32 * i, ID.Wall));
 		}
+		for (int i = 11; i < 14; i++) {
+			handler.addObject(new Wall(32 * i, 32 * 1, ID.Wall));
+		}
+		for (int i = 1; i < 9; i++) {
+			handler.addObject(new Wall(32 * 13, 32 * i, ID.Wall));
+		}
+		for (int i = 2; i < 14; i++) {
+			handler.addObject(new Wall(32 * i, 32 * 9, ID.Wall));
+		}
 		for (int i = 1; i < 6; i++) {
 			handler.addObject(new Wall(32 * i, 32 * 6, ID.Wall));
 		}
-		for (int i = 1; i < 4; i++) {
-			handler.addObject(new Wall(32 * 2, 32 * (6+i), ID.Wall));
+		
+		// Inner Walls
+		for (int i = 0; i < 4; i++) {
+			handler.addObject(new Wall(32 * 5, 32 * i, ID.Wall));
+		}
+		for (int i = 6; i < 10; i++) {
+			handler.addObject(new Wall(32 * 2, 32 * i, ID.Wall));
 		}
 		
+		handler.addObject(new Wall(32 * 5, 32 * 5, ID.Wall));
+		handler.addObject(new Wall(32 * 7, 32 * 8, ID.Wall));
+		handler.addObject(new Wall(32 * 12, 32 * 5, ID.Wall));
 		
+		handler.addObject(new Wall(32 * 7, 32 * 5, ID.Wall));
+		handler.addObject(new Wall(32 * 7, 32 * 6, ID.Wall));
+		handler.addObject(new Wall(32 * 8, 32 * 6, ID.Wall));
+		
+		for (int i = 7; i < 11; i++) {
+			handler.addObject(new Wall(32 * i, 32 * 3, ID.Wall));
+		}
+		handler.addObject(new Wall(32 * 9, 32 * 4, ID.Wall));
+		handler.addObject(new Wall(32 * 10, 32 * 4, ID.Wall));
+		
+		// -- Load boxes
+		handler.addObject(new Box(32 * 7, 32 * 2, ID.Box));
+		handler.addObject(new Box(32 * 10, 32 * 2, ID.Box));
+		
+		handler.addObject(new Box(32 * 6, 32 * 3, ID.Box));
+		
+		handler.addObject(new Box(32 * 10, 32 * 5, ID.Box));
+		
+		handler.addObject(new Box(32 * 9, 32 * 6, ID.Box));
+		handler.addObject(new Box(32 * 11, 32 * 6, ID.Box));
+		
+		handler.addObject(new Box(32 * 4, 32 * 7, ID.Box));
+		handler.addObject(new Box(32 * 7, 32 * 7, ID.Box));
+		handler.addObject(new Box(32 * 9, 32 * 7, ID.Box));
+		handler.addObject(new Box(32 * 11, 32 * 7, ID.Box));
+		
+		// -- Load goals
+		for (int i = 1; i < 6; i++) {
+			handler.addObject(new GoalSquare(32 * 1, 32 * i, ID.GoalSquare, handler));
+		}
+		
+		for (int i = 1; i < 6; i++) {
+			handler.addObject(new GoalSquare(32 * 2, 32 * i, ID.GoalSquare, handler));
+		}
 	}
 }
