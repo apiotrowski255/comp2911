@@ -87,6 +87,9 @@ public class Menu extends MouseAdapter{
 		}
 		
 		if(game.isgameStateLevelSelectMenu()){
+			
+			
+			//back button
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
 				gameStateWord = "LevelTypeMenu";
 			}
@@ -124,7 +127,9 @@ public class Menu extends MouseAdapter{
 	}
 	
 	public void mouseReleased(MouseEvent e){
-		game.setgameState(gameStateWord);
+		if(!(gameStateWord == null)){
+			game.setgameState(gameStateWord);
+		}
 	}
 	
 	
