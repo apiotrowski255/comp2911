@@ -69,6 +69,8 @@ public class Spawn {
 			loadLevel3(handler);
 		} else if (levelNumber == 4) {
 			loadLevel4(handler);
+		} else if (levelNumber == 5){
+			loadLevel5(handler);
 		}
 	}
 
@@ -244,8 +246,6 @@ public class Spawn {
 		}
 	}
 	
-	
-	
 	public void loadLevel4(Handler handler){
 		//load goals 
 		handler.addObject(new GoalSquare(32*9, 32*4, ID.GoalSquare, handler));
@@ -311,6 +311,57 @@ public class Spawn {
 		//boxes
 		handler.addObject(new Box(32*2, 32*5, ID.Box));
 		handler.addObject(new Box(32*4, 32*6, ID.Box));
+	}
+	
+	//this one is easy
+	public void loadLevel5(Handler handler){
+		for(int i = 4; i < 8; i++){
+			handler.addObject(new Wall(32*0, 32*i, ID.Wall));
+		}
+		
+		for(int i = 1; i < 5; i++){
+			handler.addObject(new Wall(32*1, 32*i, ID.Wall));
+		}
+		handler.addObject(new Wall(32*1, 32*7, ID.Wall));
+		
+		handler.addObject(new Wall(32*2, 32*1, ID.Wall));
+		handler.addObject(new Wall(32*2, 32*7, ID.Wall));
+		
+		handler.addObject(new Wall(32*3, 32*1, ID.Wall));
+		handler.addObject(new Wall(32*3, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*3, 32*7, ID.Wall));
+		
+		handler.addObject(new Wall(32*4, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*1, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*6, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*7, ID.Wall));
+		
+		handler.addObject(new Wall(32*5, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*5, 32*3, ID.Wall));
+		handler.addObject(new Wall(32*5, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*5, 32*7, ID.Wall));
+		
+		handler.addObject(new Wall(32*6, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*6, 32*7, ID.Wall));
+		
+		handler.addObject(new Wall(32*7, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*7, 32*1, ID.Wall));
+		handler.addObject(new Wall(32*7, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*7, 32*7, ID.Wall));
+		
+		for(int i = 1; i < 8; i++){
+			handler.addObject(new Wall(32*8, 32*i, ID.Wall));
+		}
+		
+		handler.addObject(new GoalSquare(32*6, 32*3, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32*6, 32*4, ID.GoalSquare, handler));
+		
+		handler.addObject(new Box(32*3, 32*2, ID.Box));
+		handler.addObject(new Box(32*3, 32*3, ID.Box));
+		
+		handler.addObject(new Player(32*7, 32*6, ID.Player2));
+		
 	}
 	
 	public int getCurrentLevelNumber() {

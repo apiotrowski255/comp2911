@@ -128,6 +128,16 @@ public class Menu extends MouseAdapter{
 				game.addKeyListener(game.getKeyinput());
 			}
 			
+			if(mouseOver(mx, my, 300, 200, 32, 32)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(5);
+				game.getSpawner().levelLoader(5, handler);
+				
+				game.setKeyinput(new KeyInput(handler, game));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
 			
 			//back button
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
