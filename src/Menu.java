@@ -148,6 +148,37 @@ public class Menu extends MouseAdapter{
 				game.addKeyListener(game.getKeyinput());
 			}
 			
+			if(mouseOver(mx, my, 400, 200, 32, 32)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(7);
+				game.getSpawner().levelLoader(7, handler);
+				
+				game.setKeyinput(new KeyInput(handler, game));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			if(mouseOver(mx, my, 450, 200, 32, 32)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(8);
+				game.getSpawner().levelLoader(8, handler);
+				
+				game.setKeyinput(new KeyInput(handler, game));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			//level 9
+			if(mouseOver(mx, my, 300, 250, 32, 32)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(9);
+				game.getSpawner().levelLoader(9, handler);
+				
+				game.setKeyinput(new KeyInput(handler, game));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
 			
 			//back button
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
@@ -187,7 +218,9 @@ public class Menu extends MouseAdapter{
 	}
 	
 	public void mouseReleased(MouseEvent e){
-		if(!(gameStateWord == null)){
+		if (game.IsgameStateMenu() && gameStateWord == "Game"){
+			//do nothing
+		} else if (!(gameStateWord == null)){
 			game.setgameState(gameStateWord);
 		}
 	}

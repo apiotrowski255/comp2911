@@ -73,6 +73,18 @@ public class Spawn {
 			loadLevel5(handler);
 		} else if (levelNumber == 6) {
 			loadLevel6(handler);
+		} else if (levelNumber == 7) {
+			loadLevel7(handler);
+		} else if (levelNumber == 8) {
+			loadLevel8(handler);
+		} else if (levelNumber == 9) {
+			loadLevel9(handler);
+		} else if (levelNumber == 10) {
+			//loadLevel10(handler);
+		} else if (levelNumber == 11) {
+			//loadLevel11(handler);
+		} else if (levelNumber == 12) {
+			//loadLevel12(handler);
 		}
 	}
 
@@ -171,10 +183,10 @@ public class Spawn {
 	
 	/**
 	 * hard coded, 
-	 * loads level three
+	 * loads level 7
 	 * @param handler
 	 */
-	public void loadLevel3(Handler handler){
+	public void loadLevel7(Handler handler){
 		
 		// -- Load Walls
 		// Outer Walls
@@ -243,9 +255,12 @@ public class Spawn {
 		for (int i = 1; i < 6; i++) {
 			handler.addObject(new GoalSquare(32 * 2, 32 * i, ID.GoalSquare, handler));
 		}
+		
+		//player
+		handler.addObject(new Player(32*7, 32*4, ID.Player2));
 	}
 	
-	public void loadLevel4(Handler handler){
+	public void loadLevel8(Handler handler){
 		//load goals 
 		handler.addObject(new GoalSquare(32*9, 32*4, ID.GoalSquare, handler));
 		handler.addObject(new GoalSquare(32*9, 32*5, ID.GoalSquare, handler));
@@ -303,20 +318,18 @@ public class Spawn {
 		for(int i = 0; i < 9; i++){
 			handler.addObject(new Wall(32*11, 32*i, ID.Wall));
 		}
-		
-		//player
-		handler.addObject(new Player(32*7, 32*6, ID.Player2));
+	
 		
 		//boxes
 		handler.addObject(new Box(32*2, 32*5, ID.Box));
 		handler.addObject(new Box(32*4, 32*6, ID.Box));
 		
 		// -- Load Player
-		handler.addObject(new Player(32 * 7, 32 * 4, ID.Player2));
+		handler.addObject(new Player(32 * 7, 32 * 6, ID.Player2));
 	}
 	
 	//this one is easy
-	public void loadLevel5(Handler handler){
+	public void loadLevel9(Handler handler){
 		for(int i = 4; i < 8; i++){
 			handler.addObject(new Wall(32*0, 32*i, ID.Wall));
 		}
@@ -370,8 +383,6 @@ public class Spawn {
 	// Best moves / pushes = 89/33
 	public void loadLevel6(Handler handler){
 		
-		
-		
 		// -- Walls
 		// Outer Walls
 		for(int i = 0; i < 6; i++){
@@ -418,9 +429,118 @@ public class Spawn {
 		// -- Player
 		handler.addObject(new Player(32*3, 32*2, ID.Player2));
 		
-		
 	}
 	
+	//easy map
+	//37 moves with 5 pushes
+	public void loadLevel3(Handler handler){
+		for(int i = 1; i < 6; i++){
+			handler.addObject(new Wall(32*0, 32*i, ID.Wall));
+		}
+		handler.addObject(new Wall(32*1, 32*1, ID.Wall));
+		for(int i = 5; i < 8; i++){
+			handler.addObject(new Wall(32*1, 32*i, ID.Wall));
+		}
+		
+		handler.addObject(new Wall(32*2, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*2, 32*1, ID.Wall));
+		handler.addObject(new Wall(32*2, 32*3, ID.Wall));
+		handler.addObject(new Wall(32*2, 32*7, ID.Wall));
+		
+		handler.addObject(new Wall(32*3, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*3, 32*5, ID.Wall));
+		handler.addObject(new Wall(32*3, 32*7, ID.Wall));
+		
+		handler.addObject(new Wall(32*4, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*2, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*7, ID.Wall));
+		
+		handler.addObject(new Wall(32*5, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*5, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*5, 32*6, ID.Wall));
+		handler.addObject(new Wall(32*5, 32*7, ID.Wall));
+		
+		handler.addObject(new Wall(32*6, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*6, 32*1, ID.Wall));
+		handler.addObject(new Wall(32*6, 32*2, ID.Wall));
+		handler.addObject(new Wall(32*6, 32*6, ID.Wall));
+		
+		for(int i = 2; i < 7; i++){
+			handler.addObject(new Wall(32*7, 32*i, ID.Wall));
+		}
+		
+		handler.addObject(new GoalSquare(32*5, 32*3, ID.GoalSquare, handler));
+
+		handler.addObject(new Box(32*2, 32*2, ID.Box));
+		
+		handler.addObject(new Player(32*2, 32*6, ID.Player2));
+	}
+	
+	//Can be solved in 71 moves
+	public void loadLevel4(Handler handler){
+		
+		//outer walls
+		for(int i = 1; i < 9; i++){
+			handler.addObject(new Wall(32*0, 32*i, ID.Wall));
+			handler.addObject(new Wall(32*7, 32*(i-1), ID.Wall));
+		}
+		
+		for(int i = 1; i < 5; i++){
+			handler.addObject(new Wall(32*i, 32*1, ID.Wall));
+			handler.addObject(new Wall(32*(i + 2), 32*7, ID.Wall));
+		}
+		
+		for(int i = 1; i < 4; i++){
+			handler.addObject(new Wall(32*i, 32*8, ID.Wall));
+			handler.addObject(new Wall(32*(i+3), 32*0, ID.Wall));
+		}
+		
+		handler.addObject(new Wall(32*1, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*3, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*6, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*3, ID.Wall));
+		handler.addObject(new Wall(32*3, 32*6, ID.Wall));
+		
+		
+		handler.addObject(new GoalSquare(32*3, 32*3, ID.GoalSquare, handler));
+		handler.addObject(new Box(32*4, 32*2, ID.Box));
+		
+		handler.addObject(new Player(32*3, 32*5, ID.Player2));
+	}
+	
+	//approx 120 moves to solve this one, but this is similar to level 4
+	public void loadLevel5(Handler handler){
+		for(int i = 1; i < 9; i++){
+			handler.addObject(new Wall(32*0, 32*i, ID.Wall));
+			handler.addObject(new Wall(32*7, 32*(i-1), ID.Wall));
+		}
+		
+		for(int i = 1; i < 5; i++){
+			handler.addObject(new Wall(32*i, 32*1, ID.Wall));
+			handler.addObject(new Wall(32*(i + 2), 32*7, ID.Wall));
+		}
+		
+		for(int i = 1; i < 4; i++){
+			handler.addObject(new Wall(32*i, 32*8, ID.Wall));
+			handler.addObject(new Wall(32*(i+3), 32*0, ID.Wall));
+		}
+		
+		handler.addObject(new Wall(32*1, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*3, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*6, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*3, ID.Wall));
+		handler.addObject(new Wall(32*3, 32*6, ID.Wall));
+		
+		
+		handler.addObject(new GoalSquare(32*3, 32*3, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32*2, 32*3, ID.GoalSquare, handler));
+		handler.addObject(new Box(32*4, 32*2, ID.Box));
+		handler.addObject(new Box(32*2, 32*3, ID.Box));
+		
+		handler.addObject(new Player(32*3, 32*5, ID.Player2));
+	}
 	
 	public int getCurrentLevelNumber() {
 		return currentLevelNumber;
