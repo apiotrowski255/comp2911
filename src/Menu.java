@@ -313,18 +313,21 @@ public class Menu extends MouseAdapter{
 			g.setFont(fnt3);
 			g.drawString("Levels", 350, 130);
 			
+			g.setColor(Color.GREEN);
 			g.drawString("Easy", 200, 175);
 			g.drawRect(350, 150, 32, 32);
 			g.drawRect(400, 150, 32, 32);
 			g.drawRect(450, 150, 32, 32);
 			g.drawRect(300, 150, 32, 32);
 			
+			g.setColor(Color.orange);
 			g.drawString("Medium", 200, 225);
 			g.drawRect(350, 200, 32, 32);
 			g.drawRect(400, 200, 32, 32);
 			g.drawRect(450, 200, 32, 32);
 			g.drawRect(300, 200, 32, 32);
 			
+			g.setColor(Color.red);
 			g.drawString("Hard", 200, 275);
 			g.drawRect(350, 250, 32, 32);
 			g.drawRect(400, 250, 32, 32);
@@ -332,6 +335,7 @@ public class Menu extends MouseAdapter{
 			g.drawRect(300, 250, 32, 32);
 			
 			
+			g.setColor(Color.WHITE);
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Back", 270, 390);
