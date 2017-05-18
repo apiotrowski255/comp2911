@@ -29,6 +29,10 @@ public class Square {
 	public boolean isPushable() {
 		return this.box;
 	}
+	public boolean isEmpty() {
+		if (!this.box && !this.goal && !this.player && !this.wall) return true;
+		else return false;	
+	}
 	
 	public boolean canBeMoveTo() {
 		if (this.box == false && this.player == false && this.wall == false) return true;
@@ -87,6 +91,9 @@ public class Square {
 		else if (this.wall == true) n += "W";
 		else n += " ";
 		
+		if (this.box == true && this.wall == true) System.out.println("TEST");
+		if (this.player == true && this.wall == true) System.out.println("TEST");
+		
 		return n;
 	}
 
@@ -126,4 +133,14 @@ public class Square {
 		else if (this.wall == true) return "W";
 		else return " ";
 	}
+	
+	public boolean isWall() {
+		return this.wall;
+	}
+	
+	public void addGoal() {
+		this.goal = true;
+	}
+	
+
 }

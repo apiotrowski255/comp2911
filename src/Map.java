@@ -3,6 +3,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Queue;
+import java.util.Random;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -26,20 +27,37 @@ public class Map {
 	
 	public Map() {
 		this.path = "";
-		// boolean goal, boolean box, boolean player, boolean wall
-		//map = new Square(true, false, false, false);
-//		this.puzzel = new Square[][] {
-//			{W(),W(),W(),W(),W(),W(),W()},
-//			{W(),E(),P(),W(),W(),E(),W()},
-//			{W(),E(),B(),W(),W(),E(),W()},
-//			{W(),E(),E(),W(),W(),E(),W()},
-//			{W(),E(),B(),E(),E(),E(),W()},
-//			{W(),W(),W(),W(),E(),E(),W()},
-//			{W(),W(),W(),W(),W(),W(),W()}
-//		};
-//		
-//		System.out.println(this.puzzel[1][2].toString());
+		
+		//this.generateMap(10);
+		//this.generateMap(10);
 	}
+	
+	public Map newMap(int width) {
+		this.path = "";
+		
+		String soultion = null;
+		
+		if (this.generateMap(width)) soultion = this.findSoultion();
+
+		
+		while(soultion == null || soultion.length() <5) {
+
+			if (this.generateMap(width)) {
+				this.printMap();
+				soultion = this.findSoultion();
+				System.out.println(soultion);
+			} else soultion = null;
+		}
+		
+		return this;
+
+	}
+	
+//	private void reset() {
+//		this.movesToSolve = 0;
+//		this.puzzel = null;
+//		this.path = "";
+//	}
 
 	public void turnToHackMap() {
 		this.puzzel = new Square[][] {
@@ -47,7 +65,7 @@ public class Map {
 			{W(),E(),P(),W(),W(),G(),W()},
 			{W(),E(),B(),W(),W(),G(),W()},
 			{W(),E(),E(),W(),W(),E(),W()},
-			{W(),E(),B(),E(),E(),E(),W()},
+			{W(),E(),B(),W(),E(),E(),W()},
 			{W(),W(),W(),W(),E(),E(),W()},
 			{W(),W(),W(),W(),W(),W(),W()}
 		};
@@ -178,6 +196,7 @@ public class Map {
 			}
 		}
 		newMap.movesToSolve = this.movesToSolve;
+//		this.printMap();
 		return newMap;
 	}
 
@@ -210,8 +229,6 @@ public class Map {
 		Queue<Map> q = new LinkedBlockingQueue<Map>();
 		ArrayList<Map> l = new ArrayList<Map>();
 		
-		//int direction = 0;
-
 		Map currentMap = this;
 		Map currentPush = null;
 		l.add(currentMap);
@@ -229,47 +246,12 @@ public class Map {
 			}
 		}
 		
-//		if (currentMap.isValidMove(UP)) {
-//			currentPush = currentMap.clone().move(UP);
-//			currentPush.movesToSolve++;
-//			if (!l.contains(currentPush) ) {
-//				q.add(currentPush);
-//				l.add(currentPush);
-//			}
-//		}
-//		direction = 1;
-//		if (currentMap.isValidMove(UP)) {
-//			currentPush = currentMap.clone().move(UP);
-//			currentPush.movesToSolve++;
-//			if (!l.contains(currentPush) ) {
-//				q.add(currentPush);
-//				l.add(currentPush);
-//			}
-//		}
-//		direction = 2;
-//		if (currentMap.isValidMove(UP)) {
-//			currentPush = currentMap.clone().move(UP);
-//			currentPush.movesToSolve++;
-//			if (!l.contains(currentPush) ) {
-//				q.add(currentPush);
-//				l.add(currentPush);
-//			}
-//		} 
-//		direction = 3;
-//		if (currentMap.isValidMove(UP)) {
-//			currentPush = currentMap.clone().move(UP);
-//			currentPush.movesToSolve++;
-//			if (!l.contains(currentPush) ) {
-//				q.add(currentPush);
-//				l.add(currentPush);
-//			}
-//		}
+
 
 
 		while ( !q.isEmpty() && !currentMap.isDone()) {
 			currentMap = q.poll();
-			System.out.println(" ");
-			currentMap.printMap();
+
 			
 			for (int direction=0; direction < 4; direction ++) {
 				if (currentMap.isValidMove(direction)) {
@@ -282,24 +264,8 @@ public class Map {
 					}
 				}
 			}
-//			if (currentMap.isValidMove(UP) && !l.contains(currentMap.clone().move(UP)) ) {
-//				q.add(currentMap.clone().move(UP));
-//				l.add(currentMap.clone().move(UP));
-//			}
-//			if (currentMap.isValidMove(DOWN) && !l.contains(currentMap.clone().move(DOWN))) {
-//				q.add(currentMap.clone().move(DOWN));
-//				l.add(currentMap.clone().move(DOWN));
-//			} 
-//			if (currentMap.isValidMove(LEFT) && !l.contains(currentMap.clone().move(LEFT))) {
-//				q.add(currentMap.clone().move(LEFT));
-//				l.add(currentMap.clone().move(LEFT));
-//			} 
-//			if (currentMap.isValidMove(RIGHT) && !l.contains(currentMap.clone().move(RIGHT))) {	
-//				q.add(currentMap.clone().move(RIGHT));
-//				l.add(currentMap.clone().move(RIGHT));
-//			}
+
 		}
-		//System.out.println(currentMap.path);
 		if (currentMap.isDone()) return currentMap.path;
 		else return null;
 	}
@@ -323,20 +289,18 @@ public class Map {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) 
 			return true;
 		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Map other = (Map) obj;
-		if (movesToSolve != other.movesToSolve)
-			return false;
 		if (!Arrays.deepEquals(puzzel, other.puzzel))
 			return false;
 		return true;
 	}
-	
+		
 	public void toTxt(String fileName) {
 		try{
 		    PrintWriter writer = new PrintWriter(fileName, "UTF-8");
@@ -360,9 +324,12 @@ public class Map {
 		return encode;
 	}
 
-	public void generateMap(int width) {
+	public boolean generateMap(int width) {
 		this.puzzel = new Square[width][width];
+		//this.printMap();
 		
+
+			
 		for (int y =0; y< this.puzzel.length; y++) {
 			this.puzzel[y][0] = W();
 			this.puzzel[y][this.puzzel[y].length-1] = W();
@@ -373,6 +340,324 @@ public class Map {
 			this.puzzel[this.puzzel.length-1][x] = W();
 		}
 		
-		//this.printMap();
+		int addfactor = 0;
+		if (this.puzzel.length%2 == 1) addfactor = 1;
+
+		for (int d=1; d<this.puzzel.length/2 + addfactor; d++) {
+			for (int y =d; y< this.puzzel.length-d; y++) {
+				this.popSquare(y,d);
+				this.popSquare(y,this.puzzel[y].length-1 -d);
+			}
+			
+			for (int x =d; x< this.puzzel.length-d; x++) {
+				this.popSquare(d,x);
+				this.popSquare(this.puzzel.length-1-d,x);
+			}
+		}
+		
+		this.makeOneChamber();	
+		
+		return this.placeKeyObjectives(width);
+		
+	}
+	
+	private boolean placeKeyObjectives(int width) {
+		int noBoxes = howManyBoxes(width);
+		
+		for (int i =0; i < noBoxes; i++) {
+			if (!this.placeBox()) return false;
+		}
+		for (int i =0; i < noBoxes; i++) {
+			if (!this.placeGoals()) return false;
+		}
+		
+		if (!this.placePlayer()) return false;
+		
+		return true;
+	}
+	
+	private boolean placeGoals() {
+		Random r = new Random();
+		int noEmptySquares =0;
+		for (int y =0; y< this.puzzel.length; y++) {
+			for (int x =0; x< this.puzzel[y].length; x++) {
+				if (this.puzzel[y][x].isEmpty()) noEmptySquares++;
+			}
+		}
+		
+		if (noEmptySquares == 0) return false;
+		
+		boolean flag = false;
+		for (int y =0; y< this.puzzel.length; y++) {
+			for (int x =0; x< this.puzzel[y].length; x++) {
+				if (this.puzzel[y][x].isEmpty() && flag == false) {
+					boolean val = r.nextInt(noEmptySquares)==0;
+					if (val) {
+						this.puzzel[y][x].addGoal();
+						flag = true;
+					}
+					noEmptySquares--;
+				}
+			}
+		}
+		
+		
+		return true;
+	}
+	
+	
+	private boolean placePlayer() {
+		int noEmptySquares = 0;
+		Random r = new Random();
+		
+		for (int y =0; y< this.puzzel.length; y++) {
+			for (int x =0; x< this.puzzel[y].length; x++) {
+				if (this.puzzel[y][x].isEmpty()) noEmptySquares+= 1;
+			}
+		}
+		if (noEmptySquares == 0) return false;
+		boolean flag = false;
+		for (int y =0; y< this.puzzel.length; y++) {
+			for (int x =0; x< this.puzzel[y].length; x++) {
+				if (this.puzzel[y][x].isEmpty() && flag == false) {
+					boolean val = r.nextInt(noEmptySquares)==0;
+					if (val) {
+						this.puzzel[y][x].addPlayer();
+						flag = true;
+					}
+					noEmptySquares--;
+				}
+			}
+		}
+		
+		
+		
+		return true;
+	}
+	
+
+	
+	private boolean placeBox() {
+		int weightEmptySquares = 0;
+		Random r = new Random();
+		
+		for (int y =0; y< this.puzzel.length; y++) {
+			for (int x =0; x< this.puzzel[y].length; x++) {
+				if (this.puzzel[y][x].isEmpty()) {
+					weightEmptySquares+= this.findWeightEmptySquare(y, x);
+				}
+			}
+		}		
+		
+		if (weightEmptySquares == 0) return false;
+		boolean flag = false;
+		for (int y =0; y< this.puzzel.length; y++) {
+			for (int x =0; x< this.puzzel[y].length; x++) {
+				if (this.puzzel[y][x].isEmpty()){
+					
+					
+					float numer = (float) this.findWeightEmptySquare(y, x);
+					float denom = (float) weightEmptySquares;
+					
+					boolean val = r.nextFloat() < numer/denom;
+					
+					
+					if (flag == false && val) {
+						this.puzzel[y][x].addBox();
+						flag = true;
+						
+					}
+					weightEmptySquares-=this.findWeightEmptySquare(y, x);
+					
+				}
+			}
+		}
+		
+		//System.out.println(weightEmptySquares);
+		return true;
+	}
+	
+	private int findWeightEmptySquare(int y, int x) {
+		int noTouchedWalls = 0;
+		if (this.puzzel[y+1][x] != null && this.puzzel[y+1][x].isWall()) noTouchedWalls++;
+		if (this.puzzel[y-1][x] != null && this.puzzel[y-1][x].isWall()) noTouchedWalls++;
+		if (this.puzzel[y][x+1] != null && this.puzzel[y][x+1].isWall()) noTouchedWalls++;
+		if (this.puzzel[y][x-1] != null && this.puzzel[y][x-1].isWall()) noTouchedWalls++;
+				
+		if (noTouchedWalls==3) {
+			return 0;
+		}
+		
+		if (noTouchedWalls == 2) {
+			if ((this.puzzel[y+1][x].isWall() && this.puzzel[y-1][x].isWall())||(this.puzzel[y][x+1].isWall() && this.puzzel[y][x-1].isWall())) return 1;
+			else return 0;
+		}
+		
+		if (noTouchedWalls == 1) {
+			return 1;
+		}
+		
+		if (noTouchedWalls == 0) {
+			return 1;
+		}
+		
+		return 0;
+	}
+	
+	private int howManyBoxes(int width){
+		int maxBoxes = width/3 + 1;
+		int noBoxes = 1;
+		Random r = new Random();
+		for (int i=0; i < maxBoxes-1; i++) {
+			boolean val = r.nextInt(2)==0;
+			if (val) noBoxes++;
+		}
+		
+		return noBoxes;
+	}
+	
+	private void popSquare(int y, int x) {
+		int noTouchedWalls =0;
+		Random r = new Random();
+		if (this.puzzel[y+1][x] != null && this.puzzel[y+1][x].isWall()) noTouchedWalls++;
+		if (this.puzzel[y-1][x] != null && this.puzzel[y-1][x].isWall()) noTouchedWalls++;
+		if (this.puzzel[y][x+1] != null && this.puzzel[y][x+1].isWall()) noTouchedWalls++;
+		if (this.puzzel[y][x-1] != null && this.puzzel[y][x-1].isWall()) noTouchedWalls++;
+		
+
+		if (noTouchedWalls==4) this.puzzel[y][x] = W();
+		
+		if (noTouchedWalls==3) {
+			boolean val = r.nextInt(1)==0;
+			if (val == true) this.puzzel[y][x] = E();
+			else this.puzzel[y][x] = W();
+		}
+		
+		if (noTouchedWalls == 2) {
+			if ((this.puzzel[y+1][x] != null && this.puzzel[y+1][x].isWall() && this.puzzel[y-1][x] != null && this.puzzel[y-1][x].isWall())||(this.puzzel[y][x+1] != null && this.puzzel[y][x+1].isWall() && this.puzzel[y][x-1] != null && this.puzzel[y][x-1].isWall())) this.puzzel[y][x] =E();
+			else {
+				boolean val = r.nextInt(1)==0;
+				if (val == true) this.puzzel[y][x] = E();
+				else this.puzzel[y][x] = W();
+			}
+		}
+		
+		if (noTouchedWalls == 1) {
+			boolean val = r.nextInt(2)==0;
+			if (val == true) this.puzzel[y][x] = E();
+			else this.puzzel[y][x] = W();
+		}
+		
+		if (noTouchedWalls == 0) {
+			boolean val = r.nextInt(3)==0;
+			if (val == true) this.puzzel[y][x] = E();
+			else this.puzzel[y][x] = W();
+		}
+		
+		//System.out.println("test");
+		//this.puzzel[y][x] = E();
+	}
+	
+	private Map makeOneChamber() {
+		ArrayList<Integer> chamberSize = new ArrayList<Integer>();
+		int[][] chamberMarkers = new int[this.puzzel.length][this.puzzel[0].length];
+		for (int y =0; y< this.puzzel.length; y++) {
+			for (int x =0; x< this.puzzel[y].length; x++) {
+				chamberMarkers[y][x] = -1;
+			}
+		}
+		for (int y =0; y< this.puzzel.length; y++) {
+			for (int x =0; x< this.puzzel[y].length; x++) {
+				if (!this.puzzel[y][x].isWall() && chamberMarkers[y][x] == -1) this.fillChamber(y,x,chamberSize, chamberMarkers);
+			}
+		}
+		
+//		for (int y =0; y< this.puzzel.length; y++) {
+//			for (int x =0; x< this.puzzel[y].length; x++) {
+//				System.out.print(chamberMarkers[y][x]);
+//			}
+//			System.out.println("");
+//		}
+		
+		int largestChamber = 0;
+		for(int i=0; i < chamberSize.size(); i++) {
+			if (chamberSize.get(i) > chamberSize.get(largestChamber)) largestChamber = i;
+		}
+		
+		for (int y =0; y< this.puzzel.length; y++) {
+			for (int x =0; x< this.puzzel[y].length; x++) {	
+				//System.out.println(chamberMarkers[y]);
+				if (chamberMarkers[y][x] != largestChamber) this.puzzel[y][x] = W(); 
+			}
+		}
+		
+		
+		return this;
+	}
+	
+	private void fillChamber(int y, int x, ArrayList<Integer> chamberSize,int[][] chamberMarkers){
+		int chamberNumber = chamberSize.size();
+		chamberSize.add(1);
+		chamberMarkers[y][x] = chamberNumber;
+		
+		Queue<int[]> q = new LinkedBlockingQueue<int[]>();
+		
+		int[] currCoord = new int[] {y,x};
+		int[] currPush;
+		
+		currPush = new int[]{currCoord[0]+1,currCoord[1]};
+
+		if (!this.puzzel[currPush[0]][currPush[1]].isWall() && chamberMarkers[currPush[0]][currPush[1]] == -1) {
+			chamberSize.set(chamberNumber, chamberSize.get(chamberNumber)+1);
+			chamberMarkers[currPush[0]][currPush[1]] = chamberNumber;
+			q.add(currPush);
+		}
+		currPush = new int[]{currCoord[0]-1,currCoord[1]};
+		if (!this.puzzel[currPush[0]][currPush[1]].isWall() && chamberMarkers[currPush[0]][currPush[1]] == -1) {
+			chamberSize.set(chamberNumber, chamberSize.get(chamberNumber)+1);
+			chamberMarkers[currPush[0]][currPush[1]] = chamberNumber;
+			q.add(currPush);
+		}
+		currPush = new int[]{currCoord[0],currCoord[1]+1};
+		if (!this.puzzel[currPush[0]][currPush[1]].isWall() && chamberMarkers[currPush[0]][currPush[1]] == -1) {
+			chamberSize.set(chamberNumber, chamberSize.get(chamberNumber)+1);
+			chamberMarkers[currPush[0]][currPush[1]] = chamberNumber;
+			q.add(currPush);
+		}
+		currPush = new int[]{currCoord[0],currCoord[1]-1};
+		if (!this.puzzel[currPush[0]][currPush[1]].isWall() && chamberMarkers[currPush[0]][currPush[1]] == -1) {
+			chamberSize.set(chamberNumber, chamberSize.get(chamberNumber)+1);
+			chamberMarkers[currPush[0]][currPush[1]] = chamberNumber;
+			q.add(currPush);
+		}
+		
+		while (!q.isEmpty()) {
+			currCoord = q.poll();
+			
+			currPush = new int[]{currCoord[0]+1,currCoord[1]};
+			if (!this.puzzel[currPush[0]][currPush[1]].isWall() && chamberMarkers[currPush[0]][currPush[1]] == -1) {
+				chamberSize.set(chamberNumber, chamberSize.get(chamberNumber)+1);
+				chamberMarkers[currPush[0]][currPush[1]] = chamberNumber;
+				q.add(currPush);
+			}
+			currPush = new int[]{currCoord[0]-1,currCoord[1]};
+			if (!this.puzzel[currPush[0]][currPush[1]].isWall() && chamberMarkers[currPush[0]][currPush[1]] == -1) {
+				chamberSize.set(chamberNumber, chamberSize.get(chamberNumber)+1);
+				chamberMarkers[currPush[0]][currPush[1]] = chamberNumber;
+				q.add(currPush);
+			}
+			currPush = new int[]{currCoord[0],currCoord[1]+1};
+			if (!this.puzzel[currPush[0]][currPush[1]].isWall() && chamberMarkers[currPush[0]][currPush[1]] == -1) {
+				chamberSize.set(chamberNumber, chamberSize.get(chamberNumber)+1);
+				chamberMarkers[currPush[0]][currPush[1]] = chamberNumber;
+				q.add(currPush);
+			}
+			currPush = new int[]{currCoord[0],currCoord[1]-1};
+			if (!this.puzzel[currPush[0]][currPush[1]].isWall() && chamberMarkers[currPush[0]][currPush[1]] == -1) {
+				chamberSize.set(chamberNumber, chamberSize.get(chamberNumber)+1);
+				chamberMarkers[currPush[0]][currPush[1]] = chamberNumber;
+				q.add(currPush);
+			}
+		}
 	}
 }
