@@ -39,7 +39,7 @@ public class Spawn {
 			levelLoader(currentLevelNumber, handler);
 			
 			
-			game.setKeyinput(new KeyInput(handler));
+			game.setKeyinput(new KeyInput(handler, game));
 			game.addKeyListener(game.getKeyinput());
 		}
 	}

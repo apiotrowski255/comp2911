@@ -62,7 +62,7 @@ public class Game extends Canvas implements Runnable {
 		}
 		
 		// Set Key Input
-		this.setKeyinput(new KeyInput(handler));
+		this.setKeyinput(new KeyInput(handler, this));
 		// add the Key Input so it actually registers
 		this.addKeyListener(getKeyinput());
 		

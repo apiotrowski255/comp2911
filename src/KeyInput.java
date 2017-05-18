@@ -4,22 +4,25 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+
 public class KeyInput extends KeyAdapter {
 
 	private Handler handler;
 	public ArrayList<GameObject> walls = new ArrayList<GameObject>();
 	public ArrayList<GameObject> boxes = new ArrayList<GameObject>();
 	public int currentSteps;
+	private Game game;
 
 	/**
 	 * Constructor
 	 * @param handler
 	 */
-	public KeyInput(Handler handler) {
+	public KeyInput(Handler handler, Game game) {
 		this.handler = handler;
 		this.walls= handler.getWalls();
 		this.boxes = handler.getBoxes();
 		this.currentSteps = 0;
+		this.game = game;
 	}
 	
 	public int getCurrentSteps() {
@@ -36,7 +39,24 @@ public class KeyInput extends KeyAdapter {
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-
+		
+		//quit key
+		if(key == KeyEvent.VK_Q && game.IsgameStateGame()){
+			handler.object.clear();
+			game.setgameState("MainMenu");
+			game.removeKeyListener(game.getKeyinput());
+		}
+		
+		//restart key
+		if(key == KeyEvent.VK_R && game.IsgameStateGame()){
+			int currentLevel = game.getSpawner().getCurrentLevelNumber();
+			handler.object.clear();
+			game.removeKeyListener(game.getKeyinput());
+			game.getSpawner().levelLoader(currentLevel, handler);
+			game.setKeyinput(new KeyInput(handler, game));
+			game.addKeyListener(game.getKeyinput());
+		}
+		
 		
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);

@@ -54,7 +54,7 @@ public class Menu extends MouseAdapter{
 				game.removeKeyListener(game.getKeyinput());
 				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
 				
-				game.setKeyinput(new KeyInput(handler));
+				game.setKeyinput(new KeyInput(handler, game));
 				game.addKeyListener(game.getKeyinput());
 			}
 			
@@ -76,7 +76,7 @@ public class Menu extends MouseAdapter{
 				game.removeKeyListener(game.getKeyinput());
 				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
 				
-				game.setKeyinput(new KeyInput(handler));
+				game.setKeyinput(new KeyInput(handler, game));
 				game.addKeyListener(game.getKeyinput());
 			}
 			
@@ -91,36 +91,40 @@ public class Menu extends MouseAdapter{
 			if(mouseOver(mx, my, 300, 150, 32, 32)){
 				gameStateWord = "Game";
 				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(1);
 				game.getSpawner().levelLoader(1, handler);
 				
-				game.setKeyinput(new KeyInput(handler));
+				game.setKeyinput(new KeyInput(handler, game));
 				game.addKeyListener(game.getKeyinput());
 			}
 			
 			if(mouseOver(mx, my, 350, 150, 32, 32)){
 				gameStateWord = "Game";
 				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(2);
 				game.getSpawner().levelLoader(2, handler);
 				
-				game.setKeyinput(new KeyInput(handler));
+				game.setKeyinput(new KeyInput(handler, game));
 				game.addKeyListener(game.getKeyinput());
 			}
 			
 			if(mouseOver(mx, my, 400, 150, 32, 32)){
 				gameStateWord = "Game";
 				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(3);
 				game.getSpawner().levelLoader(3, handler);
 				
-				game.setKeyinput(new KeyInput(handler));
+				game.setKeyinput(new KeyInput(handler, game));
 				game.addKeyListener(game.getKeyinput());
 			}
 			
 			if(mouseOver(mx, my, 450, 150, 32, 32)){
 				gameStateWord = "Game";
 				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(4);
 				game.getSpawner().levelLoader(4, handler);
 				
-				game.setKeyinput(new KeyInput(handler));
+				game.setKeyinput(new KeyInput(handler, game));
 				game.addKeyListener(game.getKeyinput());
 			}
 			
