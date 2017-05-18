@@ -60,12 +60,15 @@ public class Spawn {
 	 * @param handler the current handler
 	 */
 	public void levelLoader (int levelNumber, Handler handler) {
+		
 		if (levelNumber == 1) {
 			loadLevel1(handler);
 		} else if (levelNumber == 2) {
 			loadLevel2(handler);
 		} else if (levelNumber == 3) {
 			loadLevel3(handler);
+		} else if (levelNumber == 4) {
+			loadLevel4(handler);
 		}
 	}
 
@@ -239,5 +242,82 @@ public class Spawn {
 		for (int i = 1; i < 6; i++) {
 			handler.addObject(new GoalSquare(32 * 2, 32 * i, ID.GoalSquare, handler));
 		}
+	}
+	
+	
+	
+	public void loadLevel4(Handler handler){
+		//load goals 
+		handler.addObject(new GoalSquare(32*9, 32*4, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32*9, 32*5, ID.GoalSquare, handler));
+	
+		for(int i = 2; i < 9; i++){
+			handler.addObject(new Wall(0, 32 * i, ID.Wall));
+		}
+		
+		handler.addObject(new Wall(32*1, 32 * 2, ID.Wall));
+		handler.addObject(new Wall(32*1, 32 * 5, ID.Wall));
+		handler.addObject(new Wall(32*1, 32 * 8, ID.Wall));
+		
+		handler.addObject(new Wall(32*2, 32 * 2, ID.Wall));
+		handler.addObject(new Wall(32*2, 32 * 8, ID.Wall));
+		
+		handler.addObject(new Wall(32*3, 32 * 2, ID.Wall));
+		handler.addObject(new Wall(32*3, 32 * 5, ID.Wall));
+		handler.addObject(new Wall(32*3, 32 * 8, ID.Wall));
+		
+		handler.addObject(new Wall(32*4, 32 * 2, ID.Wall));
+		handler.addObject(new Wall(32*4, 32 * 5, ID.Wall));
+		handler.addObject(new Wall(32*4, 32 * 7, ID.Wall));
+		handler.addObject(new Wall(32*4, 32 * 8, ID.Wall));
+		
+		for(int i = 0; i < 4; i++){
+			handler.addObject(new Wall(32*5, 32*i, ID.Wall));
+		}
+		handler.addObject(new Wall(32*5, 32 * 5, ID.Wall));
+		handler.addObject(new Wall(32*5, 32 * 7, ID.Wall));
+		
+		handler.addObject(new Wall(32*6, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*6, 32 * 5, ID.Wall));
+		handler.addObject(new Wall(32*6, 32 * 7, ID.Wall));
+		
+		handler.addObject(new Wall(32*7, 32*0, ID.Wall));
+		handler.addObject(new Wall(32*7, 32 * 5, ID.Wall));
+		handler.addObject(new Wall(32*7, 32 * 7, ID.Wall));
+		handler.addObject(new Wall(32*7, 32 * 8, ID.Wall));
+		
+		handler.addObject(new Wall(32*8,32*0, ID.Wall));
+		handler.addObject(new Wall(32*8,32*1, ID.Wall));
+		handler.addObject(new Wall(32*8,32*3, ID.Wall));
+		handler.addObject(new Wall(32*8,32*4, ID.Wall));
+		handler.addObject(new Wall(32*8,32*5, ID.Wall));
+		handler.addObject(new Wall(32*8,32*8, ID.Wall));
+		
+		handler.addObject(new Wall(32*9,32*0, ID.Wall));
+		handler.addObject(new Wall(32*9,32*8, ID.Wall));
+		
+		handler.addObject(new Wall(32*10,32*0, ID.Wall));
+		handler.addObject(new Wall(32*10,32*4, ID.Wall));
+		handler.addObject(new Wall(32*10,32*5, ID.Wall));
+		handler.addObject(new Wall(32*10,32*8, ID.Wall));
+		
+		for(int i = 0; i < 9; i++){
+			handler.addObject(new Wall(32*11, 32*i, ID.Wall));
+		}
+		
+		//player
+		handler.addObject(new Player(32*7, 32*6, ID.Player2));
+		
+		//boxes
+		handler.addObject(new Box(32*2, 32*5, ID.Box));
+		handler.addObject(new Box(32*4, 32*6, ID.Box));
+	}
+	
+	public int getCurrentLevelNumber() {
+		return currentLevelNumber;
+	}
+
+	public void setCurrentLevelNumber(int currentLevelNumber) {
+		this.currentLevelNumber = currentLevelNumber;
 	}
 }

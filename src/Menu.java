@@ -88,6 +88,42 @@ public class Menu extends MouseAdapter{
 		
 		if(game.isgameStateLevelSelectMenu()){
 			
+			if(mouseOver(mx, my, 300, 150, 32, 32)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().levelLoader(1, handler);
+				
+				game.setKeyinput(new KeyInput(handler));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			if(mouseOver(mx, my, 350, 150, 32, 32)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().levelLoader(2, handler);
+				
+				game.setKeyinput(new KeyInput(handler));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			if(mouseOver(mx, my, 400, 150, 32, 32)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().levelLoader(3, handler);
+				
+				game.setKeyinput(new KeyInput(handler));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			if(mouseOver(mx, my, 450, 150, 32, 32)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().levelLoader(4, handler);
+				
+				game.setKeyinput(new KeyInput(handler));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
 			
 			//back button
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
