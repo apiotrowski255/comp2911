@@ -51,6 +51,7 @@ public class Menu extends MouseAdapter{
 			//2 player button
 			if(mouseOver(mx, my, 210, 250, 200, 64)){
 				gameStateWord = "Game";
+				//ThisMUSTBeChanged
 				game.removeKeyListener(game.getKeyinput());
 				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
 				
