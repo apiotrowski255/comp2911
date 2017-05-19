@@ -3,6 +3,7 @@
 
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public abstract class GameObject extends Canvas {
 	
@@ -18,7 +19,7 @@ public abstract class GameObject extends Canvas {
 	
 	public abstract void tick();
 	public abstract void render(Graphics g);
-	
+	public abstract Rectangle getBounds();
 	
 	// getters and setters
 	public void setX(int x){

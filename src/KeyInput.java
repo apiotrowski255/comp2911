@@ -406,4 +406,8 @@ public class KeyInput extends KeyAdapter {
 	public void UpdateHandler(Handler newHandler){
 		this.handler = newHandler;
 	}
+
+	public void setcurrentSteps(int i) {
+		this.currentSteps = i;
+	}
 }

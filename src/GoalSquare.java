@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
@@ -45,5 +46,11 @@ public class GoalSquare extends GameObject {
 	//getter
 	public boolean getBoxOnGoal(){
 		return BoxOnGoal;
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

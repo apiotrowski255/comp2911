@@ -96,4 +96,14 @@ public class Handler {
 		}
 		return walls;
 	}
+	
+	public ArrayList<GameObject> getBullets(){
+		ArrayList<GameObject> Bullets = new ArrayList<GameObject>();
+		for(int i = 0; i < object.size(); i++){
+			if(object.get(i).getID() == ID.EnemyBullet){
+				Bullets.add(object.get(i));
+			}
+		}
+		return Bullets;
+	}
 }

@@ -10,6 +10,8 @@ public enum ID {
 	Player2(),
 	Box(),
 	Enemy(),
+	EnemyBullet(),
+	Trail(),
 	GoalSquare(),
 	Wall();
 	

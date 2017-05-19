@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 public class Wall extends GameObject{
@@ -26,6 +27,12 @@ public class Wall extends GameObject{
 		Toolkit t = Toolkit.getDefaultToolkit();
         Image i = t.getImage("wall.png");
         g.drawImage(i, x, y, this);
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

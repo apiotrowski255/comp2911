@@ -42,6 +42,20 @@ public class Spawn {
 			game.setKeyinput(new KeyInput(handler, game));
 			game.addKeyListener(game.getKeyinput());
 		}
+		if(currentLevelNumber == 11){
+			Player temp = (Player) handler.getPlayer2();
+			if(temp.playerHit == true){
+				System.out.println("Hit");
+				while(handler.object.size() != 0){
+					handler.removeObject(handler.object.get(0));
+				}
+				game.getKeyinput().setcurrentSteps(0);
+				game.removeKeyListener(game.getKeyinput());
+				game.setgameState("MainMenu");
+				
+			}
+		}
+		
 	}
 	
 	/**
@@ -49,7 +63,7 @@ public class Spawn {
 	 * @param handler
 	 */
 	public void loadtest(Handler handler){
-		handler.addObject(new Player(32 * 1, 32 * 1, ID.Player2));
+		handler.addObject(new Player(32 * 1, 32 * 1, ID.Player2, handler));
 		
 		handler.addObject(new Wall(32 * 8, 32 * 8, ID.Wall));
 	}
@@ -80,9 +94,9 @@ public class Spawn {
 		} else if (levelNumber == 9) {
 			loadLevel9(handler);
 		} else if (levelNumber == 10) {
-			//loadLevel10(handler);
+			loadLevel10(handler);
 		} else if (levelNumber == 11) {
-			//loadLevel11(handler);
+			loadLevel11(handler);
 		} else if (levelNumber == 12) {
 			//loadLevel12(handler);
 		}
@@ -99,7 +113,7 @@ public class Spawn {
 		handler.addObject(new GoalSquare(32 * 4, 32 * 6, ID.GoalSquare, handler));
 		handler.addObject(new GoalSquare(32 * 3, 32 * 6, ID.GoalSquare, handler));
 		
-		handler.addObject(new Player(32 * 1, 32 * 2, ID.Player2));
+		handler.addObject(new Player(32 * 1, 32 * 2, ID.Player2, handler));
 		
 		handler.addObject(new Box(32 * 2, 32 * 2, ID.Box));
 		handler.addObject(new Box(32 * 2, 32 * 3, ID.Box));
@@ -135,7 +149,7 @@ public class Spawn {
 			handler.addObject(new GoalSquare(32 * 7, 32 * i, ID.GoalSquare, handler));
 		}
 		
-		handler.addObject(new Player(32 * 1, 32 * 1, ID.Player2));
+		handler.addObject(new Player(32 * 1, 32 * 1, ID.Player2, handler));
 		
 		handler.addObject(new Box(32 * 2, 32 * 2, ID.Box));
 		handler.addObject(new Box(32 * 3, 32 * 2, ID.Box));
@@ -257,7 +271,7 @@ public class Spawn {
 		}
 		
 		//player
-		handler.addObject(new Player(32*7, 32*4, ID.Player2));
+		handler.addObject(new Player(32*7, 32*4, ID.Player2, handler));
 	}
 	
 	public void loadLevel8(Handler handler){
@@ -325,7 +339,7 @@ public class Spawn {
 		handler.addObject(new Box(32*4, 32*6, ID.Box));
 		
 		// -- Load Player
-		handler.addObject(new Player(32 * 7, 32 * 6, ID.Player2));
+		handler.addObject(new Player(32 * 7, 32 * 6, ID.Player2, handler));
 	}
 	
 	//this one is easy
@@ -375,13 +389,13 @@ public class Spawn {
 		handler.addObject(new Box(32*3, 32*2, ID.Box));
 		handler.addObject(new Box(32*3, 32*3, ID.Box));
 		
-		handler.addObject(new Player(32*7, 32*6, ID.Player2));
+		handler.addObject(new Player(32*7, 32*6, ID.Player2, handler));
 		
 	}
 	
 	// Difficulty = Decently hard
 	// Best moves / pushes = 89/33
-	public void loadLevel6(Handler handler){
+	public void loadLevel10(Handler handler){
 		
 		// -- Walls
 		// Outer Walls
@@ -427,7 +441,7 @@ public class Spawn {
 		
 		
 		// -- Player
-		handler.addObject(new Player(32*3, 32*2, ID.Player2));
+		handler.addObject(new Player(32*3, 32*2, ID.Player2, handler));
 		
 	}
 	
@@ -473,7 +487,7 @@ public class Spawn {
 
 		handler.addObject(new Box(32*2, 32*2, ID.Box));
 		
-		handler.addObject(new Player(32*2, 32*6, ID.Player2));
+		handler.addObject(new Player(32*2, 32*6, ID.Player2, handler));
 	}
 	
 	//Can be solved in 71 moves
@@ -506,7 +520,7 @@ public class Spawn {
 		handler.addObject(new GoalSquare(32*3, 32*3, ID.GoalSquare, handler));
 		handler.addObject(new Box(32*4, 32*2, ID.Box));
 		
-		handler.addObject(new Player(32*3, 32*5, ID.Player2));
+		handler.addObject(new Player(32*3, 32*5, ID.Player2, handler));
 	}
 	
 	//approx 120 moves to solve this one, but this is similar to level 4
@@ -539,7 +553,75 @@ public class Spawn {
 		handler.addObject(new Box(32*4, 32*2, ID.Box));
 		handler.addObject(new Box(32*2, 32*3, ID.Box));
 		
-		handler.addObject(new Player(32*3, 32*5, ID.Player2));
+		handler.addObject(new Player(32*3, 32*5, ID.Player2, handler));
+	}
+	
+	//can be solved in 131 moves
+	public void loadLevel6(Handler handler){
+		for(int i = 1; i < 9; i++){
+			handler.addObject(new Wall(32*0, 32*i, ID.Wall));
+			handler.addObject(new Wall(32*7, 32*(i-1), ID.Wall));
+		}
+		
+		for(int i = 1; i < 5; i++){
+			handler.addObject(new Wall(32*i, 32*1, ID.Wall));
+			handler.addObject(new Wall(32*(i + 2), 32*7, ID.Wall));
+		}
+		
+		for(int i = 1; i < 4; i++){
+			handler.addObject(new Wall(32*i, 32*8, ID.Wall));
+			handler.addObject(new Wall(32*(i+3), 32*0, ID.Wall));
+		}
+		
+		handler.addObject(new Wall(32*1, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*3, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*6, 32*4, ID.Wall));
+		handler.addObject(new Wall(32*4, 32*3, ID.Wall));
+		handler.addObject(new Wall(32*3, 32*6, ID.Wall));
+		
+		
+		handler.addObject(new GoalSquare(32*3, 32*3, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32*2, 32*3, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32*4, 32*2, ID.GoalSquare, handler));
+		
+		handler.addObject(new Box(32*4, 32*2, ID.Box));
+		handler.addObject(new Box(32*2, 32*3, ID.Box));
+		handler.addObject(new Box(32*2, 32*5, ID.Box));
+		
+		handler.addObject(new Player(32*2, 32*6, ID.Player2, handler));
+	}
+	
+	public void loadLevel11(Handler handler){
+		for(int i = 2; i < 17; i++){
+			handler.addObject(new Wall(32*i,32*0, ID.Wall));
+			/*handler.addObject(new Wall(32*i,32*2, ID.Wall));
+			handler.addObject(new Wall(32*i,32*4, ID.Wall));
+			handler.addObject(new Wall(32*i,32*6, ID.Wall));
+			handler.addObject(new Wall(32*i,32*8, ID.Wall));
+			handler.addObject(new Wall(32*i,32*10, ID.Wall));*/
+			handler.addObject(new Wall(32*i,32*12, ID.Wall));
+		}
+		
+		for(int i = 0; i < 13; i++){
+			handler.addObject(new Wall(32*0,32*i, ID.Wall));
+			handler.addObject(new Wall(32*17,32*i, ID.Wall));
+		}
+		
+		handler.addObject(new Wall(32*1,32*0, ID.Wall));
+		handler.addObject(new Wall(32*1,32*12, ID.Wall));
+		
+		for(int i = 1; i < 13; i += 2) { 
+			handler.addObject(new GoalSquare(32*16, 32*i, ID.GoalSquare, handler));
+		}
+		for(int i = 1; i < 13; i += 2) { 
+			handler.addObject(new Box(32*2, 32*i, ID.Box));
+		}
+		
+		handler.addObject(new Player(32*1, 32*1, ID.Player2, handler));
+		
+		handler.addObject(new EnemyVertical(32*18, 32*1, ID.Enemy, handler));
+		handler.addObject(new EnemyHorizontal(32*1, 32*13, ID.Enemy, handler));
 	}
 	
 	public int getCurrentLevelNumber() {

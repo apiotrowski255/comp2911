@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 
 public class Box extends GameObject{
@@ -30,6 +31,12 @@ public class Box extends GameObject{
 		Toolkit t = Toolkit.getDefaultToolkit();
         Image i = t.getImage("box.gif");
         g.drawImage(i, x, y, this);
+	}
+
+	@Override
+	public Rectangle getBounds() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
