@@ -25,7 +25,7 @@ public class Wall extends GameObject{
 		g.setColor(Color.darkGray);
 //		g.fillRect(x, y, 32, 32);
 		Toolkit t = Toolkit.getDefaultToolkit();
-        Image i = t.getImage("wall.png");
+        Image i = t.getImage("wall1.jpg");
         g.drawImage(i, x, y, this);
 	}
 

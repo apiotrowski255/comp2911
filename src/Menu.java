@@ -40,6 +40,20 @@ public class Menu extends MouseAdapter{
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
 				System.exit(1);
 			}
+			
+			// Theme 1
+			// Not working
+			if (mouseOver(mx, my, 530, 450, 20, 20)) {
+				System.out.println("THEME 1 SELECTED");
+			}
+			
+			// Theme 2
+			// Not working
+			if (mouseOver(mx, my, 580, 350, 20, 20)) {
+
+				System.out.println("THEME 2 SELECTED");
+			}
+		
 		}
 		
 		if(game.IsgameStatePlayerMenu()){
@@ -273,6 +287,7 @@ public class Menu extends MouseAdapter{
 		if (game.IsgameStateMenu()) {
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
+			Font fnt3 = new Font("arial", 1, 10);
 
 			g.setFont(fnt);
 			g.setColor(Color.white);
@@ -287,6 +302,11 @@ public class Menu extends MouseAdapter{
 
 			g.drawRect(210 - bouncer/2, 350 - bouncer/2, 200 + bouncer, 64 + bouncer);
 			g.drawString("Quit", 270, 390);
+			
+			g.setFont(fnt3);
+			g.drawString("Theme 1", 530, 450);
+			g.drawString("Theme 2", 580, 450);
+			
 		} else if (game.IsgameStateHelp()) {
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
@@ -299,13 +319,13 @@ public class Menu extends MouseAdapter{
 			g.setFont(fnt3);
 			g.drawString("Welcome to the Game Sokoban!", 150, 100);
 			g.drawString("Your objective is to move the boxes to the goal Square", 50, 125);
-			g.drawString("Sounds easy right? but there are some rules", 90, 150);
+			g.drawString("Sounds easy right? There are some rules", 90, 150);
 			g.drawString("You (and the box) can only move horizontally and vertically", 30, 175);
-			g.drawString("Even if all your might, you can only move one box at a time", 30, 200);
+			g.drawString("Even with all your might, you can only move one box at a time", 30, 200);
 			
-			g.drawString("i need help too", 240, 300);
+			g.drawString("I need help too", 240, 300);
 			g.drawString("In Single Player mode, use the arrow keys to move", 70, 250);
-			g.drawString("In Two Player mode, use the wasd keys to move player 2", 40, 275);
+			g.drawString("In Two Player mode, use the WASD keys to move player 2", 40, 275);
 			
 			
 			g.setFont(fnt2);

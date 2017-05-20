@@ -50,7 +50,7 @@ public class Player extends GameObject {
 		}
 		
 		Toolkit t = Toolkit.getDefaultToolkit();
-        Image i = t.getImage("player.png");
+        Image i = t.getImage("player1.png");
         g.drawImage(i, x, y, this);
 	}
 

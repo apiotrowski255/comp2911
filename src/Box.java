@@ -29,7 +29,8 @@ public class Box extends GameObject{
 //		g.setColor(Color.red);
 //		g.fillRect(x, y, 32, 32);
 		Toolkit t = Toolkit.getDefaultToolkit();
-        Image i = t.getImage("box.gif");
+//        Image i = t.getImage("box.gif");
+		Image i = t.getImage("box1.png");
         g.drawImage(i, x, y, this);
 	}
 
