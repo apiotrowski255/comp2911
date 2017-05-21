@@ -271,6 +271,15 @@ public class Spawn {
 		handler.addObject(new Wall(32 * 9, 32 * 4, ID.Wall));
 		handler.addObject(new Wall(32 * 10, 32 * 4, ID.Wall));
 		
+		// -- Load goals
+		for (int i = 1; i < 6; i++) {
+			handler.addObject(new GoalSquare(32 * 1, 32 * i, ID.GoalSquare, handler));
+		}
+		
+		for (int i = 1; i < 6; i++) {
+			handler.addObject(new GoalSquare(32 * 2, 32 * i, ID.GoalSquare, handler));
+		}
+		
 		// -- Load boxes
 		handler.addObject(new Box(32 * 7, 32 * 2, ID.Box));
 		handler.addObject(new Box(32 * 10, 32 * 2, ID.Box));
@@ -287,17 +296,9 @@ public class Spawn {
 		handler.addObject(new Box(32 * 9, 32 * 7, ID.Box));
 		handler.addObject(new Box(32 * 11, 32 * 7, ID.Box));
 		
-		// -- Load goals
-		for (int i = 1; i < 6; i++) {
-			handler.addObject(new GoalSquare(32 * 1, 32 * i, ID.GoalSquare, handler));
-		}
-		
-		for (int i = 1; i < 6; i++) {
-			handler.addObject(new GoalSquare(32 * 2, 32 * i, ID.GoalSquare, handler));
-		}
-		
-		//player
+		// -- Load player
 		handler.addObject(new Player(32*7, 32*4, ID.Player2, handler));
+		
 	}
 	
 	public void loadLevel8(Handler handler){

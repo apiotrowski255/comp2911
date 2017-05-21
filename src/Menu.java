@@ -42,15 +42,13 @@ public class Menu extends MouseAdapter{
 			}
 			
 			// Theme 1
-			// Not working
-			if (mouseOver(mx, my, 525, 390, 47, 15)) {
+			if (mouseOver(mx, my, 527, 430, 47, 15)) {
 				handler.setTheme(0);
 				System.out.println("THEME 1 SELECTED");
 			}
 			
 			// Theme 2
-			// Not working
-			if (mouseOver(mx, my, 575, 390, 47, 15)) {
+			if (mouseOver(mx, my, 577, 430, 47, 15)) {
 				handler.setTheme(1);
 				System.out.println("THEME 2 SELECTED");
 			}
@@ -284,7 +282,7 @@ public class Menu extends MouseAdapter{
 	 * draw the graphics
 	 * @param g
 	 */
-	public void render(Graphics g){
+	public void render(Graphics g, Handler handler){
 		if (game.IsgameStateMenu()) {
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
@@ -305,10 +303,18 @@ public class Menu extends MouseAdapter{
 			g.drawString("Quit", 270, 390);
 			
 			g.setFont(fnt3);
-			g.drawString("Theme 1", 530, 400);
-			g.drawRect(525, 390, 47, 15);
-			g.drawString("Theme 2", 580, 400);
-			g.drawRect(575, 390, 47, 15);
+			g.setColor(Color.RED);
+			g.drawString("Theme 1", 530, 440);
+			g.setColor(Color.CYAN);
+			g.drawString("Theme 2", 580, 440);
+			if (handler.getTheme() != 1) {
+				g.setColor(Color.RED);
+				g.drawRect(527, 430, 47, 15);
+			} else {
+				g.setColor(Color.CYAN);
+				g.drawRect(577, 430, 47, 15);
+			}
+			
 			
 		} else if (game.IsgameStateHelp()) {
 			Font fnt = new Font("arial", 1, 50);
