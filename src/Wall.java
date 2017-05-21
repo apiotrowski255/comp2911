@@ -8,7 +8,7 @@ public class Wall extends GameObject{
 
 	public Wall(int x, int y, ID id) {
 		super(x, y, id);
-		// TODO Auto-generated constructor stub
+		this.theme = null;
 	}
 
 	@Override
@@ -25,7 +25,14 @@ public class Wall extends GameObject{
 		g.setColor(Color.darkGray);
 //		g.fillRect(x, y, 32, 32);
 		Toolkit t = Toolkit.getDefaultToolkit();
-        Image i = t.getImage("wall1.jpg");
+		Image i = null;
+		if(theme == null) {		//default
+        	i = t.getImage("wall.png");
+		} else if (theme.equals("Mario")){
+			i = t.getImage("wall.png");
+		} else if (theme.equals("BombMan")){
+			i = t.getImage("wall1.jpg");
+		}
         g.drawImage(i, x, y, this);
 	}
 
@@ -33,6 +40,10 @@ public class Wall extends GameObject{
 	public Rectangle getBounds() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setTheme(String Theme){
+		this.theme = Theme;
 	}
 
 }

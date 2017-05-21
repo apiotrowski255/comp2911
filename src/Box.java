@@ -14,7 +14,7 @@ public class Box extends GameObject{
 	 */
 	public Box(int x, int y, ID id) {
 		super(x, y, id);
-
+		this.theme = null;
 	}
 
 	public void tick() {
@@ -29,8 +29,15 @@ public class Box extends GameObject{
 //		g.setColor(Color.red);
 //		g.fillRect(x, y, 32, 32);
 		Toolkit t = Toolkit.getDefaultToolkit();
-//        Image i = t.getImage("box.gif");
-		Image i = t.getImage("box1.png");
+		Image i = null;
+		if(theme == null) {		//default
+        	i = t.getImage("box.gif");
+		} else if (theme.equals("Mario")){
+			i = t.getImage("box.gif");
+		} else if (theme.equals("BombMan")){
+			i = t.getImage("box1.png");
+		}
+		
         g.drawImage(i, x, y, this);
 	}
 
@@ -38,6 +45,10 @@ public class Box extends GameObject{
 	public Rectangle getBounds() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setTheme(String Theme){
+		this.theme = Theme;
 	}
 
 }

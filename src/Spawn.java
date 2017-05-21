@@ -100,6 +100,32 @@ public class Spawn {
 		} else if (levelNumber == 12) {
 			//loadLevel12(handler);
 		}
+		
+		if(handler.getTheme() == 0){
+			for(GameObject b : handler.object){
+				if(b.getID() == ID.Box){
+					b.setTheme("Mario");
+				} else if (b.getID() == ID.GoalSquare){
+					b.setTheme("Mario");
+				} else if (b.getID() == ID.Player2){
+					b.setTheme("Mario");
+				} else if (b.getID() == ID.Wall){
+					b.setTheme("Mario");
+				}
+			}
+		} else if (handler.getTheme() == 1){
+			for(GameObject b : handler.object){
+				if(b.getID() == ID.Box){
+					b.setTheme("BombMan");
+				} else if (b.getID() == ID.GoalSquare){
+					b.setTheme("BombMan");
+				} else if (b.getID() == ID.Player2){
+					b.setTheme("BombMan");
+				} else if (b.getID() == ID.Wall){
+					b.setTheme("BombMan");
+				}
+			}
+		}
 	}
 
 	/**

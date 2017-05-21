@@ -10,6 +10,7 @@ public abstract class GameObject extends Canvas {
 	protected int x, y;
 	protected ID id;
 	protected int velX, velY;
+	protected String theme;
 	
 	public GameObject(int x, int y, ID id){
 		this.x = x;
@@ -80,6 +81,10 @@ public abstract class GameObject extends Canvas {
 			return false;
 		}
 		return true;
+	}
+
+	public void setTheme(String string) {
+		this.theme = string;
 	}
 	
 }

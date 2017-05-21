@@ -43,14 +43,15 @@ public class Menu extends MouseAdapter{
 			
 			// Theme 1
 			// Not working
-			if (mouseOver(mx, my, 530, 450, 20, 20)) {
+			if (mouseOver(mx, my, 525, 390, 47, 15)) {
+				handler.setTheme(0);
 				System.out.println("THEME 1 SELECTED");
 			}
 			
 			// Theme 2
 			// Not working
-			if (mouseOver(mx, my, 580, 350, 20, 20)) {
-
+			if (mouseOver(mx, my, 575, 390, 47, 15)) {
+				handler.setTheme(1);
 				System.out.println("THEME 2 SELECTED");
 			}
 		
@@ -304,8 +305,10 @@ public class Menu extends MouseAdapter{
 			g.drawString("Quit", 270, 390);
 			
 			g.setFont(fnt3);
-			g.drawString("Theme 1", 530, 450);
-			g.drawString("Theme 2", 580, 450);
+			g.drawString("Theme 1", 530, 400);
+			g.drawRect(525, 390, 47, 15);
+			g.drawString("Theme 2", 580, 400);
+			g.drawRect(575, 390, 47, 15);
 			
 		} else if (game.IsgameStateHelp()) {
 			Font fnt = new Font("arial", 1, 50);

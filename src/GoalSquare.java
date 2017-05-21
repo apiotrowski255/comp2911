@@ -14,6 +14,7 @@ public class GoalSquare extends GameObject {
 		super(x, y, id);
 		this.handler = handler;
 		this.BoxOnGoal = false;
+		this.theme = null;
 	}
 
 	@Override
@@ -38,7 +39,14 @@ public class GoalSquare extends GameObject {
 //		g.fillRect(x, y, 32, 32);
 		
 		Toolkit t = Toolkit.getDefaultToolkit();
-        Image i = t.getImage("goal1.png");
+		Image i = null;
+		if(theme == null) {		//default
+        	i = t.getImage("goal.png");
+		} else if (theme.equals("Mario")){
+			i = t.getImage("goal.png");
+		} else if (theme.equals("BombMan")){
+			i = t.getImage("goal1.png");
+		}
         g.drawImage(i, x, y, this);
 
 	}
@@ -52,5 +60,9 @@ public class GoalSquare extends GameObject {
 	public Rectangle getBounds() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void setTheme(String Theme){
+		this.theme = Theme;
 	}
 }

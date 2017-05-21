@@ -17,6 +17,7 @@ public class Player extends GameObject {
 		super(x, y, id);
 		this.handler = handler;
 		this.playerHit = false;
+		this.theme = null;
 	}
 
 	public void tick() {
@@ -50,7 +51,14 @@ public class Player extends GameObject {
 		}
 		
 		Toolkit t = Toolkit.getDefaultToolkit();
-        Image i = t.getImage("player1.png");
+		Image i = null;
+		if(theme == null) {		//default
+        	i = t.getImage("player.png");
+		} else if (theme.equals("Mario")){
+			i = t.getImage("player.png");
+		} else if (theme.equals("BombMan")){
+			i = t.getImage("player1.png");
+		}
         g.drawImage(i, x, y, this);
 	}
 
@@ -59,6 +67,9 @@ public class Player extends GameObject {
 		return new Rectangle(x,y,32,32);
 	}
 	
+	public void setTheme(String Theme){
+		this.theme = Theme;
+	}
 
 
 }

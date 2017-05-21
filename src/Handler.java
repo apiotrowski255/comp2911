@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Handler {
 
 	ArrayList<GameObject> object = new ArrayList<GameObject>();
-	
+	public int theme = 0;	//0 for mario and 1 for bombman
 	/**
 	 * runs the tick function on each object in the Array
 	 */
@@ -105,5 +105,13 @@ public class Handler {
 			}
 		}
 		return Bullets;
+	}
+	
+	public int getTheme(){
+		return theme;
+	}
+	
+	public void setTheme(int theme){
+		this.theme = theme;
 	}
 }
