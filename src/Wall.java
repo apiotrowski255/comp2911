@@ -27,11 +27,11 @@ public class Wall extends GameObject{
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Image i = null;
 		if(theme == null) {		//default
-        	i = t.getImage("wall.png");
+        	i = t.getImage("../images/wall.png");
 		} else if (theme.equals("Mario")){
-			i = t.getImage("wall.png");
+			i = t.getImage("../images/wall.png");
 		} else if (theme.equals("BombMan")){
-			i = t.getImage("wall1.jpg");
+			i = t.getImage("../images/wall1.jpg");
 		}
         g.drawImage(i, x, y, this);
 	}

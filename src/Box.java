@@ -40,15 +40,15 @@ public class Box extends GameObject {
 		
 		if (theme.equals("Mario") || theme == null) { // default
 			if (!isOnGoal) {
-				i = t.getImage("box.gif");
+				i = t.getImage("../images/box.gif");
 			} else {
-				i = t.getImage("box_goal.png");
+				i = t.getImage("../images/box_goal.png");
 			}
 		} else if (theme.equals("BombMan")) {
 			if (!isOnGoal) {
-				i = t.getImage("box1.png");
+				i = t.getImage("../images/box1.png");
 			} else {
-				i = t.getImage("box1_goal.png");
+				i = t.getImage("../images/box1_goal.png");
 			}
 		}
 

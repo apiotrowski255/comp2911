@@ -41,11 +41,11 @@ public class GoalSquare extends GameObject {
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Image i = null;
 		if(theme == null) {		//default
-        	i = t.getImage("goal.png");
+        	i = t.getImage("../images/goal.png");
 		} else if (theme.equals("Mario")){
-			i = t.getImage("goal.png");
+			i = t.getImage("../images/goal.png");
 		} else if (theme.equals("BombMan")){
-			i = t.getImage("goal1.png");
+			i = t.getImage("../images/goal1.png");
 		}
         g.drawImage(i, x, y, this);
 

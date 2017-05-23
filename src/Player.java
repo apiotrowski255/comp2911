@@ -53,11 +53,11 @@ public class Player extends GameObject {
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Image i = null;
 		if(theme == null) {		//default
-        	i = t.getImage("player.png");
+        	i = t.getImage("../images/player.png");
 		} else if (theme.equals("Mario")){
-			i = t.getImage("player.png");
+			i = t.getImage("../images/player.png");
 		} else if (theme.equals("BombMan")){
-			i = t.getImage("player1.png");
+			i = t.getImage("../images/player1.png");
 		}
         g.drawImage(i, x, y, this);
 	}
