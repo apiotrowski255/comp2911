@@ -32,6 +32,11 @@ public class Header extends GameObject {
 			g.setColor(Color.WHITE);
 			g.drawString(Integer.toString(steps), 575, 35);
 		}
+		
+		Font fnt = new Font("arial", 1, 10);
+		g.setFont(fnt);
+		g.drawString("Q - Quit", 580, 60);
+		g.drawString("R - Reset", 580, 75);
 	}
 
 	@Override
