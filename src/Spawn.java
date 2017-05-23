@@ -109,6 +109,9 @@ public class Spawn {
 			loadLevel11(handler);
 		} else if (levelNumber == 12) {
 			// loadLevel12(handler);
+		} else if (levelNumber == 13) {
+			//2 player map
+			loadLevel13(handler);
 		}
 
 		if (handler.getTheme() == 0) {
@@ -137,7 +140,19 @@ public class Spawn {
 			}
 		}
 	}
+	
+	
+	/**
+	 * hard coded for level 13
+	 */
 
+	public void loadLevel13(Handler handler){
+		handler.addObject(new Player(0, 0, ID.Player, handler));
+		handler.addObject(new Player(32, 0, ID.Player2, handler));
+		
+		handler.addObject(new Wall(32 * 5, 32 * 5, ID.Wall));
+	}
+	
 	/**
 	 * hard coded to load level1
 	 * 

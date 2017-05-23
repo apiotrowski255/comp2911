@@ -52,19 +52,70 @@ public class KeyInput extends KeyAdapter {
 			GameObject player = handler.getPlayer2();
 
 			if (tempObject.getID() == ID.Player) {
+				
 				// key events for player 1
-
 				if (key == KeyEvent.VK_W) {
-					tempObject.setY(tempObject.getY() - 32);
+					if(!(isWallUp(tempObject))){
+						if(isPlayerAboveToBox(tempObject)){
+							GameObject b = getBoxAboveToPlayer(tempObject);
+							if(canBoxMoveUp(b)){
+								tempObject.setY(tempObject.getY() - 32);
+								b.setY(b.getY() - 32);
+								addStep();
+							}
+						} else {
+							tempObject.setY(tempObject.getY() - 32);
+							addStep();
+						}
+						
+					}
 				}
 				if (key == KeyEvent.VK_S) {
-					tempObject.setY(tempObject.getY() + 32);
+					if(!(isWallDown(tempObject))){
+						if(isPlayerBelowToBox(tempObject)){
+							GameObject b = getBoxUnderPlayer(tempObject);
+							if(canBoxMoveDown(b)){
+								tempObject.setY(tempObject.getY() + 32);
+								b.setY(b.getY() + 32);
+								addStep();
+							}
+						} else {
+							tempObject.setY(tempObject.getY() + 32);
+							addStep();
+						}
+						
+					}
 				}
 				if (key == KeyEvent.VK_D) {
-					tempObject.setX(tempObject.getX() + 32);
+					if(!(isWallRight(tempObject))){
+						if(isPlayerRightToBox(tempObject)){
+							GameObject b = getBoxRightToPlayer(tempObject);
+							if(canBoxMoveRight(b)){
+								tempObject.setX(tempObject.getX() + 32);
+								b.setX(b.getX() + 32);
+								addStep();
+							}
+						} else {
+							tempObject.setX(tempObject.getX() + 32);
+							addStep();
+						}
+					}
 				}
 				if (key == KeyEvent.VK_A) {
-					tempObject.setX(tempObject.getX() - 32);
+					if(!(isWallLeft(tempObject))){
+						if(isPlayerLeftToBox(tempObject)){
+							GameObject b = getBoxLeftToPlayer(tempObject);
+							if(canBoxMoveLeft(b)){
+								tempObject.setX(tempObject.getX() - 32);
+								b.setX(b.getX() - 32);
+								addStep();
+							}
+						} else {
+							tempObject.setX(tempObject.getX() - 32);
+							addStep();
+						}
+						
+					} 
 				}
 			}
 
@@ -119,7 +170,6 @@ public class KeyInput extends KeyAdapter {
 							tempObject.setX(tempObject.getX() + 32);
 							addStep();
 						}
-						
 					}
 				}
 				if (key == KeyEvent.VK_LEFT && tempObject.canObjectMoveLeft()) {
@@ -411,4 +461,5 @@ public class KeyInput extends KeyAdapter {
 	public void resetSteps() {
 		this.currentSteps = 0;
 	}
+	
 }

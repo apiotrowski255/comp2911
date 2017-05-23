@@ -66,7 +66,7 @@ public class Menu extends MouseAdapter{
 				gameStateWord = "Game";
 				//ThisMUSTBeChanged
 				game.removeKeyListener(game.getKeyinput());
-				game.getSpawner().levelLoader(game.getSpawner().currentLevelNumber, handler);
+				game.getSpawner().levelLoader(13, handler);
 				
 				game.setKeyinput(new KeyInput(handler, game));
 				game.addKeyListener(game.getKeyinput());
