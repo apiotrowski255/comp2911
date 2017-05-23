@@ -13,6 +13,7 @@ public enum ID {
 	EnemyBullet(),
 	Trail(),
 	GoalSquare(),
+	Header(),
 	Wall();
 	
 }

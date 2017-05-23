@@ -46,12 +46,12 @@ public class Spawn {
 			Player temp = (Player) handler.getPlayer2();
 			if(temp.playerHit == true){
 				System.out.println("Hit");
-				while(handler.object.size() != 0){
-					handler.removeObject(handler.object.get(0));
-				}
-				game.getKeyinput().setcurrentSteps(0);
+				int currentLevel = game.getSpawner().getCurrentLevelNumber();
+				handler.object.clear();
 				game.removeKeyListener(game.getKeyinput());
-				game.setgameState("MainMenu");
+				game.getSpawner().levelLoader(currentLevel, handler);
+				game.setKeyinput(new KeyInput(handler, game));
+				game.addKeyListener(game.getKeyinput());
 				
 			}
 		}

@@ -23,6 +23,7 @@ public class Game extends Canvas implements Runnable {
 	private Spawn spawner;
 	private KeyInput keyinput;
 	private Menu menu;
+	private Header header;
 	
 	public enum STATE {
 		MainMenu,
@@ -65,6 +66,8 @@ public class Game extends Canvas implements Runnable {
 		this.setKeyinput(new KeyInput(handler, this));
 		// add the Key Input so it actually registers
 		this.addKeyListener(getKeyinput());
+		
+		this.header = new Header(100, 100, ID.Header);
 		
 		//Create Window for the game
 		new Window(WIDTH, HEIGHT, "Comp2911", this);
@@ -157,6 +160,8 @@ public class Game extends Canvas implements Runnable {
 		if(gameState == STATE.Game){
 			handler.tick();
 			spawner.tick();
+			header.UpdateSteps(this.getKeyinput().getCurrentSteps());
+			header.tick();
 		} else if (gameState == STATE.MainMenu){
 			menu.tick();
 		}
@@ -183,6 +188,7 @@ public class Game extends Canvas implements Runnable {
 		
 		if(gameState == STATE.Game){
 			handler.render(g);
+			header.render(g);
 		} else if(gameState == STATE.MainMenu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.PlayerMenu || gameState == STATE.LevelTypeMenu || gameState == STATE.LevelSelectMenu){
 			menu.render(g, handler);
 		} 

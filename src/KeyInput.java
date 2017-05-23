@@ -25,17 +25,6 @@ public class KeyInput extends KeyAdapter {
 		this.game = game;
 	}
 	
-	public int getCurrentSteps() {
-		return this.currentSteps;
-	}
-	
-	public void addStep() {
-		this.currentSteps++;
-	}
-	
-	public void resetSteps() {
-		this.currentSteps = 0;
-	}
 
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -407,7 +396,19 @@ public class KeyInput extends KeyAdapter {
 		this.handler = newHandler;
 	}
 
+	public int getCurrentSteps() {
+		return this.currentSteps;
+	}
+	
+	public void addStep() {
+		this.currentSteps++;
+	}
+	
 	public void setcurrentSteps(int i) {
 		this.currentSteps = i;
+	}
+	
+	public void resetSteps() {
+		this.currentSteps = 0;
 	}
 }
