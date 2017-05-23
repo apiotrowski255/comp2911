@@ -32,6 +32,13 @@ public class Map {
 		//this.generateMap(10);
 	}
 	
+	
+	
+	/**
+	 * The constructor for the Map class
+	 * @param width the dimensions of the Map
+	 * @return the built map
+	 */
 	public Map newMap(int width) {
 		this.path = "";
 		
@@ -40,25 +47,23 @@ public class Map {
 		if (this.generateMap(width)) soultion = this.findSoultion();
 
 		
-		while(soultion == null || soultion.length() <5) {
+		while(soultion == null || soultion.length() <width) {
 
 			if (this.generateMap(width)) {
-				//this.printMap();
 				soultion = this.findSoultion();
-				//System.out.println(soultion);
 			} else soultion = null;
 		}
 		
+		this.removeUnnesEmpty(soultion);
+		this.getRidBadWalls();
 		return this;
 
 	}
 	
-//	private void reset() {
-//		this.movesToSolve = 0;
-//		this.puzzel = null;
-//		this.path = "";
-//	}
-
+	/**
+	 * Builds map predefined by the function to test the solver.
+	 * 
+	 */
 	public void turnToHackMap() {
 		this.puzzel = new Square[][] {
 			{W(),W(),W(),W(),W(),W(),W(),W()},
@@ -78,9 +83,7 @@ public class Map {
 //			{W(),P(),B(),E(),W()},
 //			{W(),E(),E(),G(),W()},
 //			{W(),W(),W(),W(),W()}
-//		};
-		
-		//this.path = this.findSoultion();
+//		};		
 	}
 
 	/* (non-Javadoc)
@@ -91,27 +94,54 @@ public class Map {
 		return "Map [puzzel=" + Arrays.toString(puzzel) + ", movesToSolve=" + movesToSolve + "]";
 	}
 
+	/**
+	 * builds a Square object that is a wall
+	 * @return the built wall
+	 */
 	private Square W() {
 		return new Square(false, false, false, true);
 	}
+	
+	/**
+	 * builds a Square object that is a player
+	 * @return the built player
+	 */
 	private Square P() {
 		return new Square(false, false, true, false);
 	}
+
+	/**
+	 * builds a Square object that is a box
+	 * @return the built box
+	 */
 	private Square B() {
 		return new Square(false, true, false, false);
 	}
+	
+	/**
+	 * builds a Square object that is a goal
+	 * @return the built goal
+	 */
 	private Square G() {
 		return new Square(true, false, false, false);
 	}
-	public Square E() {
+	
+	/**
+	 * builds a Square object that is a empty
+	 * @return the built empty
+	 */
+	private Square E() {
 		return new Square(false, false, false, false);
 	}
 	
 	
 
 
-
-	public boolean isDone() {
+	/**
+	 * checks whether every box in a given map is on a goal
+	 * @return whether every box is on a goal
+	 */
+	private boolean isDone() {
 		boolean flag = true;
 		for(int y =0; y < puzzel.length; y++) {
 			for(int x =0; x < puzzel[0].length; x++) {
@@ -119,11 +149,15 @@ public class Map {
 			}
 		}
 
-		//if (flag == true) System.out.println("NOOT");
 		return flag;
 	}
 
-	public boolean isValidMove (int direction) {
+	/**
+	 * Checks whether a given move is valid
+	 * @param direction the direction of the move
+	 * @return whether the move is valid
+	 */
+	private boolean isValidMove (int direction) {
 		
 		int[] fromLoc = this.getPlayerLocation();
 		int xFromCoord = fromLoc[0];
@@ -141,7 +175,14 @@ public class Map {
 		else return false;
 	}
 	
-	public boolean canPushBox(int direction, int xFromCoord, int yFromCoord) {
+	/**
+	 * Checks whether a box can be pushed a given direction
+	 * @param direction the direction which the user wish's to push the box
+	 * @param xFromCoord the xCoord of the player
+	 * @param yFromCoord the yCoord of the player
+	 * @return whether the box can be pushed the given direction
+	 */
+	private boolean canPushBox(int direction, int xFromCoord, int yFromCoord) {
 		boolean flag;
 		int[] toLoc = this.getToCoord(direction, xFromCoord, yFromCoord);
 		int xToCoord = toLoc[0];
@@ -152,8 +193,16 @@ public class Map {
 		
 		return flag;
 	}
+
 	
-	public int[] getToCoord(int direction, int xFromCoord, int yFromCoord) {
+	/**
+	 * gets the coords if a player or box moves from a certain set of coords in a given direction.
+	 * @param direction the direction the user wishes to moves
+	 * @param xFromCoord
+	 * @param yFromCoord
+	 * @return
+	 */
+	private int[] getToCoord(int direction, int xFromCoord, int yFromCoord) {
 		int[] toCoords = new int[2];
 		if (direction == UP) {
 			toCoords[0] = xFromCoord;
@@ -175,7 +224,11 @@ public class Map {
 		return toCoords;
 	}
 	
-	public int[] getPlayerLocation() {
+	/**
+	 * Gets the coords of the player
+	 * @return the location of the player stored in an array of the format [ycoord, xcoord]
+	 */
+	private int[] getPlayerLocation() {
 		int[] location = new int[2];
 		for(int y =0; y < puzzel.length; y++) {
 			for(int x =0; x < puzzel[0].length; x++) {
@@ -188,6 +241,11 @@ public class Map {
 		return location;
 	}
 
+	
+	
+	/**
+	 * Clones a given Map
+	 */
 	public Map clone() {
 		Map newMap = new Map();
 		newMap.puzzel = new Square[this.puzzel.length][this.puzzel[0].length];
@@ -199,11 +257,15 @@ public class Map {
 			}
 		}
 		newMap.movesToSolve = this.movesToSolve;
-//		this.printMap();
 		return newMap;
 	}
 
-	public Map move(int direction) {
+	/**
+	 * moves the player a given direction.
+	 * @param direction the direction to move the player
+	 * @return the Map object after the player has moved
+	 */
+	private Map move(int direction) {
 		if (this.isValidMove(direction)) {
 
 			int[] fromLoc = this.getPlayerLocation();
@@ -228,6 +290,11 @@ public class Map {
 		} else return this;
 	}
 	
+	
+	/**
+	 * Returns the path one must take to solve the puzzle.
+	 * @return the path to solve the puzzle null if there is no solution.
+	 */
 	public String findSoultion() {
 		Queue<Map> q = new LinkedBlockingQueue<Map>();
 		ArrayList<Map> l = new ArrayList<Map>();
@@ -275,6 +342,11 @@ public class Map {
 		else return null;
 	}
 	
+	
+	/**
+	 * checks whether any of the boxes in the map are in a location where they can no longer be moved.
+	 * @return
+	 */
 	private boolean boxIsStuck() {
 		
 		for (int y = 0; y < this.puzzel.length; y++) {
@@ -289,6 +361,13 @@ public class Map {
 		return false;
 	}
 	
+	
+	/**
+	 * checks whether a given box is stuck
+	 * @param y the y coord of the box
+	 * @param x the x coord of the box
+	 * @return whether the box is stuck
+	 */
 	private boolean isStuck(int y, int x) {
 		if (this.puzzel[y][x].isGoal()) return false;
 		if (this.puzzel[y][x].isPushable()) {
@@ -301,7 +380,9 @@ public class Map {
 		return false;
 	}
 	
-	
+	/**
+	 * Used to print the Map
+	 */
 	public void printMap() {
 		for(int y =0; y < puzzel.length; y++) {
 			for(int x =0; x < puzzel[0].length; x++) {
@@ -330,7 +411,12 @@ public class Map {
 			return false;
 		return true;
 	}
-		
+
+	
+	/**
+	 * outputs the map to a txt
+	 * @param fileName the name of the txt to output to.
+	 */
 	public void toTxt(String fileName) {
 		try{
 		    PrintWriter writer = new PrintWriter(fileName, "UTF-8");
@@ -342,6 +428,10 @@ public class Map {
 		}
 	}
 	
+	/**
+	 * encodes a map into a string
+	 * @return the encoded map
+	 */
 	public String getTxtOutputString() {
 		String encode = "";
 		for (int y =0; y< this.puzzel.length; y++) {
@@ -354,7 +444,13 @@ public class Map {
 		return encode;
 	}
 
-	public boolean generateMap(int width) {
+	
+	/**
+	 * builds a random Map may or may not be solvable
+	 * @param width the dimensions of the map
+	 * @return whether the map is solvable
+	 */
+	private boolean generateMap(int width) {
 		this.puzzel = new Square[width][width];
 		//this.printMap();
 		
@@ -391,6 +487,11 @@ public class Map {
 		
 	}
 	
+	/**
+	 * places goals players and boxes on the map
+	 * @param width the dimensions of the map
+	 * @return whether the place was successful
+	 */
 	private boolean placeKeyObjectives(int width) {
 		int noBoxes = howManyBoxes(width);
 		
@@ -406,6 +507,11 @@ public class Map {
 		return true;
 	}
 	
+	
+	/**
+	 * Places goals
+	 * @return whether the method was successful.
+	 */
 	private boolean placeGoals() {
 		Random r = new Random();
 		int noEmptySquares =0;
@@ -435,7 +541,10 @@ public class Map {
 		return true;
 	}
 	
-	
+	/**
+	 * Places Player
+	 * @return whether the method was successful.
+	 */
 	private boolean placePlayer() {
 		int noEmptySquares = 0;
 		Random r = new Random();
@@ -466,7 +575,10 @@ public class Map {
 	}
 	
 
-	
+	/**
+	 * Places Box
+	 * @return whether the method was successful.
+	 */
 	private boolean placeBox() {
 		int weightEmptySquares = 0;
 		Random r = new Random();
@@ -507,6 +619,12 @@ public class Map {
 		return true;
 	}
 	
+	/**
+	 * Calculates how much a given square should be weight when trying to place a box there
+	 * @param y the ycoord of the box
+	 * @param x the xcoord of the box
+	 * @return
+	 */
 	private int findWeightEmptySquare(int y, int x) {
 		int noTouchedWalls = 0;
 		if (this.puzzel[y+1][x] != null && this.puzzel[y+1][x].isWall()) noTouchedWalls++;
@@ -534,6 +652,11 @@ public class Map {
 		return 0;
 	}
 	
+	/**
+	 * Decides how many boxes to place on a given map
+	 * @param width the width of the map
+	 * @return the number of boxes to place.
+	 */
 	private int howManyBoxes(int width){
 		int maxBoxes = width/3 + 1;
 		int noBoxes = 1;
@@ -546,6 +669,11 @@ public class Map {
 		return noBoxes;
 	}
 	
+	/**
+	 * Decides whether to place a empty square or a wall in a square.
+	 * @param y the y coord of the square to pop.
+	 * @param x the x coord of the square to pop.
+	 */
 	private void popSquare(int y, int x) {
 		int noTouchedWalls =0;
 		Random r = new Random();
@@ -588,6 +716,10 @@ public class Map {
 		//this.puzzel[y][x] = E();
 	}
 	
+	/**
+	 * Gets rid of all continuous empty spaces in the map besides the largest
+	 * @return the now modified map
+	 */
 	private Map makeOneChamber() {
 		ArrayList<Integer> chamberSize = new ArrayList<Integer>();
 		int[][] chamberMarkers = new int[this.puzzel.length][this.puzzel[0].length];
@@ -625,6 +757,13 @@ public class Map {
 		return this;
 	}
 	
+	/**
+	 * fills the chamber marker array for a single chamber with the index of the chamber
+	 * @param y the ycoord.
+	 * @param x the x coord.
+	 * @param chamberSize an array holding the size of a particular chambers size
+	 * @param chamberMarkers a 2d array holding the index of the particular chamber which the given square belongs to
+	 */
 	private void fillChamber(int y, int x, ArrayList<Integer> chamberSize,int[][] chamberMarkers){
 		int chamberNumber = chamberSize.size();
 		chamberSize.add(1);
@@ -689,5 +828,66 @@ public class Map {
 				q.add(currPush);
 			}
 		}
+	}
+
+
+	private void getRidBadWalls() {
+		boolean[][] toBeDeleted = new boolean[this.puzzel.length][this.puzzel.length];
+
+		for(int y =0; y < this.puzzel.length; y++) {
+			for(int x =0; x < this.puzzel[y].length; x++) {
+				if (this.puzzel[y][x].isWall() && this.isBadWall(y,x)) toBeDeleted[y][x] = true;
+				else toBeDeleted[y][x] = false;
+			}			
+		}
+		
+		for(int y =0; y < this.puzzel.length; y++) {
+			for(int x =0; x < this.puzzel[y].length; x++) {
+				if (toBeDeleted[y][x] == true) this.puzzel[y][x] = E();
+			}
+		}
+		
+		
+	}
+
+	private boolean isBadWall(int y, int x) {
+		if (y+1 < this.puzzel.length && !this.puzzel[y+1][x].isWall()) return false;
+		else if (y-1 > 0 && !this.puzzel[y-1][x].isWall()) return false;
+		else if (x+1 < this.puzzel.length && !this.puzzel[y][x+1].isWall()) return false;
+		else if (x-1 > 0 && !this.puzzel[y][x-1].isWall()) return false;
+		
+		else if (y+1 < this.puzzel.length && x+1 < this.puzzel.length && !this.puzzel[y+1][x+1].isWall()) return false;
+		else if (y-1 > 0 && x-1 > 0 && !this.puzzel[y-1][x-1].isWall()) return false;
+		else if (y+1 < this.puzzel.length && x-1 > 0 && !this.puzzel[y+1][x-1].isWall()) return false;
+		else if (y-1 > 0 && x+1 < this.puzzel.length && !this.puzzel[y-1][x+1].isWall()) return false;
+		else return true;
+	}
+	
+	private void removeUnnesEmpty(String sol) {
+		Map m = this.clone();
+		boolean[][] marker = new boolean[this.puzzel.length][this.puzzel[0].length];
+		for(int y =0; y < this.puzzel.length; y++) {
+			for(int x =0; x < this.puzzel[y].length; x++) {
+				marker[y][x] = false;
+			}
+		}
+		
+		
+		for (int i=0; i<sol.length(); i++) {
+			m.move(Character.getNumericValue(sol.charAt(i)));
+			for(int y =0; y < m.puzzel.length; y++) {
+				for(int x =0; x < m.puzzel[y].length; x++) {
+					if (!m.puzzel[y][x].isEmpty()) marker[y][x] = true;
+				}
+			}
+		}
+		
+		for(int y =0; y < this.puzzel.length; y++) {
+			for(int x =0; x < this.puzzel[y].length; x++) {
+				if (marker[y][x] == false) this.puzzel[y][x] = W();
+			}
+		}
+		
+
 	}
 }
