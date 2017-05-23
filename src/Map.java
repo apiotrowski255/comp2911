@@ -43,9 +43,9 @@ public class Map {
 		while(soultion == null || soultion.length() <5) {
 
 			if (this.generateMap(width)) {
-				this.printMap();
+				//this.printMap();
 				soultion = this.findSoultion();
-				System.out.println(soultion);
+				//System.out.println(soultion);
 			} else soultion = null;
 		}
 		
@@ -61,13 +61,16 @@ public class Map {
 
 	public void turnToHackMap() {
 		this.puzzel = new Square[][] {
-			{W(),W(),W(),W(),W(),W(),W()},
-			{W(),E(),P(),W(),W(),G(),W()},
-			{W(),E(),B(),W(),W(),G(),W()},
-			{W(),E(),E(),W(),W(),E(),W()},
-			{W(),E(),B(),W(),E(),E(),W()},
-			{W(),W(),W(),W(),E(),E(),W()},
-			{W(),W(),W(),W(),W(),W(),W()}
+			{W(),W(),W(),W(),W(),W(),W(),W()},
+			{W(),G(),G(),G(),E(),E(),W(),W()},
+			{W(),E(),B(),P(),B(),E(),W(),W()},
+			{W(),W(),E(),W(),W(),E(),E(),W()},
+			{W(),W(),E(),E(),B(),E(),E(),W()},
+			{W(),W(),E(),E(),W(),E(),E(),W()},
+			{W(),W(),W(),W(),W(),W(),W(),W()},
+			{W(),W(),W(),W(),W(),W(),W(),W()}
+
+
 		};
 //		this.puzzel = new Square[][] {
 //			{W(),W(),W(),W(),W()},
@@ -77,7 +80,7 @@ public class Map {
 //			{W(),W(),W(),W(),W()}
 //		};
 		
-		this.path = this.findSoultion();
+		//this.path = this.findSoultion();
 	}
 
 	/* (non-Javadoc)
@@ -239,7 +242,8 @@ public class Map {
 				currentPush.path = currentPush.path + Integer.toString(direction);
 			
 
-				if (!l.contains(currentPush) ) {
+				if (!currentPush.boxIsStuck() && !l.contains(currentPush)) {
+					
 					q.add(currentPush);
 					l.add(currentPush);
 				}
@@ -251,6 +255,7 @@ public class Map {
 
 		while ( !q.isEmpty() && !currentMap.isDone()) {
 			currentMap = q.poll();
+			//currentMap.printMap();
 
 			
 			for (int direction=0; direction < 4; direction ++) {
@@ -258,7 +263,7 @@ public class Map {
 					currentPush = currentMap.clone().move(direction);
 					currentPush.movesToSolve++;
 					currentPush.path = currentPush.path + Integer.toString(direction);
-					if (!l.contains(currentPush) ) {
+					if (!l.contains(currentPush) && !currentPush.boxIsStuck()) {
 						q.add(currentPush);
 						l.add(currentPush);
 					}
@@ -270,6 +275,31 @@ public class Map {
 		else return null;
 	}
 	
+	private boolean boxIsStuck() {
+		
+		for (int y = 0; y < this.puzzel.length; y++) {
+			for (int x = 0; x < this.puzzel[y].length; x++) {
+
+				if (this.isStuck(y,x)) return true;
+
+			}
+		}
+		
+		
+		return false;
+	}
+	
+	private boolean isStuck(int y, int x) {
+		if (this.puzzel[y][x].isGoal()) return false;
+		if (this.puzzel[y][x].isPushable()) {
+			if (this.puzzel[y+1][x].isWall() && this.puzzel[y][x+1].isWall()) return true;
+			if (this.puzzel[y+1][x].isWall() && this.puzzel[y][x-1].isWall()) return true;
+			if (this.puzzel[y-1][x].isWall() && this.puzzel[y][x+1].isWall()) return true;
+			if (this.puzzel[y-1][x].isWall() && this.puzzel[y][x-1].isWall()) return true;
+		}
+		
+		return false;
+	}
 	
 	
 	public void printMap() {

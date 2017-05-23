@@ -141,6 +141,9 @@ public class Square {
 	public void addGoal() {
 		this.goal = true;
 	}
+	public boolean isGoal() {
+		return this.goal;
+	}
 	
 
 }
