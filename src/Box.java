@@ -42,10 +42,14 @@ public class Box extends GameObject {
 			if (!isOnGoal) {
 				i = t.getImage("box.gif");
 			} else {
-				i = t.getImage("box1.png");
+				i = t.getImage("box_goal.png");
 			}
 		} else if (theme.equals("BombMan")) {
-			i = t.getImage("box1.png");
+			if (!isOnGoal) {
+				i = t.getImage("box1.png");
+			} else {
+				i = t.getImage("box1_goal.png");
+			}
 		}
 
 		g.drawImage(i, x, y, this);
