@@ -9,7 +9,7 @@ public class Spawn {
 	public Spawn(Handler handler, Game game) {
 		this.handler = handler;
 		this.game = game;
-		this.currentLevelNumber = 1;
+		this.currentLevelNumber = 0;
 	}
 
 	/**
@@ -112,6 +112,8 @@ public class Spawn {
 		} else if (levelNumber == 13) {
 			//2 player map
 			loadLevel13(handler);
+		} else if (levelNumber == 0) {
+			loadLevel0(handler);
 		}
 
 		if (handler.getTheme() == 0) {
@@ -671,6 +673,34 @@ public class Spawn {
 
 		handler.addObject(new EnemyVertical(32 * 18, 32 * 1, ID.Enemy, handler));
 		handler.addObject(new EnemyHorizontal(32 * 1, 32 * 13, ID.Enemy, handler));
+	}
+	
+	public void loadLevel0(Handler handler) {
+		for (int i = 0; i < 12; i++) {
+			handler.addObject(new Wall(32 * i, 32 * 0, ID.Wall));
+			handler.addObject(new Wall(32 * i, 32 * 11, ID.Wall));
+		}
+		for (int i = 0; i < 11; i++) {
+			handler.addObject(new Wall(32 * 0, 32 * i, ID.Wall));
+			handler.addObject(new Wall(32 * 11, 32 * i, ID.Wall));
+		}
+		
+		handler.addObject(new Wall(32 * 5, 32 * 7, ID.Wall));
+		handler.addObject(new Wall(32 * 6, 32 * 7, ID.Wall));
+		
+		handler.addObject(new Wall(32 * 3, 32 * 6, ID.Wall));
+		handler.addObject(new Wall(32 * 3, 32 * 5, ID.Wall));
+		
+		handler.addObject(new Wall(32 * 8, 32 * 6, ID.Wall));
+		handler.addObject(new Wall(32 * 8, 32 * 5, ID.Wall));
+		
+		handler.addObject(new GoalSquare(32 * 5, 32 * 9, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32 * 6, 32 * 9, ID.GoalSquare, handler));
+		
+		handler.addObject(new Box(32 * 5, 32 * 5, ID.Box));
+		handler.addObject(new Box(32 * 6, 32 * 5, ID.Box));
+		
+		handler.addObject(new Player(32 * 1, 32 * 1, ID.Player2, handler));
 	}
 
 	public int getCurrentLevelNumber() {
