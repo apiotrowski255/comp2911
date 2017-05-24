@@ -1,9 +1,12 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.ImageObserver;
 
 public class Menu extends MouseAdapter{
 
@@ -317,7 +320,10 @@ public class Menu extends MouseAdapter{
 			
 			
 		} else if (game.IsgameStateHelp()) {
-			Font fnt = new Font("arial", 1, 50);
+			
+			Font fnt = new Font("arial", 1, 30);
+			
+			/*
 			Font fnt2 = new Font("arial", 1, 30);
 			Font fnt3 = new Font("arial", 1, 20);
 
@@ -335,11 +341,24 @@ public class Menu extends MouseAdapter{
 			g.drawString("I need help too", 240, 300);
 			g.drawString("In Single Player mode, use the arrow keys to move", 70, 250);
 			g.drawString("In Two Player mode, use the WASD keys to move player 2", 40, 275);
+			*/
+			Toolkit t = Toolkit.getDefaultToolkit();
+			Image i = null;
 			
+			if (handler.getTheme() != 1) {
+				i = t.getImage("../images/help.png");
+			} else {
+				i = t.getImage("../images/help1.png");
+			}
+		
+	        g.drawImage(i, 0, 0, null);
 			
-			g.setFont(fnt2);
+			g.setFont(fnt);
+			g.setColor(Color.WHITE);
 			g.drawRect(210 - bouncer/2, 350 - bouncer/2, 200 + bouncer, 64 + bouncer);
 			g.drawString("Back", 270, 390);
+			
+			
 		} else if (game.IsgameStatePlayerMenu()){
 			Font fnt = new Font("arial", 1, 50);
 			Font fnt2 = new Font("arial", 1, 30);
