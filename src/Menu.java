@@ -218,6 +218,17 @@ public class Menu extends MouseAdapter{
 				game.addKeyListener(game.getKeyinput());
 			}
 			
+			//level 0
+			if(mouseOver(mx, my, 80, 200, 32, 32)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(0);
+				game.getSpawner().levelLoader(0, handler);
+				
+				game.setKeyinput(new KeyInput(handler, game));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
 			
 			//back button
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
@@ -405,6 +416,9 @@ public class Menu extends MouseAdapter{
 			
 			g.setFont(fnt4);
 			g.setColor(Color.white);
+			g.drawString("0", 90, 225);
+			g.drawRect(80, 200, 32, 32);
+			
 			g.drawString("1", 310, 175);
 			g.drawString("2", 360, 175);
 			g.drawString("3", 410, 175);
@@ -426,6 +440,8 @@ public class Menu extends MouseAdapter{
 			
 			g.setFont(fnt3);
 			g.drawString("Levels", 350, 130);
+			
+			g.drawString("Tutorial", 48, 175);
 			
 			g.setColor(Color.GREEN);
 			g.drawString("Easy", 200, 175);
