@@ -46,7 +46,7 @@ public class Box extends GameObject {
 			}
 		} else if (theme.equals("BombMan")) {
 			if (!isOnGoal) {
-				i = t.getImage("../images/box1.png");
+				i = t.getImage("../images/box1.gif");
 			} else {
 				i = t.getImage("../images/box1_goal.png");
 			}
