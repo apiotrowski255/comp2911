@@ -12,6 +12,7 @@ public class KeyInput extends KeyAdapter {
 	public ArrayList<GameObject> boxes = new ArrayList<GameObject>();
 	public int currentSteps;
 	private Game game;
+	private Sound bump;
 
 	/**
 	 * Constructor
@@ -23,6 +24,7 @@ public class KeyInput extends KeyAdapter {
 		this.boxes = handler.getBoxes();
 		this.currentSteps = 0;
 		this.game = game;
+		this.bump = new Sound("bump.wav", 1);
 	}
 	
 
@@ -34,6 +36,8 @@ public class KeyInput extends KeyAdapter {
 			handler.object.clear();
 			game.setgameState("MainMenu");
 			game.removeKeyListener(game.getKeyinput());
+			Spawn.stopLoopMusic();
+			Menu.startMenuTheme();
 		}
 		
 		//restart key
@@ -62,6 +66,7 @@ public class KeyInput extends KeyAdapter {
 								tempObject.setY(tempObject.getY() - 32);
 								b.setY(b.getY() - 32);
 								addStep();
+								bump.play();
 							}
 						} else {
 							tempObject.setY(tempObject.getY() - 32);
@@ -78,6 +83,7 @@ public class KeyInput extends KeyAdapter {
 								tempObject.setY(tempObject.getY() + 32);
 								b.setY(b.getY() + 32);
 								addStep();
+								bump.play();
 							}
 						} else {
 							tempObject.setY(tempObject.getY() + 32);
@@ -94,6 +100,7 @@ public class KeyInput extends KeyAdapter {
 								tempObject.setX(tempObject.getX() + 32);
 								b.setX(b.getX() + 32);
 								addStep();
+								bump.play();
 							}
 						} else {
 							tempObject.setX(tempObject.getX() + 32);
@@ -109,6 +116,7 @@ public class KeyInput extends KeyAdapter {
 								tempObject.setX(tempObject.getX() - 32);
 								b.setX(b.getX() - 32);
 								addStep();
+								bump.play();
 							}
 						} else {
 							tempObject.setX(tempObject.getX() - 32);
@@ -133,6 +141,7 @@ public class KeyInput extends KeyAdapter {
 								tempObject.setY(tempObject.getY() - 32);
 								b.setY(b.getY() - 32);
 								addStep();
+								bump.play();
 							}
 						} else {
 							tempObject.setY(tempObject.getY() - 32);
@@ -149,6 +158,7 @@ public class KeyInput extends KeyAdapter {
 								tempObject.setY(tempObject.getY() + 32);
 								b.setY(b.getY() + 32);
 								addStep();
+								bump.play();
 							}
 						} else {
 							tempObject.setY(tempObject.getY() + 32);
@@ -165,6 +175,7 @@ public class KeyInput extends KeyAdapter {
 								tempObject.setX(tempObject.getX() + 32);
 								b.setX(b.getX() + 32);
 								addStep();
+								bump.play();
 							}
 						} else {
 							tempObject.setX(tempObject.getX() + 32);
@@ -180,6 +191,7 @@ public class KeyInput extends KeyAdapter {
 								tempObject.setX(tempObject.getX() - 32);
 								b.setX(b.getX() - 32);
 								addStep();
+								bump.play();
 							}
 						} else {
 							tempObject.setX(tempObject.getX() - 32);

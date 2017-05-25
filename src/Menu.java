@@ -15,12 +15,15 @@ public class Menu extends MouseAdapter{
 	private String gameStateWord;
 	private int bouncer;
 	private boolean startFromTop;
+	private static Sound menuTheme;
 	
 	public Menu(Game game, Handler handler){
 		this.game = game;
 		this.handler = handler;
 		this.gameStateWord = null;
 		this.bouncer = 0;
+		this.menuTheme = new Sound("Gameboy.wav", -1);
+		menuTheme.play();
 	}
 	
 	public void mousePressed(MouseEvent e){
@@ -246,6 +249,8 @@ public class Menu extends MouseAdapter{
 			if (mouseOver(mx, my, 210, 350, 200, 64)) {
 				gameStateWord = "LevelTypeMenu";
 			}
+			
+			if(gameStateWord != "LevelTypeMenu") menuTheme.stop();
 		}
 		
 		
@@ -530,5 +535,13 @@ public class Menu extends MouseAdapter{
 			g.drawString("Back to level select", 210, 415);
 			
 		}
+	}
+	
+	public static void startMenuTheme() {
+		menuTheme.play();
+	}
+	
+	public static void stopMenuTheme() {
+		menuTheme.stop();
 	}
 }
