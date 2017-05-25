@@ -5,11 +5,13 @@ public class Spawn {
 	private Handler handler;
 	private Game game;
 	public int currentLevelNumber;
+	private static Sound s;
 
 	public Spawn(Handler handler, Game game) {
 		this.handler = handler;
 		this.game = game;
 		this.currentLevelNumber = 0;
+		this.s = new Sound("loop.wav", -1);
 	}
 
 	/**
@@ -90,6 +92,8 @@ public class Spawn {
 	 *            the current handler
 	 */
 	public void levelLoader(int levelNumber, Handler handler) {
+		
+		s.play();
 
 		if (levelNumber == 1) {
 			loadLevel1(handler);
@@ -765,5 +769,13 @@ public class Spawn {
 
 	public void setCurrentLevelNumber(int currentLevelNumber) {
 		this.currentLevelNumber = currentLevelNumber;
+	}
+	
+	public static void stopLoopMusic() {
+		s.stop();
+	}
+	
+	public static void startLoopMusic() {
+		s.play();
 	}
 }

@@ -12,6 +12,7 @@ public class EnemyVertical extends GameObject{
 		this.handler = handler;
 		this.velY = 1;
 		this.time = 0;
+		this.s = new Sound("laser.wav", 1);
 	}
 
 	@Override

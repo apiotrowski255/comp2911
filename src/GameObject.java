@@ -11,6 +11,7 @@ public abstract class GameObject extends Canvas {
 	protected ID id;
 	protected int velX, velY;
 	protected String theme;
+	protected Sound s;
 	
 	public GameObject(int x, int y, ID id){
 		this.x = x;
