@@ -1,5 +1,6 @@
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Spawn {
 	private Handler handler;
@@ -93,26 +94,51 @@ public class Spawn {
 	 * 
 	 * @param levelNumber
 	 *            the level to be loaded
+	 *            -1 to load a random level
 	 * @param handler
 	 *            the current handler
 	 */
 	public void levelLoader(int levelNumber, Handler handler) {
 		
-		s.play();
-		
-		//Temporary solution until the map loader can handle enemies or multiple players
-		if (levelNumber == 11) {
-			loadLevel11(handler);
-		} else if (levelNumber == 12) {
-			loadLevel12(handler);
-		} else if (levelNumber == 13) {
-			//2 player map
-			loadLevel13(handler);
-		} else if (levelNumber == 0) {
-			loadLevel0(handler);
-		} else {
-			loadPremadeLevel(handler, Integer.toString(levelNumber));
+		switch (levelNumber) {
+			//-1 means load random level
+			case -1:
+				Map randomMap = new Map();
+				Random r = new Random();
+				randomMap.newMap(8);
+				//System.out.println(randomMap.getTxtOutputString());
+				randomMap.printMap();
+				int randLevelID = r.nextInt();
+				this.setCurrentLevelNumber(randLevelID);
+				String filename = Integer.toString(randLevelID);
+				//randomMap.toTxt(filename + ".map");
+				//This will break if the filename already exists. Roll them dice baby
+				randomMap.writeMapToFile(filename);
+				//loadMapFile(handler, randomMap);
+				loadPremadeLevel(handler, filename);
+				break;
+			//Load tutorial level
+			case 0:
+				loadLevel0(handler);
+				break;
+			//Load level 11 TODO add this functionality to map reader
+			case 11:
+				loadLevel11(handler);
+				break;
+			case 12:
+			//Load level 12 TODO see above
+				loadLevel12(handler);
+				break;
+			//Load level 13 TODO see above
+			case 13:
+				loadLevel13(handler);
+				break;
+			//Otherwise load level from file
+			default:
+				loadPremadeLevel(handler, Integer.toString(levelNumber));
+				break;
 		}
+		
 
 		if (handler.getTheme() == 0) {
 			for (GameObject b : handler.object) {
@@ -123,6 +149,7 @@ public class Spawn {
 				b.setTheme("BombMan");
 			}
 		}
+		s.play();
 	}
 	
 	/**
@@ -135,10 +162,10 @@ public class Spawn {
 		if (levelID == null) {
 			System.err.println("levelID is null");
 		} else System.out.println(levelID);
-		loadMap(handler, new Map(levelID));
+		loadMapFile(handler, new Map(levelID));
 	}
 	
-	public void loadMap(Handler handler, Map map) {
+	public void loadMapFile(Handler handler, Map map) {
 		//Load goal squares
 		if (map == null) System.err.println("Map is null you moron");
 		for (int i = 0; i < map.getSize(); i++) {

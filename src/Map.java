@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Queue;
@@ -57,7 +58,7 @@ public class Map {
 		//Read the file line by line and populate the puzzel array row by row
 		while (sc.hasNext()) {
 			input = sc.nextLine();
-			//System.out.println(input);
+			System.out.println(input);
 			for (int i = 0; i < this.size; i++) {
 				switch (input.charAt(i)) {
 				case 'W':
@@ -72,11 +73,15 @@ public class Map {
 				case 'B':
 					this.puzzel[i][j] = B();
 					break;
+				//The function P() will have to be expanded for different players
 				case '2':
 					this.puzzel[i][j] = P();
 					break;
-				case '1':
+				case 'P':
 					this.puzzel[i][j] = P();
+					break;
+				case 'S':
+					this.puzzel[i][j] = new Square(true, false, true, false);
 					break;
 				case 'C':
 					this.puzzel[i][j] = new Square(true, true, false, false);
@@ -101,6 +106,7 @@ public class Map {
 	 */
 	public Map newMap(int width) {
 		this.path = "";
+		this.size = width;
 		
 		String soultion = null;
 		
@@ -450,6 +456,33 @@ public class Map {
 				
 			}
 			System.out.printf("\n");
+		}
+	}
+	
+	public void writeMapToFile(String mapID) {
+		try {
+			PrintWriter writer = new PrintWriter("../maps/" + mapID + ".map", "UTF-8");
+			System.out.println("printing to file ../maps/" + mapID + ".map");
+			writer.println(this.getSize());
+			System.out.println(this.getSize());
+
+			for (int i = 0; i < this.getSize(); i++) {
+				System.out.print("Adding line: ");
+				for (int j = 0; j < this.getSize(); j++) {
+					writer.print(this.getSquare(i, j).encode());
+					System.out.print(this.getSquare(i, j).encode());
+				}
+				writer.print('\n');
+				System.out.print('\n');
+			}
+			writer.close();
+			System.out.println("FileWriter closed");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

@@ -9,7 +9,7 @@
 public class Square {
 	private String type;
 	
-	//Legacy
+	//
 	private boolean goal;
 	private boolean box;
 	private boolean player;
@@ -44,7 +44,7 @@ public class Square {
 		this.verticalEnemy = false;
 		this.horizontalEnemy = false;
 		
-		//Legacy
+		//
 		switch (type) {
 			case "box":
 				this.box = true;
@@ -208,7 +208,7 @@ public class Square {
 		else if (this.goal == true) return "G";
 		else if (this.player == true) return "P";
 		else if (this.wall == true) return "W";
-		else return " ";
+		else return "E";
 	}
 	
 	public void addGoal() {
