@@ -24,7 +24,7 @@ public class KeyInput extends KeyAdapter {
 		this.boxes = handler.getBoxes();
 		this.currentSteps = 0;
 		this.game = game;
-		this.bump = new Sound("bump.wav", 1);
+		this.bump = new Sound("../sounds/bump.wav", 1);
 	}
 	
 

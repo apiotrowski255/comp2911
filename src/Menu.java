@@ -22,7 +22,7 @@ public class Menu extends MouseAdapter{
 		this.handler = handler;
 		this.gameStateWord = null;
 		this.bouncer = 0;
-		this.menuTheme = new Sound("Gameboy.wav", -1);
+		this.menuTheme = new Sound("../sounds/Gameboy.wav", -1);
 		menuTheme.play();
 	}
 	

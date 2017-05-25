@@ -12,7 +12,7 @@ public class Spawn {
 		this.game = game;
 		this.currentLevelNumber = 0;
 		this.numberOfSteps = 0;
-		this.s = new Sound("loop.wav", -1);
+		this.s = new Sound("../sounds/loop.wav", -1);
 	}
 
 	/**
