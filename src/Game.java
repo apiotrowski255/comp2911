@@ -32,6 +32,7 @@ public class Game extends Canvas implements Runnable {
 		PlayerMenu,
 		LevelTypeMenu,
 		LevelSelectMenu,
+		LevelInbetween,
 		End
 	};
 	
@@ -188,7 +189,7 @@ public class Game extends Canvas implements Runnable {
 		if(gameState == STATE.Game){
 			handler.render(g);
 			header.render(g);
-		} else if(gameState == STATE.MainMenu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.PlayerMenu || gameState == STATE.LevelTypeMenu || gameState == STATE.LevelSelectMenu){
+		} else if(gameState == STATE.MainMenu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.PlayerMenu || gameState == STATE.LevelTypeMenu || gameState == STATE.LevelSelectMenu || gameState == STATE.LevelInbetween){
 			menu.render(g, handler);
 		} 
 
@@ -282,6 +283,13 @@ public class Game extends Canvas implements Runnable {
 		return false;
 	}
 	
+	public boolean isgameStateLevelInbetween(){
+		if(gameState == STATE.LevelInbetween){
+			return true;
+		}
+		return false;
+	}
+	
 	public void setgameState(String state){
 		if(state.equals("Help")){
 			gameState = STATE.Help;
@@ -297,10 +305,13 @@ public class Game extends Canvas implements Runnable {
 			gameState = STATE.LevelTypeMenu;
 		} else if (state.equals("LevelSelectMenu")){
 			gameState = STATE.LevelSelectMenu;
+		} else if (state.equals("LevelInbetween")){
+			gameState = STATE.LevelInbetween;
 		} else {
 			System.out.println("Error");
 		}
 	}
+	
 	
 	public Spawn getSpawner(){
 		return this.spawner;

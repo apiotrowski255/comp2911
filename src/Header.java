@@ -9,7 +9,7 @@ public class Header extends GameObject {
 
 	public Header(int x, int y, ID id) {
 		super(x, y, id);
-		this.steps = 222;
+		this.steps = 0;
 	}
 
 	@Override

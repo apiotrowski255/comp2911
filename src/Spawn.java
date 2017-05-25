@@ -4,12 +4,13 @@ import java.util.ArrayList;
 public class Spawn {
 	private Handler handler;
 	private Game game;
-	public int currentLevelNumber;
+	public int currentLevelNumber, numberOfSteps;
 
 	public Spawn(Handler handler, Game game) {
 		this.handler = handler;
 		this.game = game;
 		this.currentLevelNumber = 0;
+		this.numberOfSteps = 0;
 	}
 
 	/**
@@ -37,6 +38,10 @@ public class Spawn {
 		}
 		if (i == GoalSquares.size() && i != 0) {
 			System.out.println("You Win!");
+			
+			game.setgameState("LevelInbetween");
+			numberOfSteps = game.getKeyinput().getCurrentSteps();
+			
 			while (handler.object.size() != 0) {
 				handler.removeObject(handler.object.get(0));
 			}
@@ -766,4 +771,13 @@ public class Spawn {
 	public void setCurrentLevelNumber(int currentLevelNumber) {
 		this.currentLevelNumber = currentLevelNumber;
 	}
+
+	public int getNumberOfSteps() {
+		return numberOfSteps;
+	}
+
+	public void setNumberOfSteps(int numberOfSteps) {
+		this.numberOfSteps = numberOfSteps;
+	}
+	
 }

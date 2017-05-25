@@ -248,6 +248,41 @@ public class Menu extends MouseAdapter{
 			}
 		}
 		
+		
+		//for levelInbetween
+		if(game.isgameStateLevelInbetween()){
+			gameStateWord = null;
+			
+			//restart
+			if(mouseOver(mx, my, 90, 300, 200, 64)){
+				gameStateWord = "Game";
+				int currentLevel = game.getSpawner().getCurrentLevelNumber();	
+				game.getSpawner().setCurrentLevelNumber(currentLevel - 1);
+				currentLevel = game.getSpawner().getCurrentLevelNumber();
+				handler.object.clear();
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().levelLoader(currentLevel, handler);
+				game.setKeyinput(new KeyInput(handler, game));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			//next level
+			if(mouseOver(mx, my, 310, 300, 200, 64)){
+				gameStateWord = "Game";
+				int currentLevel = game.getSpawner().getCurrentLevelNumber();		
+				handler.object.clear();
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().levelLoader(currentLevel, handler);
+				game.setKeyinput(new KeyInput(handler, game));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			if(mouseOver(mx, my, 200, 380, 200, 64)){
+				gameStateWord = "LevelSelectMenu";
+			}
+			
+		}
+		
 		//back button for help
 		if(game.IsgameStateHelp()){
 			if(mouseOver(mx, my, 210, 350, 200, 64)){
@@ -346,25 +381,6 @@ public class Menu extends MouseAdapter{
 			
 			Font fnt = new Font("arial", 1, 30);
 			
-			/*
-			Font fnt2 = new Font("arial", 1, 30);
-			Font fnt3 = new Font("arial", 1, 20);
-
-			g.setFont(fnt);
-			g.setColor(Color.white);
-			g.drawString("Help", 240, 70);
-			
-			g.setFont(fnt3);
-			g.drawString("Welcome to the Game Sokoban!", 150, 100);
-			g.drawString("Your objective is to move the boxes to the goal Square", 50, 125);
-			g.drawString("Sounds easy right? There are some rules", 90, 150);
-			g.drawString("You (and the box) can only move horizontally and vertically", 30, 175);
-			g.drawString("Even with all your might, you can only move one box at a time", 30, 200);
-			
-			g.drawString("I need help too", 240, 300);
-			g.drawString("In Single Player mode, use the arrow keys to move", 70, 250);
-			g.drawString("In Two Player mode, use the WASD keys to move player 2", 40, 275);
-			*/
 			Toolkit t = Toolkit.getDefaultToolkit();
 			Image i = null;
 			
@@ -481,6 +497,38 @@ public class Menu extends MouseAdapter{
 			g.setFont(fnt2);
 			g.drawRect(210, 350, 200, 64);
 			g.drawString("Back", 270, 390);
+		} else if (game.isgameStateLevelInbetween()){
+			int steps = game.getSpawner().getNumberOfSteps();
+			String score = Integer.toString(steps);
+			String level = Integer.toString(game.getSpawner().getCurrentLevelNumber() - 1);
+			
+			Font fnt = new Font("arial", 1, 50);
+			Font fnt2 = new Font("arial", 1, 30);
+			Font fnt3 = new Font("arial", 1, 20);
+			
+			
+			g.setFont(fnt);
+			g.setColor(Color.white);
+			g.drawString("Your Score", 190, 90);
+			
+			g.setFont(fnt2);
+			g.drawString("Level", 250, 150);
+			g.drawString(level, 335, 150);
+			g.setFont(fnt);
+			g.drawString(score, 280, 220);
+			
+			g.setFont(fnt2);
+			g.drawRect(90, 300, 200, 64);
+			g.drawString("Restart", 145, 340);
+			
+			g.setFont(fnt2);
+			g.drawRect(310, 300, 200, 64);
+			g.drawString("Next Level", 325, 340);
+			
+			g.setFont(fnt3);
+			g.drawRect(200, 380, 200, 64);
+			g.drawString("Back to level select", 210, 415);
+			
 		}
 	}
 }
