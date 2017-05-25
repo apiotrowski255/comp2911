@@ -7,10 +7,17 @@
  *
  */
 public class Square {
+	private String type;
+	
+	//Legacy
 	private boolean goal;
 	private boolean box;
 	private boolean player;
 	private boolean wall;
+	
+	private boolean player2;
+	private boolean verticalEnemy;
+	private boolean horizontalEnemy;
 	
 	/**
 	 * @param goal
@@ -20,14 +27,56 @@ public class Square {
 	 */
 	public Square(boolean goal, boolean box, boolean player, boolean wall) {
 		super();
+		this.type = "";
 		this.goal = goal;
 		this.box = box;
 		this.player = player;
 		this.wall = wall;
 	}
 	
+	public Square(String type) {
+		this.type = type;
+		this.goal = false;
+		this.box = false;
+		this.player = false;
+		this.wall = false;
+		this.player2 = false;
+		this.verticalEnemy = false;
+		this.horizontalEnemy = false;
+		
+		//Legacy
+		switch (type) {
+			case "box":
+				this.box = true;
+				break;
+			case "wall":
+				this.wall = true;
+				break;
+			case "goal":
+				this.goal = true;
+				break;
+			case "player1":
+				this.player = true;
+				break;
+			case "player2":
+				this.player2 = true;
+				break;
+			case "horizontal":
+				this.horizontalEnemy = true;
+				break;
+			case "vertical":
+				this.verticalEnemy = true;
+				break;
+			case "empty":
+				//do nothing
+				break;
+			default:
+				System.err.println("Square construction failed");
+		}
+	}
+	
 	public boolean isPushable() {
-		return this.box;
+		return (this.box || this.type.equals("box"));
 	}
 	public boolean isEmpty() {
 		if (!this.box && !this.goal && !this.player && !this.wall) return true;
@@ -47,6 +96,34 @@ public class Square {
 	public boolean isPlayer() {
 		if (this.player == true) return true;
 		else return false;
+	}
+	
+	public boolean isPlayer2() {
+		return (this.player2 || this.type.equals("player2"));
+	}
+	
+	public boolean isBox() {
+		return (this.box || this.type.equals("box"));
+	}
+	
+	public boolean isWall() {
+		return (this.wall || this.type.equals("wall"));
+	}
+	
+	public boolean isGoal() {
+		return (this.goal || this.type.equals("goal"));
+	}
+	
+	public boolean isVerticalEnemy() {
+		return (this.verticalEnemy || this.type.equals("vertical"));
+	}
+	
+	public boolean isHorizontalEnemy() {
+		return (this.horizontalEnemy || this.type.equals("horizontal"));
+	}
+	
+	public String getType() {
+		return this.type;
 	}
 
 	/* (non-Javadoc)
@@ -134,15 +211,8 @@ public class Square {
 		else return " ";
 	}
 	
-	public boolean isWall() {
-		return this.wall;
-	}
-	
 	public void addGoal() {
 		this.goal = true;
-	}
-	public boolean isGoal() {
-		return this.goal;
 	}
 	
 

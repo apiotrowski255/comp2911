@@ -1,9 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Queue;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -18,6 +21,7 @@ public class Map {
 	
 	//private ArrayList<ArrayList<String>> map;
 	private Square puzzel[][];
+	private int size;
 	private int movesToSolve;
 	private String path;
 	private static final int UP = 0;
@@ -30,6 +34,62 @@ public class Map {
 		
 		//this.generateMap(10);
 		//this.generateMap(10);
+	}
+	
+	/**
+	 * Reads a map from file name.map
+	 * Assumes the parameter name is a file with the side width of the map on the
+	 * first line, and then the map in text form below it
+	 * @param name
+	 */
+	public Map(String name) {
+		//Still rocking the sample code from assignment 1
+		
+		Scanner sc = null;
+		try {
+			sc = new Scanner(new FileReader("../maps/" + name + ".map"));
+		} catch (FileNotFoundException e) {System.err.println("Error opening file: " + e);}
+		String input;
+		int j = 0;
+		//Read the first line of the infile, which should be the size of the map
+		this.size = Integer.parseInt(sc.nextLine());
+		this.puzzel = new Square[this.size][this.size];
+		//Read the file line by line and populate the puzzel array row by row
+		while (sc.hasNext()) {
+			input = sc.nextLine();
+			//System.out.println(input);
+			for (int i = 0; i < this.size; i++) {
+				switch (input.charAt(i)) {
+				case 'W':
+					this.puzzel[i][j] = W();
+					break;
+				case 'G':
+					this.puzzel[i][j] = G();
+					break;
+				case 'E':
+					this.puzzel[i][j] = E();
+					break;
+				case 'B':
+					this.puzzel[i][j] = B();
+					break;
+				case '2':
+					this.puzzel[i][j] = P();
+					break;
+				case '1':
+					this.puzzel[i][j] = P();
+					break;
+				case 'C':
+					this.puzzel[i][j] = new Square(true, true, false, false);
+					break;
+				default:
+					System.err.println("Invalid file input. Brace for NPE");
+				}
+			}
+			//Next row
+			j++;
+		}
+		
+		if (sc != null) sc.close();
 	}
 	
 	
@@ -889,5 +949,13 @@ public class Map {
 		}
 		
 
+	}
+	
+	public int getSize() {
+		return this.size;
+	}
+	
+	public Square getSquare(int x, int y) {
+		return this.puzzel[x][y];
 	}
 }

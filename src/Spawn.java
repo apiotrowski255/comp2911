@@ -99,28 +99,9 @@ public class Spawn {
 	public void levelLoader(int levelNumber, Handler handler) {
 		
 		s.play();
-
-		if (levelNumber == 1) {
-			loadLevel1(handler);
-		} else if (levelNumber == 2) {
-			loadLevel2(handler);
-		} else if (levelNumber == 3) {
-			loadLevel3(handler);
-		} else if (levelNumber == 4) {
-			loadLevel4(handler);
-		} else if (levelNumber == 5) {
-			loadLevel5(handler);
-		} else if (levelNumber == 6) {
-			loadLevel6(handler);
-		} else if (levelNumber == 7) {
-			loadLevel7(handler);
-		} else if (levelNumber == 8) {
-			loadLevel8(handler);
-		} else if (levelNumber == 9) {
-			loadLevel9(handler);
-		} else if (levelNumber == 10) {
-			loadLevel10(handler);
-		} else if (levelNumber == 11) {
+		
+		//Temporary solution until the map loader can handle enemies or multiple players
+		if (levelNumber == 11) {
 			loadLevel11(handler);
 		} else if (levelNumber == 12) {
 			loadLevel12(handler);
@@ -129,31 +110,65 @@ public class Spawn {
 			loadLevel13(handler);
 		} else if (levelNumber == 0) {
 			loadLevel0(handler);
+		} else {
+			loadPremadeLevel(handler, Integer.toString(levelNumber));
 		}
 
 		if (handler.getTheme() == 0) {
 			for (GameObject b : handler.object) {
-				if (b.getID() == ID.Box) {
-					b.setTheme("Mario");
-				} else if (b.getID() == ID.GoalSquare) {
-					b.setTheme("Mario");
-				} else if (b.getID() == ID.Player2) {
-					b.setTheme("Mario");
-				} else if (b.getID() == ID.Wall) {
-					b.setTheme("Mario");
-				}
+				b.setTheme("Mario");
 			}
 		} else if (handler.getTheme() == 1) {
 			for (GameObject b : handler.object) {
-				if (b.getID() == ID.Box) {
-					b.setTheme("BombMan");
-				} else if (b.getID() == ID.GoalSquare) {
-					b.setTheme("BombMan");
-				} else if (b.getID() == ID.Player2) {
-					b.setTheme("BombMan");
-				} else if (b.getID() == ID.Wall) {
-					b.setTheme("BombMan");
-				}
+				b.setTheme("BombMan");
+			}
+		}
+	}
+	
+	/**
+	 * Level loader function for built-in levels
+	 * @param handler
+	 * @param levelID
+	 */
+	public void loadPremadeLevel(Handler handler, String levelID) {
+		if (handler == null) System.err.println("handler is null");
+		if (levelID == null) {
+			System.err.println("levelID is null");
+		} else System.out.println(levelID);
+		loadMap(handler, new Map(levelID));
+	}
+	
+	public void loadMap(Handler handler, Map map) {
+		//Load goal squares
+		if (map == null) System.err.println("Map is null you moron");
+		for (int i = 0; i < map.getSize(); i++) {
+			for (int j = 0; j < map.getSize(); j++) {
+				if (map.getSquare(i, j).isGoal()) handler.addObject(new GoalSquare(32*i, 32*j, ID.GoalSquare, handler));
+			}
+		}
+		//Load Player(s)
+		for (int i = 0; i < map.getSize(); i++) {
+			for (int j = 0; j < map.getSize(); j++) {
+				if (map.getSquare(i, j).isPlayer()) handler.addObject(new Player(32*i, 32*j, ID.Player2, handler));
+			}
+		}
+		//Load Boxes
+		for (int i = 0; i < map.getSize(); i++) {
+			for (int j = 0; j < map.getSize(); j++) {
+				if (map.getSquare(i, j).isBox()) handler.addObject(new Box(32*i, 32*j, ID.Box));
+			}
+		}
+		//Load Walls
+		for (int i = 0; i < map.getSize(); i++) {
+			for (int j = 0; j < map.getSize(); j++) {
+				if (map.getSquare(i, j).isWall()) handler.addObject(new Wall(32*i, 32*j, ID.Wall));
+			}
+		}
+		
+		//Load Enemies
+		for (int i = 0; i < map.getSize(); i++) {
+			for (int j = 0; j < map.getSize(); j++) {
+				
 			}
 		}
 	}
@@ -220,11 +235,14 @@ public class Spawn {
 		handler.addObject(new Box(32 * 4, 32 * 4, ID.Box));
 	}
 	
+	
+	//Once we have verified the code loading maps from file is ok (which 
+	//it more or less is), we can get rid of this huge block
 	/**
 	 * hard coded to load level1
 	 * 
 	 * @param handler
-	 */
+	 *//*
 	public void loadLevel1(Handler handler) {
 		handler.addObject(new GoalSquare(32 * 1, 32 * 5, ID.GoalSquare, handler));
 		handler.addObject(new GoalSquare(32 * 1, 32 * 6, ID.GoalSquare, handler));
@@ -257,11 +275,11 @@ public class Spawn {
 		handler.addObject(new Wall(32 * 1, 32 * 4, ID.Wall));
 	}
 
-	/**
+	*//**
 	 * hard coded, loads level two
 	 * 
 	 * @param handler
-	 */
+	 *//*
 	public void loadLevel2(Handler handler) {
 
 		for (int i = 3; i < 6; i++) {
@@ -314,11 +332,11 @@ public class Spawn {
 
 	}
 
-	/**
+	*//**
 	 * hard coded, loads level 7
 	 * 
 	 * @param handler
-	 */
+	 *//*
 	public void loadLevel7(Handler handler) {
 
 		// -- Load Walls
@@ -704,7 +722,7 @@ public class Spawn {
 		handler.addObject(new Box(32 * 2, 32 * 5, ID.Box));
 
 		handler.addObject(new Player(32 * 2, 32 * 6, ID.Player2, handler));
-	}
+	}*/
 
 	public void loadLevel11(Handler handler) {
 		for (int i = 2; i < 17; i++) {
