@@ -26,7 +26,11 @@ public class EnemyVertical extends GameObject{
 		
 		if(time == 100){
 			time = 0;
-			handler.addObject(new EnemyBullet(x + 8,y + 8,ID.EnemyBullet, -4, 0, handler));
+			if(handler.getPlayer2().getX() < x){
+				handler.addObject(new EnemyBullet(x + 8,y + 8,ID.EnemyBullet, -4, 0, handler));
+			} else {
+				handler.addObject(new EnemyBullet(x + 8,y + 8,ID.EnemyBullet, 4, 0, handler));
+			}
 		} else {
 			time++;
 		}

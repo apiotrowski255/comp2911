@@ -25,7 +25,11 @@ public class EnemyHorizontal extends GameObject{
 		
 		if(time == 100){
 			time = 0;
-			handler.addObject(new EnemyBullet(x + 8,y + 8,ID.EnemyBullet, 0, -4, handler));
+			if(handler.getPlayer2().getY() < y){
+				handler.addObject(new EnemyBullet(x + 8,y + 8,ID.EnemyBullet, 0, -4, handler));
+			} else {
+				handler.addObject(new EnemyBullet(x + 8,y + 8,ID.EnemyBullet, 0, 4, handler));
+			}
 		} else {
 			time++;
 		}

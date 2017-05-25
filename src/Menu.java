@@ -69,6 +69,7 @@ public class Menu extends MouseAdapter{
 				gameStateWord = "Game";
 				//ThisMUSTBeChanged
 				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(13);
 				game.getSpawner().levelLoader(13, handler);
 				
 				game.setKeyinput(new KeyInput(handler, game));
@@ -213,6 +214,17 @@ public class Menu extends MouseAdapter{
 				game.removeKeyListener(game.getKeyinput());
 				game.getSpawner().setCurrentLevelNumber(11);
 				game.getSpawner().levelLoader(11, handler);
+				
+				game.setKeyinput(new KeyInput(handler, game));
+				game.addKeyListener(game.getKeyinput());
+			}
+			
+			//level 12
+			if(mouseOver(mx, my, 450, 250, 32, 32)){
+				gameStateWord = "Game";
+				game.removeKeyListener(game.getKeyinput());
+				game.getSpawner().setCurrentLevelNumber(12);
+				game.getSpawner().levelLoader(12, handler);
 				
 				game.setKeyinput(new KeyInput(handler, game));
 				game.addKeyListener(game.getKeyinput());

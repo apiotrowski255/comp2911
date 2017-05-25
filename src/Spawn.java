@@ -41,14 +41,20 @@ public class Spawn {
 				handler.removeObject(handler.object.get(0));
 			}
 
-			game.removeKeyListener(game.getKeyinput());
-			currentLevelNumber++;
-			levelLoader(currentLevelNumber, handler);
-
-			game.setKeyinput(new KeyInput(handler, game));
-			game.addKeyListener(game.getKeyinput());
+			if(currentLevelNumber == 13 || currentLevelNumber == 12){
+				handler.object.clear();
+				game.setgameState("MainMenu");
+				game.removeKeyListener(game.getKeyinput());
+			} else {
+				game.removeKeyListener(game.getKeyinput());
+				currentLevelNumber++;
+				levelLoader(currentLevelNumber, handler);
+	
+				game.setKeyinput(new KeyInput(handler, game));
+				game.addKeyListener(game.getKeyinput());
+			}
 		}
-		if (currentLevelNumber == 11) {
+		if (currentLevelNumber == 11 || currentLevelNumber == 12) {
 			Player temp = (Player) handler.getPlayer2();
 			if (temp.playerHit == true) {
 				System.out.println("Hit");
@@ -108,7 +114,7 @@ public class Spawn {
 		} else if (levelNumber == 11) {
 			loadLevel11(handler);
 		} else if (levelNumber == 12) {
-			// loadLevel12(handler);
+			loadLevel12(handler);
 		} else if (levelNumber == 13) {
 			//2 player map
 			loadLevel13(handler);
@@ -144,6 +150,37 @@ public class Spawn {
 	}
 	
 	
+	private void loadLevel12(Handler handler) {
+		for (int i = 2; i < 17; i++) {
+			handler.addObject(new Wall(32 * i, 32 * 1, ID.Wall));
+			handler.addObject(new Wall(32 * i, 32 * 12, ID.Wall));
+		}
+
+		for (int i = 1; i < 13; i++) {
+			handler.addObject(new Wall(32 * 1, 32 * i, ID.Wall));
+			handler.addObject(new Wall(32 * 17, 32 * i, ID.Wall));
+		}
+
+		handler.addObject(new Wall(32 * 1, 32 * 1, ID.Wall));
+		handler.addObject(new Wall(32 * 1, 32 * 12, ID.Wall));
+
+		for (int i = 3; i < 11; i += 2) {
+			handler.addObject(new GoalSquare(32 * 14, 32 * i, ID.GoalSquare, handler));
+		}
+		for (int i = 3; i < 11; i += 2) {
+			handler.addObject(new Box(32 * 4, 32 * i, ID.Box));
+		}
+
+		handler.addObject(new Player(32 * 9, 32 * 7, ID.Player2, handler));
+
+		handler.addObject(new EnemyVertical(32 * 18, 32 * 13, ID.Enemy, handler));
+		handler.addObject(new EnemyVertical(32 * 0, 32 * 0, ID.Enemy, handler));
+		handler.addObject(new EnemyHorizontal(32 * 0, 32 * 13, ID.Enemy, handler));
+		handler.addObject(new EnemyHorizontal(32 * 18, 32 * 0, ID.Enemy, handler));
+		
+		
+	}
+
 	/**
 	 * hard coded for level 13
 	 */
