@@ -149,10 +149,29 @@ public class Spawn {
 	 */
 
 	public void loadLevel13(Handler handler){
-		handler.addObject(new Player(0, 0, ID.Player, handler));
-		handler.addObject(new Player(32, 0, ID.Player2, handler));
+		handler.addObject(new Player(32, 32, ID.Player, handler));
+		handler.addObject(new Player(32, 32*4, ID.Player2, handler));
 		
-		handler.addObject(new Wall(32 * 5, 32 * 5, ID.Wall));
+		for(int i = 0; i < 8; i++){
+			handler.addObject(new Wall(32 * i, 32 * 0, ID.Wall));
+			if(i != 4){
+				handler.addObject(new Wall(32 * i, 32 * 3, ID.Wall));
+			}
+			handler.addObject(new Wall(32 * i, 32 * 6, ID.Wall));
+		}
+		
+		for(int i = 1; i < 6; i++){
+			if(i != 3){
+				handler.addObject(new Wall(32 * 7, 32 * i, ID.Wall));
+				handler.addObject(new Wall(32 * 0, 32 * i, ID.Wall));
+			}
+		}
+		
+		handler.addObject(new GoalSquare(32 * 6, 32 * 4, ID.GoalSquare, handler));
+		handler.addObject(new GoalSquare(32 * 4, 32 * 5, ID.GoalSquare, handler));
+		
+		handler.addObject(new Box(32 * 4, 32 * 3, ID.Box));
+		handler.addObject(new Box(32 * 4, 32 * 4, ID.Box));
 	}
 	
 	/**
