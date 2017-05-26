@@ -11,9 +11,12 @@ public enum ID {
 	Box(),
 	Enemy(),
 	EnemyBullet(),
+	SmartEnemy(),
+	SmartBullet(),
 	Trail(),
 	GoalSquare(),
 	Header(),
-	Wall();
+	Wall(),
+	FloorTile();
 	
 }

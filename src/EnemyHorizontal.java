@@ -16,7 +16,7 @@ public class EnemyHorizontal extends GameObject{
 
 	@Override
 	public void tick() {
-		int player_x = handler.getPlayer2().getX();
+		float player_x = handler.getPlayer2().getX();
 		
 		if(player_x < this.x){
 			x -= velX;
@@ -40,7 +40,7 @@ public class EnemyHorizontal extends GameObject{
 	@Override
 	public void render(Graphics g) {
 		g.setColor(Color.RED);
-		g.fillRect(x, y, 32, 32);
+		g.fillRect((int) x, (int) y, 32, 32);
 	}
 
 	@Override

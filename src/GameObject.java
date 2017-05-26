@@ -7,13 +7,13 @@ import java.awt.Rectangle;
 
 public abstract class GameObject extends Canvas {
 	
-	protected int x, y;
+	protected float y, x;
 	protected ID id;
-	protected int velX, velY;
+	protected double velX, velY;
 	protected String theme;
 	protected Sound s;
 	
-	public GameObject(int x, int y, ID id){
+	public GameObject(float x, float y, ID id){
 		this.x = x;
 		this.y = y;
 		this.id = id;
@@ -24,17 +24,17 @@ public abstract class GameObject extends Canvas {
 	public abstract Rectangle getBounds();
 	
 	// getters and setters
-	public void setX(int x){
+	public void setX(float x){
 		this.x = x;
 	}
-	public void setY(int y){
+	public void setY(float y){
 		this.y = y;
 	}
 	public int getX(){
-		return x;
+		return (int) x;
 	}
 	public int getY(){
-		return y;
+		return (int) y;
 	}
 	public void setID(ID id){
 		this.id = id;
@@ -48,10 +48,10 @@ public abstract class GameObject extends Canvas {
 	public void setVelY(int velY){
 		this.velY = velY;
 	}
-	public int getVelX(){
+	public double getVelX(){
 		return velX;
 	}
-	public int getVelY(){
+	public double getVelY(){
 		return velY;
 	}
 	

@@ -13,6 +13,7 @@ public class KeyInput extends KeyAdapter {
 	public int currentSteps;
 	private Game game;
 	private Sound bump;
+	private boolean Qpressed;
 
 	/**
 	 * Constructor

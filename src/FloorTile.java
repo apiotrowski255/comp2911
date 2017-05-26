@@ -1,49 +1,40 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
-public class Wall extends GameObject{
+public class FloorTile extends GameObject{
 
-	public Wall(int x, int y, ID id) {
+	public FloorTile(float x, float y, ID id) {
 		super(x, y, id);
-		this.theme = null;
+		
 	}
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
+		//Do nothing
 		
 	}
 
-	/**
-	 * loads image to draw
-	 */
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.darkGray);
-//		g.fillRect(x, y, 32, 32);
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Image i = null;
 		if(theme == null) {		//default
-        	i = t.getImage("../images/wall.png");
+        	i = t.getImage("../images/tile_grass.png");
 		} else if (theme.equals("Mario")){
-			i = t.getImage("../images/wall.png");
+			i = t.getImage("../images/tile_grass.png");
 		} else if (theme.equals("BombMan")){
-			i = t.getImage("../images/wall1.jpg");
+			i = t.getImage("../images/tile_concrete.png");
 		}
         g.drawImage(i, (int) x, (int) y, this);
+		
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		// TODO Auto-generated method stub
+		//no rectangle
 		return null;
-	}
-	
-	public void setTheme(String Theme){
-		this.theme = Theme;
 	}
 
 }

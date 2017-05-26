@@ -47,7 +47,7 @@ public class GoalSquare extends GameObject {
 		} else if (theme.equals("BombMan")){
 			i = t.getImage("../images/goal1.png");
 		}
-        g.drawImage(i, x, y, this);
+        g.drawImage(i, (int) x, (int) y, this);
 
 	}
 

@@ -15,7 +15,7 @@ public class Menu extends MouseAdapter{
 	private String gameStateWord;
 	private int bouncer;
 	private boolean startFromTop;
-	private static Sound menuTheme;
+	private static Sound menuTheme, theme1button, theme2button;
 	
 	public Menu(Game game, Handler handler){
 		this.game = game;
@@ -24,6 +24,8 @@ public class Menu extends MouseAdapter{
 		this.bouncer = 0;
 		this.menuTheme = new Sound("../sounds/Gameboy.wav", -1);
 		menuTheme.play();
+		this.theme1button = new Sound("../sounds/Magic Air Blast 1.wav", 1);
+		this.theme2button = new Sound("../sounds/Magic Air Blast 2.wav", 1);
 	}
 	
 	public void mousePressed(MouseEvent e){
@@ -51,12 +53,14 @@ public class Menu extends MouseAdapter{
 			if (mouseOver(mx, my, 527, 430, 47, 15)) {
 				handler.setTheme(0);
 				System.out.println("THEME 1 SELECTED");
+				theme1button.play();
 			}
 			
 			// Theme 2
 			if (mouseOver(mx, my, 577, 430, 47, 15)) {
 				handler.setTheme(1);
 				System.out.println("THEME 2 SELECTED");
+				theme2button.play();
 			}
 		
 		}

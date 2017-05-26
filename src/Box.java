@@ -52,7 +52,7 @@ public class Box extends GameObject {
 			}
 		}
 
-		g.drawImage(i, x, y, this);
+		g.drawImage(i, (int) x, (int) y, this);
 	}
 
 	@Override

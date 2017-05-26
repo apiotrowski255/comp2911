@@ -32,7 +32,7 @@ public class Player extends GameObject {
 	private void collision(){
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
-			if (tempObject.getID() == ID.EnemyBullet) {
+			if (tempObject.getID() == ID.EnemyBullet || tempObject.getID() == ID.SmartBullet) {
 				if (getBounds().intersects(tempObject.getBounds())) {
 					playerHit = true;
 				}
@@ -44,11 +44,6 @@ public class Player extends GameObject {
 	 * draws the player
 	 */
 	public void render(Graphics g) {
-		if (id == ID.Player) {
-			g.setColor(Color.white);
-		} else if (id == ID.Player2) {
-			g.setColor(Color.blue);
-		}
 		
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Image i = null;
@@ -59,12 +54,12 @@ public class Player extends GameObject {
 		} else if (theme.equals("BombMan")){
 			i = t.getImage("../images/player1.png");
 		}
-        g.drawImage(i, x, y, this);
+        g.drawImage(i, (int) x, (int) y, this);
 	}
 
 	@Override
 	public Rectangle getBounds() {
-		return new Rectangle(x,y,32,32);
+		return new Rectangle((int) x,(int) y,32,32);
 	}
 	
 	public void setTheme(String Theme){
