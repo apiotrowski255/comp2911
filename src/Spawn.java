@@ -103,7 +103,7 @@ public class Spawn {
 	 *            the current handler
 	 */
 	public void levelLoader(int levelNumber, Handler handler) {
-
+		handler.object.clear();
 		switch (levelNumber) {
 		// -1 means load random level
 		case -1:
@@ -163,7 +163,7 @@ public class Spawn {
 	 * @param levelID
 	 */
 	public void loadPremadeLevel(Handler handler, String levelID) {
-		handler.object.clear();
+		
 		if (handler == null)
 			System.err.println("handler is null");
 		if (levelID == null) {
