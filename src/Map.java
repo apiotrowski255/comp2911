@@ -654,7 +654,12 @@ public class Map {
 				if (this.puzzel[y][x].isEmpty() && flag == false) {
 					boolean val = r.nextInt(noEmptySquares)==0;
 					if (val) {
+						System.out.println(this.puzzel[y][x].isWall());
+						System.out.println(this.puzzel[y][x].isPlayer());
+						System.out.println(this.puzzel[y][x].isGoal());
+						System.out.println("TEST");
 						this.puzzel[y][x].addPlayer();
+						System.out.println(this.puzzel[y][x].isPlayer());
 						flag = true;
 					}
 					noEmptySquares--;
@@ -962,6 +967,12 @@ public class Map {
 		for(int y =0; y < this.puzzel.length; y++) {
 			for(int x =0; x < this.puzzel[y].length; x++) {
 				marker[y][x] = false;
+			}
+		}
+	
+		for(int y =0; y < m.puzzel.length; y++) {
+			for(int x =0; x < m.puzzel[y].length; x++) {
+				if (!m.puzzel[y][x].isEmpty()) marker[y][x] = true;
 			}
 		}
 		
