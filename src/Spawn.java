@@ -274,13 +274,6 @@ public class Spawn {
 	public void loadLevel11(Handler handler) {
 		for (int i = 2; i < 17; i++) {
 			handler.addObject(new Wall(32 * i, 32 * 0, ID.Wall));
-			/*
-			 * handler.addObject(new Wall(32*i,32*2, ID.Wall));
-			 * handler.addObject(new Wall(32*i,32*4, ID.Wall));
-			 * handler.addObject(new Wall(32*i,32*6, ID.Wall));
-			 * handler.addObject(new Wall(32*i,32*8, ID.Wall));
-			 * handler.addObject(new Wall(32*i,32*10, ID.Wall));
-			 */
 			handler.addObject(new Wall(32 * i, 32 * 12, ID.Wall));
 		}
 

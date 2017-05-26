@@ -190,8 +190,12 @@ public class Game extends Canvas implements Runnable {
 		if(gameState == STATE.Game){
 			handler.render(g);
 			header.render(g);
+			menu.stopMenuTheme();
+			spawner.startLoopMusic();
 		} else if(gameState == STATE.MainMenu || gameState == STATE.Help || gameState == STATE.End || gameState == STATE.PlayerMenu || gameState == STATE.LevelTypeMenu || gameState == STATE.LevelSelectMenu || gameState == STATE.LevelInbetween){
 			menu.render(g, handler);
+			menu.startMenuTheme();
+			spawner.stopLoopMusic();
 		} 
 
 		g.dispose();
