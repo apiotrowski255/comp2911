@@ -59,7 +59,7 @@ public class EnemyVertical extends GameObject {
 		if (this.id == id.Enemy) {
 			g.setColor(Color.RED);
 		} else if (this.id == id.SmartEnemy) {
-			g.setColor(Color.BLUE);
+			g.setColor(Color.MAGENTA);
 		}
 		g.fillRect((int) x, (int) y, 32, 32);
 	}

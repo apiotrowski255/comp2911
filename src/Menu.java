@@ -346,7 +346,6 @@ public class Menu extends MouseAdapter{
 				startFromTop = false;
 			}
 		}
-		
 	}
 	
 	/**

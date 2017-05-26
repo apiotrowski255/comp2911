@@ -59,7 +59,6 @@ public class Game extends Canvas implements Runnable {
 		if(gameState == STATE.Game){
 			spawner.levelLoader(spawner.currentLevelNumber, handler);
 		} else {
-			
 			//cool background animations
 		}
 		
@@ -137,8 +136,6 @@ public class Game extends Canvas implements Runnable {
 
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				System.out.println("FPS: " + frames);
-				System.out.println(gameState);
 				if(frames > targetFPS){
 					sleepCounter++;
 				} else if (frames < targetFPS){
@@ -156,9 +153,9 @@ public class Game extends Canvas implements Runnable {
 	 * basically updates the game
 	 */
 	private void tick() {
+		handler.tick();
 		
-		if(gameState == STATE.Game){
-			handler.tick();
+		if(gameState == STATE.Game){	
 			spawner.tick();
 			header.UpdateSteps(this.getKeyinput().getCurrentSteps());
 			header.tick();

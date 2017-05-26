@@ -36,7 +36,7 @@ public class EnemyBullet extends GameObject {
 			} else {
 				timer++;
 			}
-			handler.addObject(new Trail(x, y, ID.Trail, Color.BLUE, 16, 16, 0.03f, handler));
+			handler.addObject(new Trail(x, y, ID.Trail, Color.MAGENTA, 16, 16, 0.03f, handler));
 		}
 		x += velX;
 		y += velY;
@@ -62,7 +62,7 @@ public class EnemyBullet extends GameObject {
 		if(this.id == id.EnemyBullet){
 			g.setColor(Color.red);
 		} else if (this.id == id.SmartBullet){
-			g.setColor(Color.BLUE);
+			g.setColor(Color.MAGENTA);
 		}
 		g.fillRect((int) x, (int) y, 16, 16);
 	}

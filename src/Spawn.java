@@ -45,23 +45,24 @@ public class Spawn {
 			game.setgameState("LevelInbetween");
 			numberOfSteps = game.getKeyinput().getCurrentSteps();
 
-			while (handler.object.size() != 0) {
-				handler.removeObject(handler.object.get(0));
-			}
+			handler.object.clear();
 
 			if (currentLevelNumber == 13 || currentLevelNumber == 12) {
-				handler.object.clear();
-
+				
 				game.setgameState("MainMenu");
 				game.removeKeyListener(game.getKeyinput());
 
-			} else {
+			} else if (currentLevelNumber < 12 && currentLevelNumber >= 0){
 				game.removeKeyListener(game.getKeyinput());
 				currentLevelNumber++;
 				levelLoader(currentLevelNumber, handler);
 
 				game.setKeyinput(new KeyInput(handler, game));
 				game.addKeyListener(game.getKeyinput());
+			} else {
+
+				game.setgameState("MainMenu");
+				game.removeKeyListener(game.getKeyinput());
 			}
 		}
 		if (currentLevelNumber == 11 || currentLevelNumber == 12) {

@@ -31,6 +31,7 @@ public class Sound {
 			else clip.loop(counter);
 	}
 	
+	
 	public synchronized void stop() {
 		clip.stop();
 	}
