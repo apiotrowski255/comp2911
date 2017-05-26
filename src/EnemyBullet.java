@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 public class EnemyBullet extends GameObject {
 	private Handler handler;
@@ -61,10 +63,14 @@ public class EnemyBullet extends GameObject {
 	public void render(Graphics g) {
 		if(this.id == id.EnemyBullet){
 			g.setColor(Color.red);
+			g.fillRect((int) x, (int) y, 16, 16);
 		} else if (this.id == id.SmartBullet){
-			g.setColor(Color.MAGENTA);
+			Toolkit t = Toolkit.getDefaultToolkit();
+			Image i = null;
+			i = t.getImage("../images/darkBolt.png");
+	        g.drawImage(i, (int) x, (int) y, this);
 		}
-		g.fillRect((int) x, (int) y, 16, 16);
+		
 	}
 
 	@Override
