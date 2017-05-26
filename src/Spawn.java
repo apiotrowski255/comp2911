@@ -45,14 +45,12 @@ public class Spawn {
 			game.setgameState("LevelInbetween");
 			numberOfSteps = game.getKeyinput().getCurrentSteps();
 
-			
-
 			if (currentLevelNumber == 13 || currentLevelNumber == 12) {
-				
+
 				game.setgameState("MainMenu");
 				game.removeKeyListener(game.getKeyinput());
 
-			} else if (currentLevelNumber < 12 && currentLevelNumber >= 0){
+			} else if (currentLevelNumber < 12 && currentLevelNumber >= 0) {
 				game.removeKeyListener(game.getKeyinput());
 				currentLevelNumber++;
 				levelLoader(currentLevelNumber, handler);
@@ -68,15 +66,15 @@ public class Spawn {
 		if (currentLevelNumber == 11 || currentLevelNumber == 12) {
 			if (handler.object.size() != 0) {
 				Player temp = (Player) handler.getPlayer2();
-				if (temp.playerHit == true) {
-					System.out.println("Hit");
-					int currentLevel = game.getSpawner().getCurrentLevelNumber();
-					handler.object.clear();
-					game.removeKeyListener(game.getKeyinput());
-					game.getSpawner().levelLoader(currentLevel, handler);
-					game.setKeyinput(new KeyInput(handler, game));
-					game.addKeyListener(game.getKeyinput());
-
+				if (temp != null) {
+					if (temp.playerHit == true) {
+						int currentLevel = game.getSpawner().getCurrentLevelNumber();
+						handler.object.clear();
+						game.removeKeyListener(game.getKeyinput());
+						game.getSpawner().levelLoader(currentLevel, handler);
+						game.setKeyinput(new KeyInput(handler, game));
+						game.addKeyListener(game.getKeyinput());
+					}
 				}
 			}
 		}
@@ -163,7 +161,7 @@ public class Spawn {
 	 * @param levelID
 	 */
 	public void loadPremadeLevel(Handler handler, String levelID) {
-		
+
 		if (handler == null)
 			System.err.println("handler is null");
 		if (levelID == null) {
@@ -238,7 +236,7 @@ public class Spawn {
 		handler.addObject(new Player(32 * 9, 32 * 7, ID.Player2, handler));
 
 		handler.addObject(new EnemyVertical(32 * 18, 32 * 7, ID.SmartEnemy, handler));
-		
+
 	}
 
 	/**
@@ -760,10 +758,9 @@ public class Spawn {
 		s.play();
 	}
 
-	
-	public void loadbackground(Handler handler){
-		for(int i = 0; i < 20; i++){
-			for(int j = 0; j < 14; j++){
+	public void loadbackground(Handler handler) {
+		for (int i = 0; i < 20; i++) {
+			for (int j = 0; j < 14; j++) {
 				handler.addObject(new FloorTile(32 * i, 32 * j, ID.FloorTile));
 			}
 		}

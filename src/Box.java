@@ -33,11 +33,9 @@ public class Box extends GameObject {
 	 * uses the image box.gif to draw the image
 	 */
 	public void render(Graphics g) {
-		// g.setColor(Color.red);
-		// g.fillRect(x, y, 32, 32);
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Image i = null;
-		
+
 		if (theme.equals("Mario") || theme == null) { // default
 			if (!isOnGoal) {
 				i = t.getImage("../images/box.gif");
@@ -60,7 +58,7 @@ public class Box extends GameObject {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public boolean getIsOnGoal() {
 		return this.isOnGoal;
 	}
@@ -68,11 +66,9 @@ public class Box extends GameObject {
 	public void setTheme(String Theme) {
 		this.theme = Theme;
 	}
-	
+
 	public void setIsOnGoal(boolean bool) {
 		this.isOnGoal = bool;
 	}
-	
-	
 
 }
