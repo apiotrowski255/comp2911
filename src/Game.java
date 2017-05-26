@@ -7,9 +7,12 @@ import java.awt.image.BufferStrategy;
 /**
  * 
  * @authors
- * Alex Piotrowski z5115499
- * Joshua Allen z3330729
- *
+ * Alex Piotrowski 		z5115499
+ * Henry Veng			z5553239
+ * Jacob Sturges		z5059632
+ * Jonathan Timmerman	z5117123
+ * Joshua Allen 		z3330729
+ * Nathan Zen			z5017458
  */
 
 public class Game extends Canvas implements Runnable {
