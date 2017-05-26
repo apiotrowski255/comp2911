@@ -12,7 +12,7 @@ import java.awt.image.BufferStrategy;
  * Jacob Sturges		z5059632
  * Jonathan Timmerman	z5117123
  * Joshua Allen 		z3330729
- * Nathan Zen			z5017458
+ * Nathan Zhen			z5017458
  */
 
 public class Game extends Canvas implements Runnable {
@@ -74,7 +74,7 @@ public class Game extends Canvas implements Runnable {
 		this.header = new Header(100, 100, ID.Header);
 		
 		//Create Window for the game
-		new Window(WIDTH, HEIGHT, "Comp2911", this);
+		new Window(WIDTH, HEIGHT, "Sokoban", this);
 	}
 	
 	/**
