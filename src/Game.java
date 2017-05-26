@@ -3,9 +3,14 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
-import java.util.Random;
 
+/**
+ * 
+ * @authors
+ * Alex Piotrowski z5115499
+ * Joshua Allen z3330729
+ *
+ */
 
 public class Game extends Canvas implements Runnable {
 
@@ -18,7 +23,6 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	private boolean running = false;
 
-	private Random r;
 	private Handler handler;
 	private Spawn spawner;
 	private KeyInput keyinput;
@@ -52,9 +56,6 @@ public class Game extends Canvas implements Runnable {
 		this.menu = new Menu(this, handler);
 		//needed for the menu class as we need to "listen" when the user clicks 
 		this.addMouseListener(menu);
-		
-		//creates a random number
-		r = new Random();
 		
 		if(gameState == STATE.Game){
 			spawner.levelLoader(spawner.currentLevelNumber, handler);
