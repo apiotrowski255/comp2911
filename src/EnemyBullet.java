@@ -53,8 +53,8 @@ public class EnemyBullet extends GameObject {
 		
 		double angle = Math.atan(diffy/diffx);
 
-		velX =  (-4 * Math.cos(angle));
-		velY =  (-4 * Math.sin(angle));
+		velX =  (-8 * Math.cos(angle));
+		velY =  (-8 * Math.sin(angle));
 	}
 
 	@Override

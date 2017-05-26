@@ -18,11 +18,11 @@ public class GoalSquare extends GameObject {
 	}
 
 	@Override
-	//can determine whether a box is on the Goal square
+	// can determine whether a box is on the Goal square
 	public void tick() {
 		ArrayList<GameObject> boxes = handler.getBoxes();
 		BoxOnGoal = false;
-		for(GameObject g : boxes){
+		for (GameObject g : boxes) {
 			if (g.getX() == x && g.getY() == y) {
 				if (!BoxOnGoal) {
 					BoxOnGoal = true;
@@ -35,24 +35,24 @@ public class GoalSquare extends GameObject {
 
 	@Override
 	public void render(Graphics g) {
-//		g.setColor(Color.green);
-//		g.fillRect(x, y, 32, 32);
-		
+		// g.setColor(Color.green);
+		// g.fillRect(x, y, 32, 32);
+
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Image i = null;
-		if(theme == null) {		//default
-        	i = t.getImage("../images/goal.png");
-		} else if (theme.equals("Mario")){
+		if (theme == null) { // default
 			i = t.getImage("../images/goal.png");
-		} else if (theme.equals("BombMan")){
+		} else if (theme.equals("Mario")) {
+			i = t.getImage("../images/goal.png");
+		} else if (theme.equals("BombMan")) {
 			i = t.getImage("../images/goal1.png");
 		}
-        g.drawImage(i, (int) x, (int) y, this);
+		g.drawImage(i, (int) x, (int) y, this);
 
 	}
 
-	//getter
-	public boolean getBoxOnGoal(){
+	// getter
+	public boolean getBoxOnGoal() {
 		return BoxOnGoal;
 	}
 
@@ -61,8 +61,8 @@ public class GoalSquare extends GameObject {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public void setTheme(String Theme){
+
+	public void setTheme(String Theme) {
 		this.theme = Theme;
 	}
 }

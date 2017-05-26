@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 public class Box extends GameObject {
 
 	private boolean isOnGoal;
+	private boolean playOnce;
 
 	/**
 	 * constructor
@@ -23,6 +24,8 @@ public class Box extends GameObject {
 		super(x, y, id);
 		this.theme = null;
 		this.isOnGoal = false;
+		this.s = new Sound("../sounds/Magic Poof.wav", 1);
+		this.playOnce = true;
 	}
 
 	public void tick() {
@@ -69,6 +72,10 @@ public class Box extends GameObject {
 
 	public void setIsOnGoal(boolean bool) {
 		this.isOnGoal = bool;
+		if (bool == true && playOnce == true) {
+			s.play();
+			playOnce  = false;
+		}
 	}
 
 }
