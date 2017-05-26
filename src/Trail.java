@@ -1,3 +1,8 @@
+/**
+ * most inspired from https://stackoverflow.com/questions/29932822/java-painting-program-how-to-leave-a-trail-behind-a-shape
+ * The link above is where we got the trail code
+ */
+
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;

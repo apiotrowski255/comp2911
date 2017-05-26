@@ -41,11 +41,11 @@ public class Spawn {
 		}
 		if (i == GoalSquares.size() && i != 0) {
 			System.out.println("You Win!");
-
+			handler.object.clear();
 			game.setgameState("LevelInbetween");
 			numberOfSteps = game.getKeyinput().getCurrentSteps();
 
-			handler.object.clear();
+			
 
 			if (currentLevelNumber == 13 || currentLevelNumber == 12) {
 				
@@ -163,6 +163,7 @@ public class Spawn {
 	 * @param levelID
 	 */
 	public void loadPremadeLevel(Handler handler, String levelID) {
+		handler.object.clear();
 		if (handler == null)
 			System.err.println("handler is null");
 		if (levelID == null) {
