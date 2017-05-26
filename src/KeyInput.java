@@ -44,7 +44,7 @@ public class KeyInput extends KeyAdapter {
 		if (key == KeyEvent.VK_R && game.IsgameStateGame()) {
 			if (game.getSpawner().getCurrentLevelNumber() == 11 || game.getSpawner().getCurrentLevelNumber() == 12) {
 				Player temp = (Player) handler.getPlayer2();
-				temp.playerHit = true;
+				temp.SetplayerHit(true);
 			} else {
 				int currentLevel = game.getSpawner().getCurrentLevelNumber();
 				handler.object.clear();

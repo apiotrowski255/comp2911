@@ -79,5 +79,9 @@ public class Player extends GameObject {
 		this.theme = Theme;
 	}
 
+	public void SetplayerHit(boolean b) {
+		this.playerHit = b;
+	}
+
 
 }
