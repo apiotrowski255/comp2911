@@ -38,21 +38,23 @@ public class Box extends GameObject {
 	public void render(Graphics g) {
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Image i = null;
-
-		if (theme.equals("Mario") || theme == null) { // default
-			if (!isOnGoal) {
-				i = t.getImage("../images/box.gif");
-			} else {
-				i = t.getImage("../images/box_goal.png");
+		try {
+			if (theme.equals("Mario") || theme == null) { // default
+				if (!isOnGoal) {
+					i = t.getImage("../images/box.gif");
+				} else {
+					i = t.getImage("../images/box_goal.png");
+				}
+			} else if (theme.equals("BombMan")) {
+				if (!isOnGoal) {
+					i = t.getImage("../images/box1.gif");
+				} else {
+					i = t.getImage("../images/box1_goal.png");
+				}
 			}
-		} else if (theme.equals("BombMan")) {
-			if (!isOnGoal) {
-				i = t.getImage("../images/box1.gif");
-			} else {
-				i = t.getImage("../images/box1_goal.png");
-			}
+		} catch (Exception e) {
+			
 		}
-
 		g.drawImage(i, (int) x, (int) y, this);
 	}
 
@@ -74,7 +76,7 @@ public class Box extends GameObject {
 		this.isOnGoal = bool;
 		if (bool == true && playOnce == true) {
 			s.play();
-			playOnce  = false;
+			playOnce = false;
 		}
 	}
 

@@ -25,15 +25,15 @@ public class Handler {
 	 *            which is a Graphics
 	 */
 	public void render(Graphics g) {
+		if (object.size() != 0) {
+			for (int i = 0; i < object.size(); i++) {
+				GameObject tempObject = object.get(i);
+				if (tempObject != null) {
+					tempObject.render(g);
+				}
 
-		for (int i = 0; i < object.size(); i++) {
-			GameObject tempObject = object.get(i);
-			if(tempObject != null){
-				tempObject.render(g);
 			}
-
 		}
-
 	}
 
 	/**
