@@ -11,13 +11,14 @@ public class Player extends GameObject {
 
 	Random r = new Random();
 	private Handler handler;
-	public boolean playerHit;
+	public boolean playerHit, facingLeft;
 	
 	public Player(int x, int y, ID id, Handler handler) {
 		super(x, y, id);
 		this.handler = handler;
 		this.playerHit = false;
 		this.theme = null;
+		this.facingLeft = false;
 	}
 
 	public void tick() {
@@ -48,11 +49,23 @@ public class Player extends GameObject {
 		Toolkit t = Toolkit.getDefaultToolkit();
 		Image i = null;
 		if(theme == null) {		//default
-        	i = t.getImage("../images/player.png");
+			if(!facingLeft){
+				i = t.getImage("../images/player.png");
+			} else {
+				i = t.getImage("../images/player_left.png");
+			}
 		} else if (theme.equals("Mario")){
-			i = t.getImage("../images/player.png");
+			if(!facingLeft){
+				i = t.getImage("../images/player.png");
+			} else {
+				i = t.getImage("../images/player_left.png");
+			}
 		} else if (theme.equals("BombMan")){
-			i = t.getImage("../images/player1.png");
+			if(!facingLeft){
+				i = t.getImage("../images/player1.png");
+			} else {
+				i = t.getImage("../images/player1_left.png");
+			}
 		}
         g.drawImage(i, (int) x, (int) y, this);
 	}

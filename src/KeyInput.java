@@ -54,7 +54,7 @@ public class KeyInput extends KeyAdapter {
 		
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
-			GameObject player = handler.getPlayer2();
+			Player player = (Player) handler.getPlayer2();
 
 			if (tempObject.getID() == ID.Player) {
 				
@@ -177,9 +177,11 @@ public class KeyInput extends KeyAdapter {
 								b.setX(b.getX() + 32);
 								addStep();
 								bump.play();
+								player.facingLeft = false;
 							}
 						} else {
 							tempObject.setX(tempObject.getX() + 32);
+							player.facingLeft = false;
 							addStep();
 						}
 					}
@@ -193,9 +195,11 @@ public class KeyInput extends KeyAdapter {
 								b.setX(b.getX() - 32);
 								addStep();
 								bump.play();
+								player.facingLeft = true;
 							}
 						} else {
 							tempObject.setX(tempObject.getX() - 32);
+							player.facingLeft = true;
 							addStep();
 						}
 						
